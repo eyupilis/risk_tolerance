@@ -1,0 +1,38 @@
+INFO:     Will watch for changes in these directories: ['/Users/eyupi/websites/kuveyturkportfoy/backend']
+INFO:     Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)
+INFO:     Started reloader process [13336] using WatchFiles
+INFO:     Started server process [13356]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'ips_system/__init__.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [13356]
+WARNING:  WatchFiles detected changes in 'ips_system/agents/__init__.py'. Reloading...
+INFO:     Started server process [17514]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'ips_system/agents/editor.py', 'ips_system/gemini_client.py', 'ips_system/orchestrator.py', 'ips_system/api.py', 'ips_system/example_run.py', 'ips_system/agents/legal_compliance.py', 'ips_system/tests/test_orchestrator.py', 'ips_system/agents/conflict_resolver.py', 'ips_system/agents/constraints_expert.py', 'ips_system/prompts.py', 'ips_system/agents/behavioral_expert.py', 'ips_system/__init__.py', 'ips_system/agents/__init__.py', 'ips_system/config.py', 'ips_system/schemas.py', 'ips_system/agents/portfolio_strategist.py', 'ips_system/agents/data_analyst.py'. Reloading...
+INFO:     Started server process [17627]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Started server process [17633]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'ips_system/agents/editor.py', 'ips_system/gemini_client.py', 'ips_system/orchestrator.py', 'ips_system/api.py', 'ips_system/example_run.py', 'ips_system/agents/legal_compliance.py', 'ips_system/tests/test_orchestrator.py', 'ips_system/agents/conflict_resolver.py', 'ips_system/agents/constraints_expert.py', 'ips_system/prompts.py', 'ips_system/agents/behavioral_expert.py', 'ips_system/__init__.py', 'ips_system/agents/__init__.py', 'ips_system/config.py', 'ips_system/schemas.py', 'ips_system/agents/portfolio_strategist.py', 'ips_system/agents/data_analyst.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [17633]
+ERROR:    Error loading ASGI app. Attribute "app" not found in module "ips_system.api".
+WARNING:  WatchFiles detected changes in 'ips_system/agents/editor.py', 'ips_system/gemini_client.py', 'ips_system/orchestrator.py', 'ips_system/api.py', 'ips_system/example_run.py', 'ips_system/agents/legal_compliance.py', 'ips_system/tests/test_orchestrator.py', 'ips_system/agents/conflict_resolver.py', 'ips_system/agents/constraints_expert.py', 'ips_system/prompts.py', 'ips_system/agents/behavioral_expert.py', 'ips_system/__init__.py', 'ips_system/agents/__init__.py', 'ips_system/config.py', 'ips_system/schemas.py', 'ips_system/agents/portfolio_strategist.py', 'ips_system/agents/data_analyst.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "ips_system.api".
+WARNING:  WatchFiles detected changes in 'ips_system/agents/editor.py', 'ips_system/gemini_client.py', 'ips_system/orchestrator.py', 'ips_system/api.py', 'ips_system/example_run.py', 'ips_system/agents/legal_compliance.py', 'ips_system/tests/test_orchestrator.py', 'ips_system/agents/conflict_resolver.py', 'ips_system/prompts.py', 'ips_system/agents/behavioral_expert.py', 'ips_system/__init__.py', 'ips_system/agents/__init__.py', 'ips_system/config.py', 'ips_system/agents/portfolio_strategist.py', 'ips_system/schemas.py', 'ips_system/agents/data_analyst.py'. Reloading...
+ERROR:    Error loading ASGI app. Could not import module "ips_system.api".
+WARNING:  WatchFiles detected changes in 'ips_system/main.py'. Reloading...
+Python(21602) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+ERROR:    Error loading ASGI app. Could not import module "ips_system.api".
+WARNING:  WatchFiles detected changes in 'ips_system/main.py'. Reloading...
+Python(21635) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+ERROR:    Error loading ASGI app. Could not import module "ips_system.api".

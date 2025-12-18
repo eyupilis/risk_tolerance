@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Portfolio Optimizer Backend Test</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+        }
+
+        .box {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 3px;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        pre {
+            background: #f5f5f5;
+            padding: 10px;
+            overflow-x: auto;
+        }
+
+        .success {
+            color: green;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Portfolio Optimizer Backend Test</h1>
+    <p>This page sends a request directly to the Python FastAPI backend running on port 8000.</p>
+
+    <div class="box">
+        <h3>1. Check System Status</h3>
+        <button onclick="checkHealth()">Check Health</button>
+        <div id="health-result"></div>
+    </div>
+
+    <div class="box">
+        <h3>2. Run Optimization (Mock Data)</h3>
+        <button onclick="runOptimization()">Optimize Portfolio</button>
+        <div id="opt-result"></div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:8000/api';
+
+        async function checkHealth() {
+            const div = document.getElementById('health-result');
+            div.innerHTML = 'Checking...';
+            try {
+                const res = await fetch(`${API_URL}/health`);
+                const data = await res.json();
+                div.innerHTML = `<pre class="success">${JSON.stringify(data, null, 2)}</pre>`;
+            } catch (e) {
+                div.innerHTML = `<pre class="error">Error: ${e.message}. Is backend running?</pre>`;
+            }
+        }
+
+        async function runOptimization() {
+            const div = document.getElementById('opt-result');
+            div.innerHTML = 'Optimizing...';
+
+            // Generate dummy data
+            const funds = [];
+            for (let i = 0; i < 5; i++) {
+                const returns = [];
+                for (let j = 0; j < 60; j++) {
+                    returns.push((Math.random() - 0.5) * 0.02); // Random return +/- 1%
+                }
+                funds.push({
+                    code: `F${i + 1}`,
+                    name: `Fund ${i + 1}`,
+                    returns: returns,
+                    current_price: 1.0,
+                    total_value: 1000000
+                });
+            }
+
+            const payload = {
+                funds: funds,
+                risk_profile: 'medium',
+                risk_free_rate: 0.0,
+                max_funds_final: 5
+            };
+
+            try {
+                const res = await fetch(`${API_URL}/optimize`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+                const data = await res.json();
+                div.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+            } catch (e) {
+                div.innerHTML = `<pre class="error">Error: ${e.message}</pre>`;
+            }
+        }
+    </script>
+</body>
+
+</html>

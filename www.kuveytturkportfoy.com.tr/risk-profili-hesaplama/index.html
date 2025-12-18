@@ -1,0 +1,2735 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preload" as="script" href="/Content/uikit/dist/js/uikit.min.js">
+    <link rel="preload" as="script" href="/Content/uikit/dist/js/uikit-icons.min.js">
+    <link rel="preload" as="script" href="/Content/lib/js/jquery-3.7.1.min.js">
+    <link rel="preload" as="script" href="/Content/lib/js/jquery.validate.min.js">
+    <link rel="preload" as="script" href="/Content/lib/js/jquery.mask.min.js">
+    <link rel="preload" as="script" href="/Content/js/theme.js">
+
+    <link rel="dns-prefetch" href="//www.google-analytics.com">
+    <link rel="dns-prefetch" href="//connect.facebook.net">
+    <link rel="dns-prefetch" href="//www.googletagmanager.com">
+    <link rel="preconnect" crossorigin href="https://www.google-analytics.com">
+    <link rel="preconnect" crossorigin href="https://connect.facebook.net">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" crossorigin href="https://fonts.gstatic.com">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Titillium&#x2B;Web:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&amp;display=swap">
+
+
+
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'"
+        href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+
+    <link rel="stylesheet" href="/Content/uikit/dist/css/uikit.custom-theme.min.css?v=220420252">
+    <script src="/Content/uikit/dist/js/uikit.min.js?v=11032025"></script>
+    <script src="/Content/uikit/dist/js/uikit-icons.min.js?v=11032025"></script>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/Content/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/Content/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/Content/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/Content/images/favicon/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+    <title>Risk Profili Hesaplama - Kuveyt Türk Portföy</title>
+    <meta name="description" content="Risk profilinizi belirleyerek size uygun yatırım stratejisini oluşturun." />
+    <meta name="og:url" content="https://www.kuveytturkportfoy.com.tr/risk-profili-hesaplama/" />
+    <link rel="canonical" href="https://www.kuveytturkportfoy.com.tr/risk-profili-hesaplama/" />
+
+
+
+    <link rel="alternate" hreflang="x-default" href="https://www.kuveytturkportfoy.com.tr/risk-profili-hesaplama/" />
+
+    <link rel="alternate" hreflang="en" href="https://www.kuveytturkportfoy.com.tr/en/risk-profile-calculation/" />
+    <link rel="alternate" hreflang="tr" href="https://www.kuveytturkportfoy.com.tr/risk-profili-hesaplama/" />
+
+    <style>
+        /* 15 Sorulu Anket için Kompakt Stepper */
+        .uk-survey-step-compact .uk-step {
+            padding: 8px 4px;
+            min-width: 40px;
+        }
+
+        .uk-survey-step-compact .uk-step .uk-title {
+            font-size: 11px !important;
+        }
+
+        .uk-survey-step-compact .uk-step .uk-text-xsmall {
+            font-size: 9px !important;
+            line-height: 1.2;
+        }
+
+        @media (max-width: 960px) {
+            .uk-survey-step-compact {
+                overflow-x: auto;
+                flex-wrap: nowrap;
+            }
+
+            .uk-survey-step-compact .uk-step {
+                min-width: 35px;
+                padding: 6px 2px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <noscript>
+        <img height="1" width="1" style="display: none"
+            src="https://www.facebook.com/tr?id=477570256532611&ev=PageView&noscript=1" />
+    </noscript>
+
+    <noscript>
+        <img height="1" width="1" style="display: none"
+            src="https://www.facebook.com/tr?id=351289865242877&ev=PageView&noscript=1" />
+    </noscript>
+
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N7HBSJC" height="0" width="0"
+            style="display: none; visibility: hidden"></iframe>
+    </noscript>
+
+
+    <header>
+        <div class="header-top uk-background-muted-100">
+            <div class="uk-container uk-container-expand">
+                <div class="uk-grid uk-grid-medium uk-grid-divider uk-flex-right uk-flex-middle" uk-grid>
+                    <div class="uk-width-expand uk-width-auto@m">
+                        <ul class="uk-subnav uk-subnav-default">
+                            <li><a href="https://www.kuveytturkportfoy.com.tr/kuveyt-turk-portfoy-10-yasinda/"
+                                    class=" uk-text-emphasis uk-text-bold">Kuveyt T&#xFC;rk Portf&#xF6;y 10
+                                    Ya&#x15F;&#x131;nda!</a></li>
+                            <li><a href="https://www.kuveytturkportfoy.com.tr/coklu-tema-fonumuz-ile-tanisin/"
+                                    class=" uk-text-emphasis uk-text-bold">&#xC7;oklu Tema Fonumuz ile
+                                    Tan&#x131;&#x15F;&#x131;n!</a></li>
+                            <li><a href="https://www.kuveytturkportfoy.com.tr/degisken-fonlarimizla-tanisin/"
+                                    class=" uk-text-emphasis uk-text-bold">De&#x11F;i&#x15F;ken Fonlar&#x131;m&#x131;zla
+                                    Tan&#x131;&#x15F;&#x131;n!</a></li>
+                            <li><a href="https://www.kuveytturkportfoy.com.tr/kurumsal/guncel-stopaj-oranlari/"
+                                    class="">G&#xFC;ncel Stopaj Oranlar&#x131;</a></li>
+                            <li><a href="https://www.kuveytturkportfoy.com.tr/blog/" class="">Blog</a></li>
+                            <li><a href="https://www.kuveytturkportfoy.com.tr/medya/kataloglar/" class="">Medya</a></li>
+                            <li><a href="https://www.kuveytturkportfoy.com.tr/sikca-sorulan-sorular/"
+                                    class="">S&#x131;k&#xE7;a Sorulan Sorular</a></li>
+                            <li><a href="https://www.kuveytturkportfoy.com.tr/iletisim/"
+                                    class="">&#x130;leti&#x15F;im</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="uk-width-auto">
+                        <ul class="uk-subnav uk-subnav-default">
+                            <li><a
+                                    href="https://www.kuveytturkportfoy.com.tr/en/risk-profile-calculation/">&#x130;ngilizce</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-bottom">
+            <nav class="uk-navbar-container">
+                <div class="uk-container uk-container-expand">
+                    <div class="uk-navbar" uk-navbar="boundary: !.header-bottom; stretch: x; offset: 14;">
+                        <div class="uk-navbar-left uk-flex-1">
+                            <a class="uk-navbar-item uk-logo" href="https://www.kuveytturkportfoy.com.tr/"
+                                aria-label="Back to Home">
+                                <picture>
+                                    <source media="(min-width: 959px)" srcset="/Content/images/logos/logo-10.svg"
+                                        width="316" height="68" />
+                                    <img src="/Content/images/logos/logo-10.svg" alt="" width="210" height="45"
+                                        loading="lazy" />
+                                </picture>
+                            </a>
+
+                            <ul class="uk-navbar-nav uk-flex-1 uk-flex-center uk-visible@l">
+                                <li>
+                                    <a href="https://www.kuveytturkportfoy.com.tr/kurumsal/">
+                                        Kurumsal
+
+                                        <span class="uk-navbar-parent-icon" uk-icon="icon: icn-chevron-down;"></span>
+                                    </a>
+
+                                    <div class="uk-drop uk-navbar-dropdown">
+                                        <div class="uk-container uk-flex uk-flex-center">
+                                            <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-3 uk-inline-block">
+                                                <li><a
+                                                        href="https://www.kuveytturkportfoy.com.tr/kurumsal/kuveyt-turk-portfoy/">Kuveyt
+                                                        T&#xFC;rk Portf&#xF6;y<span class="uk-margin-auto-left"
+                                                            uk-icon="icon: icn-chevron-right;"></span></a></li>
+                                                <li><a
+                                                        href="https://www.kuveytturkportfoy.com.tr/kurumsal/vizyon-misyon/">Vizyon
+                                                        &amp; Misyon<span class="uk-margin-auto-left"
+                                                            uk-icon="icon: icn-chevron-right;"></span></a></li>
+                                                <li><a
+                                                        href="https://www.kuveytturkportfoy.com.tr/kurumsal/insan-kaynaklari/">&#x130;nsan
+                                                        Kaynaklar&#x131;<span class="uk-margin-auto-left"
+                                                            uk-icon="icon: icn-chevron-right;"></span></a></li>
+                                                <li><a
+                                                        href="https://www.kuveytturkportfoy.com.tr/kurumsal/degerlerimiz/">De&#x11F;erlerimiz<span
+                                                            class="uk-margin-auto-left"
+                                                            uk-icon="icon: icn-chevron-right;"></span></a></li>
+                                                <li><a
+                                                        href="https://www.kuveytturkportfoy.com.tr/kurumsal/kurumsal-dokumanlar/">Kurumsal
+                                                        Dok&#xFC;manlar<span class="uk-margin-auto-left"
+                                                            uk-icon="icon: icn-chevron-right;"></span></a></li>
+                                                <li><a
+                                                        href="https://www.kuveytturkportfoy.com.tr/kurumsal/yonetim-kurulu/">Y&#xF6;netim
+                                                        Kurulu<span class="uk-margin-auto-left"
+                                                            uk-icon="icon: icn-chevron-right;"></span></a></li>
+                                                <li><a href="https://www.kuveytturkportfoy.com.tr/kurumsal/duyurular/">Duyurular<span
+                                                            class="uk-margin-auto-left"
+                                                            uk-icon="icon: icn-chevron-right;"></span></a></li>
+                                                <li><a
+                                                        href="https://www.kuveytturkportfoy.com.tr/kurumsal/basinda-biz/">Bas&#x131;nda
+                                                        Biz<span class="uk-margin-auto-left"
+                                                            uk-icon="icon: icn-chevron-right;"></span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="https://www.kuveytturkportfoy.com.tr/yatirim-evreni/">
+                                        Yat&#x131;r&#x131;m Evreni
+
+                                        <span class="uk-navbar-parent-icon" uk-icon="icon: icn-chevron-down;"></span>
+                                    </a>
+
+                                    <div class="uk-drop uk-navbar-dropdown">
+                                        <div class="uk-container uk-flex uk-flex-center">
+                                            <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-2 uk-inline-block">
+                                                <li><a
+                                                        href="https://www.kuveytturkportfoy.com.tr/yatirim-evreni/yatirim-fonlari/">Yat&#x131;r&#x131;m
+                                                        Fonlar&#x131;<span class="uk-margin-auto-left"
+                                                            uk-icon="icon: icn-chevron-right;"></span></a></li>
+                                                <li><a
+                                                        href="https://www.kuveytturkportfoy.com.tr/yatirim-evreni/ozel-portfoy-yonetimi/">&#xD6;zel
+                                                        Portf&#xF6;y Y&#xF6;netimi<span class="uk-margin-auto-left"
+                                                            uk-icon="icon: icn-chevron-right;"></span></a></li>
+                                                <li><a
+                                                        href="https://www.kuveytturkportfoy.com.tr/yatirim-evreni/emeklilik-fonlari/">Emeklilik
+                                                        Fonlar&#x131;<span class="uk-margin-auto-left"
+                                                            uk-icon="icon: icn-chevron-right;"></span></a></li>
+                                                <li><a
+                                                        href="https://www.kuveytturkportfoy.com.tr/yatirim-evreni/girisim-sermayesi-yatirim-fonlari/">Giri&#x15F;im
+                                                        Sermayesi Yat&#x131;r&#x131;m Fonlar&#x131;<span
+                                                            class="uk-margin-auto-left"
+                                                            uk-icon="icon: icn-chevron-right;"></span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="https://www.kuveytturkportfoy.com.tr/fon-getirileri/">
+                                        Fon Getirileri
+
+                                        <span class="uk-navbar-parent-icon" uk-icon="icon: icn-chevron-down;"></span>
+                                    </a>
+
+                                    <div class="uk-drop uk-navbar-dropdown">
+                                        <div class="uk-container uk-flex uk-flex-center">
+                                            <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-2 uk-inline-block">
+                                                <li><a href="https://www.kuveytturkportfoy.com.tr/fon-getirileri/">Fon
+                                                        Getirileri<span class="uk-margin-auto-left"
+                                                            uk-icon="icon: icn-chevron-right;"></span></a></li>
+                                                <li><a
+                                                        href="https://www.kuveytturkportfoy.com.tr/fon-getirileri/fon-getiri-hesaplama/">Fon
+                                                        Getiri Hesaplama<span class="uk-margin-auto-left"
+                                                            uk-icon="icon: icn-chevron-right;"></span></a></li>
+                                                <li><a
+                                                        href="https://www.kuveytturkportfoy.com.tr/fon-getirileri/fon-karsilastirma/">Fon
+                                                        Kar&#x15F;&#x131;la&#x15F;t&#x131;rma<span
+                                                            class="uk-margin-auto-left"
+                                                            uk-icon="icon: icn-chevron-right;"></span></a></li>
+                                                <li><a
+                                                        href="https://www.kuveytturkportfoy.com.tr/fon-getirileri/valor-hesaplama/">Val&#xF6;r
+                                                        Hesaplama<span class="uk-margin-auto-left"
+                                                            uk-icon="icon: icn-chevron-right;"></span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="https://www.kuveytturkportfoy.com.tr/yatirimci-kilavuzu/">
+                                        Yat&#x131;r&#x131;mc&#x131; K&#x131;lavuzu
+
+                                        <span class="uk-navbar-parent-icon" uk-icon="icon: icn-chevron-down;"></span>
+                                    </a>
+
+                                    <div class="uk-drop uk-navbar-dropdown">
+                                        <div class="uk-container uk-flex uk-flex-center">
+                                            <ul class="uk-nav uk-navbar-dropdown-nav uk-column-1-3 uk-inline-block">
+                                                <li><a
+                                                        href="https://www.kuveytturkportfoy.com.tr/yatirimci-kilavuzu/aylik-fon-dagilim-onerileri/">Ayl&#x131;k
+                                                        Fon Da&#x11F;&#x131;l&#x131;m &#xD6;nerileri<span
+                                                            class="uk-margin-auto-left"
+                                                            uk-icon="icon: icn-chevron-right;"></span></a></li>
+                                                <li><a
+                                                        href="https://www.kuveytturkportfoy.com.tr/yatirimci-kilavuzu/bulten/">B&#xFC;lten<span
+                                                            class="uk-margin-auto-left"
+                                                            uk-icon="icon: icn-chevron-right;"></span></a></li>
+                                                <li><a
+                                                        href="https://www.kuveytturkportfoy.com.tr/yatirimci-kilavuzu/arindirma-islemleri/">Ar&#x131;nd&#x131;rma
+                                                        &#x130;&#x15F;lemleri<span class="uk-margin-auto-left"
+                                                            uk-icon="icon: icn-chevron-right;"></span></a></li>
+                                                <li><a
+                                                        href="https://www.kuveytturkportfoy.com.tr/yatirimci-kilavuzu/hangi-yatirim-fonu-bana-gore/">Hangi
+                                                        Yat&#x131;r&#x131;m Fonu Bana G&#xF6;re<span
+                                                            class="uk-margin-auto-left"
+                                                            uk-icon="icon: icn-chevron-right;"></span></a></li>
+                                                <li><a
+                                                        href="https://www.kuveytturkportfoy.com.tr/yatirimci-kilavuzu/yatirim-sozluk/yatirim-sozluk/">Yat&#x131;r&#x131;m
+                                                        S&#xF6;zl&#xFC;k<span class="uk-margin-auto-left"
+                                                            uk-icon="icon: icn-chevron-right;"></span></a></li>
+                                                <li><a
+                                                        href="https://www.kuveytturkportfoy.com.tr/yatirimci-kilavuzu/tanitim-videolari/">Tan&#x131;t&#x131;m
+                                                        Videolar&#x131;<span class="uk-margin-auto-left"
+                                                            uk-icon="icon: icn-chevron-right;"></span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                        <div class="uk-navbar-right">
+                            <div class="uk-navbar-item uk-text-small">
+                                <a href="#modal-search" uk-toggle
+                                    class="uk-link-reset uk-flex uk-flex-middle uk-gap-14">
+                                    <span class="uk-visible@l">Arama Yap</span>
+                                    <span uk-icon="icon: icn-search;"></span>
+                                </a>
+                            </div>
+
+                            <div class="uk-navbar-item uk-gap-12 uk-visible@l">
+                                <a href="https://www.kuveytturkportfoy.com.tr/fon-satin-al/" target="_blank"
+                                    class="uk-button uk-button-primary uk-button-xlarge@m">Fon Sat&#x131;n Al</a>
+                            </div>
+
+                            <div class="uk-navbar-toggle uk-hidden@l">
+                                <a href="#modal-menu" class="uk-link-reset" uk-icon="icon: icn-menu;" uk-toggle></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <div id="modal-menu" class="uk-modal uk-modal-full" uk-modal>
+        <div class="uk-modal-dialog uk-height-viewport uk-flex uk-flex-column">
+            <div class="header-top uk-background-muted-100">
+                <div class="uk-container uk-container-expand">
+                    <div class="uk-grid uk-grid-medium uk-grid-divider uk-flex-right uk-flex-middle" uk-grid>
+                        <div class="uk-width-expand uk-width-auto@m">
+                            <ul class="uk-subnav uk-subnav-default">
+                                <li><a href="https://www.kuveytturkportfoy.com.tr/kuveyt-turk-portfoy-10-yasinda/"
+                                        class=" uk-text-emphasis uk-text-bold">Kuveyt T&#xFC;rk Portf&#xF6;y 10
+                                        Ya&#x15F;&#x131;nda!</a></li>
+                                <li><a href="https://www.kuveytturkportfoy.com.tr/coklu-tema-fonumuz-ile-tanisin/"
+                                        class=" uk-text-emphasis uk-text-bold">&#xC7;oklu Tema Fonumuz ile
+                                        Tan&#x131;&#x15F;&#x131;n!</a></li>
+                                <li><a href="https://www.kuveytturkportfoy.com.tr/degisken-fonlarimizla-tanisin/"
+                                        class=" uk-text-emphasis uk-text-bold">De&#x11F;i&#x15F;ken
+                                        Fonlar&#x131;m&#x131;zla Tan&#x131;&#x15F;&#x131;n!</a></li>
+                                <li><a href="https://www.kuveytturkportfoy.com.tr/kurumsal/guncel-stopaj-oranlari/"
+                                        class="">G&#xFC;ncel Stopaj Oranlar&#x131;</a></li>
+                                <li><a href="https://www.kuveytturkportfoy.com.tr/blog/" class="">Blog</a></li>
+                                <li><a href="https://www.kuveytturkportfoy.com.tr/medya/kataloglar/" class="">Medya</a>
+                                </li>
+                                <li><a href="https://www.kuveytturkportfoy.com.tr/sikca-sorulan-sorular/"
+                                        class="">S&#x131;k&#xE7;a Sorulan Sorular</a></li>
+                                <li><a href="https://www.kuveytturkportfoy.com.tr/iletisim/"
+                                        class="">&#x130;leti&#x15F;im</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="uk-width-auto">
+                            <ul class="uk-subnav uk-subnav-default">
+                                <li><a
+                                        href="https://www.kuveytturkportfoy.com.tr/en/risk-profile-calculation/">&#x130;ngilizce</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="header-bottom">
+                <nav class="uk-navbar-container">
+                    <div class="uk-container uk-container-expand">
+                        <div class="uk-navbar" uk-navbar>
+                            <div class="uk-navbar-left">
+                                <a class="uk-navbar-item uk-logo" href="https://www.kuveytturkportfoy.com.tr/"
+                                    aria-label="Back to Home">
+                                    <picture>
+                                        <source media="(min-width: 959px)" srcset="/Content/images/logos/logo.svg"
+                                            width="316" height="36" />
+                                        <img src="/Content/images/logos/logo.svg" alt="" width="210" height="24"
+                                            loading="lazy" />
+                                    </picture>
+                                </a>
+                            </div>
+
+                            <div class="uk-navbar-right">
+                                <div class="uk-navbar-toggle">
+                                    <a href="#" class="uk-link-reset" uk-icon="icon: icn-search;"></a>
+                                </div>
+
+                                <div class="uk-navbar-toggle">
+                                    <a href="#" class="uk-link-reset uk-modal-close" uk-icon="icon: icn-close;"></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="uk-modal-body">
+                <ul class="uk-nav uk-nav-primary" uk-nav>
+                    <li class="uk-parent">
+                        <a href="https://www.kuveytturkportfoy.com.tr/kurumsal/">
+                            Kurumsal
+                            <span class="uk-nav-parent-icon uk-text-primary"
+                                uk-icon="icon: icn-chevron-down; ratio: 1.54;"></span>
+                        </a>
+                        <ul class="uk-nav-sub">
+                            <li><a href="https://www.kuveytturkportfoy.com.tr/kurumsal/kuveyt-turk-portfoy/">Kuveyt
+                                    T&#xFC;rk Portf&#xF6;y<span class="uk-margin-auto-left"
+                                        uk-icon="icon: icn-chevron-right-primary;"></span></a></li>
+                            <li><a href="https://www.kuveytturkportfoy.com.tr/kurumsal/vizyon-misyon/">Vizyon &amp;
+                                    Misyon<span class="uk-margin-auto-left"
+                                        uk-icon="icon: icn-chevron-right-primary;"></span></a></li>
+                            <li><a href="https://www.kuveytturkportfoy.com.tr/kurumsal/insan-kaynaklari/">&#x130;nsan
+                                    Kaynaklar&#x131;<span class="uk-margin-auto-left"
+                                        uk-icon="icon: icn-chevron-right-primary;"></span></a></li>
+                            <li><a href="https://www.kuveytturkportfoy.com.tr/kurumsal/degerlerimiz/">De&#x11F;erlerimiz<span
+                                        class="uk-margin-auto-left"
+                                        uk-icon="icon: icn-chevron-right-primary;"></span></a></li>
+                            <li><a href="https://www.kuveytturkportfoy.com.tr/kurumsal/kurumsal-dokumanlar/">Kurumsal
+                                    Dok&#xFC;manlar<span class="uk-margin-auto-left"
+                                        uk-icon="icon: icn-chevron-right-primary;"></span></a></li>
+                            <li><a href="https://www.kuveytturkportfoy.com.tr/kurumsal/yonetim-kurulu/">Y&#xF6;netim
+                                    Kurulu<span class="uk-margin-auto-left"
+                                        uk-icon="icon: icn-chevron-right-primary;"></span></a></li>
+                            <li><a href="https://www.kuveytturkportfoy.com.tr/kurumsal/duyurular/">Duyurular<span
+                                        class="uk-margin-auto-left"
+                                        uk-icon="icon: icn-chevron-right-primary;"></span></a></li>
+                            <li><a href="https://www.kuveytturkportfoy.com.tr/kurumsal/basinda-biz/">Bas&#x131;nda
+                                    Biz<span class="uk-margin-auto-left"
+                                        uk-icon="icon: icn-chevron-right-primary;"></span></a></li>
+                        </ul>
+                    </li>
+                    <li class="uk-parent">
+                        <a href="https://www.kuveytturkportfoy.com.tr/yatirim-evreni/">
+                            Yat&#x131;r&#x131;m Evreni
+                            <span class="uk-nav-parent-icon uk-text-primary"
+                                uk-icon="icon: icn-chevron-down; ratio: 1.54;"></span>
+                        </a>
+                        <ul class="uk-nav-sub">
+                            <li><a href="https://www.kuveytturkportfoy.com.tr/yatirim-evreni/yatirim-fonlari/">Yat&#x131;r&#x131;m
+                                    Fonlar&#x131;<span class="uk-margin-auto-left"
+                                        uk-icon="icon: icn-chevron-right-primary;"></span></a></li>
+                            <li><a href="https://www.kuveytturkportfoy.com.tr/yatirim-evreni/ozel-portfoy-yonetimi/">&#xD6;zel
+                                    Portf&#xF6;y Y&#xF6;netimi<span class="uk-margin-auto-left"
+                                        uk-icon="icon: icn-chevron-right-primary;"></span></a></li>
+                            <li><a href="https://www.kuveytturkportfoy.com.tr/yatirim-evreni/emeklilik-fonlari/">Emeklilik
+                                    Fonlar&#x131;<span class="uk-margin-auto-left"
+                                        uk-icon="icon: icn-chevron-right-primary;"></span></a></li>
+                            <li><a
+                                    href="https://www.kuveytturkportfoy.com.tr/yatirim-evreni/girisim-sermayesi-yatirim-fonlari/">Giri&#x15F;im
+                                    Sermayesi Yat&#x131;r&#x131;m Fonlar&#x131;<span class="uk-margin-auto-left"
+                                        uk-icon="icon: icn-chevron-right-primary;"></span></a></li>
+                        </ul>
+                    </li>
+                    <li class="uk-parent">
+                        <a href="https://www.kuveytturkportfoy.com.tr/fon-getirileri/">
+                            Fon Getirileri
+                            <span class="uk-nav-parent-icon uk-text-primary"
+                                uk-icon="icon: icn-chevron-down; ratio: 1.54;"></span>
+                        </a>
+                        <ul class="uk-nav-sub">
+                            <li><a href="https://www.kuveytturkportfoy.com.tr/fon-getirileri/">Fon Getirileri<span
+                                        class="uk-margin-auto-left"
+                                        uk-icon="icon: icn-chevron-right-primary;"></span></a></li>
+                            <li><a href="https://www.kuveytturkportfoy.com.tr/fon-getirileri/fon-getiri-hesaplama/">Fon
+                                    Getiri Hesaplama<span class="uk-margin-auto-left"
+                                        uk-icon="icon: icn-chevron-right-primary;"></span></a></li>
+                            <li><a href="https://www.kuveytturkportfoy.com.tr/fon-getirileri/fon-karsilastirma/">Fon
+                                    Kar&#x15F;&#x131;la&#x15F;t&#x131;rma<span class="uk-margin-auto-left"
+                                        uk-icon="icon: icn-chevron-right-primary;"></span></a></li>
+                            <li><a href="https://www.kuveytturkportfoy.com.tr/fon-getirileri/valor-hesaplama/">Val&#xF6;r
+                                    Hesaplama<span class="uk-margin-auto-left"
+                                        uk-icon="icon: icn-chevron-right-primary;"></span></a></li>
+                        </ul>
+                    </li>
+                    <li class="uk-parent">
+                        <a href="https://www.kuveytturkportfoy.com.tr/yatirimci-kilavuzu/">
+                            Yat&#x131;r&#x131;mc&#x131; K&#x131;lavuzu
+                            <span class="uk-nav-parent-icon uk-text-primary"
+                                uk-icon="icon: icn-chevron-down; ratio: 1.54;"></span>
+                        </a>
+                        <ul class="uk-nav-sub">
+                            <li><a
+                                    href="https://www.kuveytturkportfoy.com.tr/yatirimci-kilavuzu/aylik-fon-dagilim-onerileri/">Ayl&#x131;k
+                                    Fon Da&#x11F;&#x131;l&#x131;m &#xD6;nerileri<span class="uk-margin-auto-left"
+                                        uk-icon="icon: icn-chevron-right-primary;"></span></a></li>
+                            <li><a href="https://www.kuveytturkportfoy.com.tr/yatirimci-kilavuzu/bulten/">B&#xFC;lten<span
+                                        class="uk-margin-auto-left"
+                                        uk-icon="icon: icn-chevron-right-primary;"></span></a></li>
+                            <li><a href="https://www.kuveytturkportfoy.com.tr/yatirimci-kilavuzu/arindirma-islemleri/">Ar&#x131;nd&#x131;rma
+                                    &#x130;&#x15F;lemleri<span class="uk-margin-auto-left"
+                                        uk-icon="icon: icn-chevron-right-primary;"></span></a></li>
+                            <li><a
+                                    href="https://www.kuveytturkportfoy.com.tr/yatirimci-kilavuzu/hangi-yatirim-fonu-bana-gore/">Hangi
+                                    Yat&#x131;r&#x131;m Fonu Bana G&#xF6;re<span class="uk-margin-auto-left"
+                                        uk-icon="icon: icn-chevron-right-primary;"></span></a></li>
+                            <li><a
+                                    href="https://www.kuveytturkportfoy.com.tr/yatirimci-kilavuzu/yatirim-sozluk/yatirim-sozluk/">Yat&#x131;r&#x131;m
+                                    S&#xF6;zl&#xFC;k<span class="uk-margin-auto-left"
+                                        uk-icon="icon: icn-chevron-right-primary;"></span></a></li>
+                            <li><a href="https://www.kuveytturkportfoy.com.tr/yatirimci-kilavuzu/tanitim-videolari/">Tan&#x131;t&#x131;m
+                                    Videolar&#x131;<span class="uk-margin-auto-left"
+                                        uk-icon="icon: icn-chevron-right-primary;"></span></a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+
+            <div class="uk-modal-footer uk-margin-auto-top">
+                <a href="https://www.kuveytturkportfoy.com.tr/fon-satin-al/" target="_blank"
+                    class="uk-button uk-button-primary uk-width-1-1">Fon Sat&#x131;n Al</a>
+            </div>
+        </div>
+    </div>
+    <div id="modal-search" class="uk-modal uk-modal-full" uk-modal>
+        <div class="uk-modal-dialog uk-height-viewport">
+            <div class="uk-modal-body">
+                <nav class="uk-navbar-container uk-margin-xlarge">
+                    <div class="uk-container">
+                        <div class="uk-navbar" uk-navbar="boundary: !.header-bottom; stretch: x; offset: 36;">
+                            <div class="uk-navbar-left uk-flex-1">
+                                <a class="uk-navbar-item uk-logo" href="/" aria-label="Back to Home">
+                                    <picture>
+                                        <source media="(min-width: 959px)" srcset="/Content/images/logos/logo.svg"
+                                            width="316" height="36" />
+                                        <img src="/Content/images/logos/logo.svg" alt="" width="210" height="24"
+                                            loading="lazy" />
+                                    </picture>
+                                </a>
+                            </div>
+
+                            <div class="uk-navbar-right">
+                                <div class="uk-navbar-item">
+                                    <a href="#" class="uk-modal-close uk-link-reset uk-flex uk-flex-middle uk-gap-8">
+                                        <span>Kapat</span>
+                                        <span uk-icon="icon: icn-close; ratio: 0.84;"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+
+                <div class="uk-container">
+                    <div class="uk-grid uk-grid-medium uk-flex-center" uk-grid>
+                        <div class="uk-width-2-3@m">
+                            <form class="uk-search uk-search-medium">
+                                <input class="uk-search-input uk-border-bottom-muted-100" type="search"
+                                    placeholder="Arama Yapın" aria-label="Arama Yapın" autofocus>
+                                <button type="button" class="uk-search-icon uk-search-icon-flip uk-icon-20"
+                                    uk-icon="icon: icn-search;"></button>
+                            </form>
+
+                            <div class="uk-margin-xlarge suggested">
+                                <h4 class="uk-margin-16 uk-margin-30@m">Önerilen Aramalar</h4>
+
+                                <div class="uk-grid uk-grid-medium uk-child-width-1-2@m" uk-grid>
+                                    <div>
+                                        <div class="uk-border uk-border-rounded-large uk-padding-24 uk-padding-24-32@m">
+                                            <h4 class="uk-text-primary uk-margin-small">Yat&#x131;r&#x131;m Evreni</h4>
+                                            <ul class="uk-nav uk-navbar-dropdown-nav">
+
+                                                <li><a
+                                                        href="https://www.kuveytturkportfoy.com.tr/yatirim-evreni/ozel-portfoy-yonetimi/">&#xD6;zel
+                                                        Portf&#xF6;y Y&#xF6;netimi <span class="uk-margin-auto-left"
+                                                            uk-icon="icon: icn-chevron-right;"></span></a></li>
+                                                <li><a
+                                                        href="https://www.kuveytturkportfoy.com.tr/yatirim-evreni/yatirim-fonlari/">Yat&#x131;r&#x131;m
+                                                        Fonlar&#x131; <span class="uk-margin-auto-left"
+                                                            uk-icon="icon: icn-chevron-right;"></span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="uk-border uk-border-rounded-large uk-padding-24 uk-padding-24-32@m">
+                                            <h4 class="uk-text-primary uk-margin-small">Yat&#x131;r&#x131;mc&#x131;
+                                                K&#x131;lavuzu</h4>
+                                            <ul class="uk-nav uk-navbar-dropdown-nav">
+                                                <li><a
+                                                        href="https://www.kuveytturkportfoy.com.tr/yatirimci-kilavuzu/aylik-fon-dagilim-onerileri/">Ayl&#x131;k
+                                                        Fon Da&#x11F;&#x131;l&#x131;m &#xD6;nerileri <span
+                                                            class="uk-margin-auto-left"
+                                                            uk-icon="icon: icn-chevron-right;"></span></a></li>
+                                                <li><a
+                                                        href="https://www.kuveytturkportfoy.com.tr/yatirimci-kilavuzu/bulten/">B&#xFC;lten
+                                                        <span class="uk-margin-auto-left"
+                                                            uk-icon="icon: icn-chevron-right;"></span></a></li>
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="uk-margin-40-top search-list"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <main>
+
+
+
+
+        <section class="uk-section uk-section-primary uk-section-large uk-position-relative">
+            <div class="uk-position-top uk-margin-medium-top uk-visible@l">
+                <div class="uk-container">
+                    <nav aria-label="Breadcrumb">
+                        <ul class="uk-breadcrumb uk-margin-remove">
+                            <li><a class="" href="https://www.kuveytturkportfoy.com.tr/">Anasayfa</a></li>
+                            <li><span aria-current="page">Risk Profili Hesaplama</span></li>
+                        </ul>
+                    </nav>
+
+                </div>
+            </div>
+
+            <div class="uk-position-bottom-right uk-disabled">
+                <picture>
+                    <source media="(min-width: 959px)" srcset="/Content/images/figure/figure-1.svg" width="554">
+                    <img src="/Content/images/figure/figure-1.svg" alt="figure" width="272">
+                </picture>
+            </div>
+
+            <div class="uk-container uk-position-relative uk-text-lead">
+                <div class="uk-width-2-5@m">
+                    <h1 class="uk-margin-16">Risk Profili Anketi</h1>
+                    <div class="uk-margin-remove-last-child">
+                        <div class="uk-margin-remove-last-child uk-margin-32 uk-margin-40@m">
+                            <p>Gündelik hayattan hazırlanan 4 soruluk anketi çözerek hangi risk profiline sahip
+                                olduğunuzu öğrenebilir ve size uygun fon dağılım önerilerine ulaşabilirsiniz.</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+
+        <section class="uk-section uk-section-default">
+            <div class="uk-container">
+                <div class="uk-grid uk-grid-medium uk-flex-between" uk-grid>
+                    <div class="uk-width-1-3@m uk-text-lead">
+                        <div class="uk-margin-30 uk-margin-remove-last-child">
+                            <h2 class="uk-margin-medium">Risk Profilinize G&#xF6;re Yat&#x131;r&#x131;m Yap&#x131;n</h2>
+                            <p>Kuveyt Türk Portföy’ün her risk seviyesine uygun çeşitlendirilmiş yatırım fonları ile
+                                herkese uygun bir yatırım fonu var.</p>
+                        </div>
+
+                        <a href="#modal-survey" class="uk-button uk-button-primary uk-button-xlarge@m" uk-toggle>Anketi
+                            Doldur</a>
+                    </div>
+
+                    <div class="uk-width-1-2@m">
+                        <div uk-margin="margin: uk-margin-top">
+                            <div
+                                class="uk-background-muted uk-border-rounded-large uk-padding-medium uk-flex uk-gap-14 uk-flex-column uk-flex-row@m">
+                                <span class="uk-flex-none">
+                                    <img src="/media/z2mh14by/yat&#x131;r&#x131;mc&#x131;-tipi-1.svg"
+                                        alt="Yat&#x131;r&#x131;mc&#x131; Tipi (1)" width="35" loading="lazy">
+                                </span>
+
+                                <div>
+                                    <h4 class="uk-margin-14">Ayl&#x131;k fon da&#x11F;&#x131;l&#x131;m &#xF6;nerileri
+                                        ile her risk profiline uygun &#xE7;e&#x15F;itlendirilmi&#x15F; fon
+                                        portf&#xF6;yleri</h4>
+                                    <div class="uk-text-lead uk-margin-remove-last-child uk-width-2-3@m">
+                                        <p>Anket sonucunuza göre risk seviyenizi belirleyin. Aylık fon dağılım
+                                            önerilerimizdeki 3 farklı risk seviyesine göre yatırımlarınızı planlayın.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="uk-background-muted uk-border-rounded-large uk-padding-medium uk-flex uk-gap-14 uk-flex-column uk-flex-row@m">
+                                <span class="uk-flex-none">
+                                    <img src="/media/3z3djbrm/yat&#x131;r&#x131;mc&#x131;-tipi-2.svg"
+                                        alt="Yat&#x131;r&#x131;mc&#x131; Tipi (2)" width="35" loading="lazy">
+                                </span>
+
+                                <div>
+                                    <h4 class="uk-margin-14">T&#xFC;m Bankalardan Kuveyt T&#xFC;rk Fonlar&#x131;na
+                                        kolayl&#x131;kla yat&#x131;r&#x131;m yap&#x131;n</h4>
+                                    <div class="uk-text-lead uk-margin-remove-last-child uk-width-2-3@m">
+                                        <p>Belirlediğiniz fonlara Kuveyt Türk ve tüm bankaların yatırım menülerinden
+                                            yatırım yapın.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="uk-background-muted uk-border-rounded-large uk-padding-medium uk-flex uk-gap-14 uk-flex-column uk-flex-row@m">
+                                <span class="uk-flex-none">
+                                    <img src="/media/kygmunkf/yat&#x131;r&#x131;mc&#x131;-tipi-3.svg"
+                                        alt="Yat&#x131;r&#x131;mc&#x131; Tipi (3)" width="35" loading="lazy">
+                                </span>
+
+                                <div>
+                                    <h4 class="uk-margin-14">Uzman fon y&#xF6;netimi ekibi, profesyonel y&#xF6;netim.
+                                    </h4>
+                                    <div class="uk-text-lead uk-margin-remove-last-child uk-width-2-3@m">
+                                        <p>Yatırım kararınız ardından Kuveyt Türk Portföy’ün uzman fon yönetimi ekibi
+                                            ile yatırımlarınıza değer kazandırın.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div id="modal-survey" class="uk-modal uk-modal-full uk-modal-survey" uk-modal>
+            <div class="uk-modal-dialog uk-flex uk-flex-column" uk-height-viewport>
+                <div class="uk-flex uk-survey-step uk-text-right uk-survey-step-compact">
+                    <!-- Yatırımcı Tipi -->
+                    <div data-step="1"
+                        class="uk-flex-1 uk-position-z-index uk-flex uk-flex-column uk-gap-4 uk-step uk-active">
+                        <span class="uk-title uk-text-bold uk-text-xsmall">Başla</span>
+                        <span class="uk-text-xsmall">Yatırımcı Tipi</span>
+                    </div>
+                    <!-- KAPASİTE SORULARI (1-5) -->
+                    <div data-step="2" class="uk-flex-1 uk-position-z-index uk-flex uk-flex-column uk-gap-4 uk-step">
+                        <span class="uk-title uk-text-bold uk-text-xsmall">S1</span>
+                        <span class="uk-text-xsmall">Yaş</span>
+                    </div>
+                    <div data-step="3" class="uk-flex-1 uk-position-z-index uk-flex uk-flex-column uk-gap-4 uk-step">
+                        <span class="uk-title uk-text-bold uk-text-xsmall">S2</span>
+                        <span class="uk-text-xsmall">Vade</span>
+                    </div>
+                    <div data-step="4" class="uk-flex-1 uk-position-z-index uk-flex uk-flex-column uk-gap-4 uk-step">
+                        <span class="uk-title uk-text-bold uk-text-xsmall">S3</span>
+                        <span class="uk-text-xsmall">Varlık</span>
+                    </div>
+                    <div data-step="5" class="uk-flex-1 uk-position-z-index uk-flex uk-flex-column uk-gap-4 uk-step">
+                        <span class="uk-title uk-text-bold uk-text-xsmall">S4</span>
+                        <span class="uk-text-xsmall">Gelir</span>
+                    </div>
+                    <div data-step="6" class="uk-flex-1 uk-position-z-index uk-flex uk-flex-column uk-gap-4 uk-step">
+                        <span class="uk-title uk-text-bold uk-text-xsmall">S5</span>
+                        <span class="uk-text-xsmall">Fon</span>
+                    </div>
+                    <!-- RİSK TOLERANSI SORULARI (6-12) -->
+                    <div data-step="7" class="uk-flex-1 uk-position-z-index uk-flex uk-flex-column uk-gap-4 uk-step">
+                        <span class="uk-title uk-text-bold uk-text-xsmall">S6</span>
+                        <span class="uk-text-xsmall">Kayıp</span>
+                    </div>
+                    <div data-step="8" class="uk-flex-1 uk-position-z-index uk-flex uk-flex-column uk-gap-4 uk-step">
+                        <span class="uk-title uk-text-bold uk-text-xsmall">S7</span>
+                        <span class="uk-text-xsmall">Tercih</span>
+                    </div>
+                    <div data-step="9" class="uk-flex-1 uk-position-z-index uk-flex uk-flex-column uk-gap-4 uk-step">
+                        <span class="uk-title uk-text-bold uk-text-xsmall">S8</span>
+                        <span class="uk-text-xsmall">Senaryo</span>
+                    </div>
+                    <div data-step="10" class="uk-flex-1 uk-position-z-index uk-flex uk-flex-column uk-gap-4 uk-step">
+                        <span class="uk-title uk-text-bold uk-text-xsmall">S9</span>
+                        <span class="uk-text-xsmall">Deneyim</span>
+                    </div>
+                    <div data-step="11" class="uk-flex-1 uk-position-z-index uk-flex uk-flex-column uk-gap-4 uk-step">
+                        <span class="uk-title uk-text-bold uk-text-xsmall">S10</span>
+                        <span class="uk-text-xsmall">Psikoloji</span>
+                    </div>
+                    <div data-step="12" class="uk-flex-1 uk-position-z-index uk-flex uk-flex-column uk-gap-4 uk-step">
+                        <span class="uk-title uk-text-bold uk-text-xsmall">S11</span>
+                        <span class="uk-text-xsmall">Tolerans</span>
+                    </div>
+                    <div data-step="13" class="uk-flex-1 uk-position-z-index uk-flex uk-flex-column uk-gap-4 uk-step">
+                        <span class="uk-title uk-text-bold uk-text-xsmall">S12</span>
+                        <span class="uk-text-xsmall">Kazanç</span>
+                    </div>
+                    <!-- UYGUNLUK SORULARI (13-15) -->
+                    <div data-step="14" class="uk-flex-1 uk-position-z-index uk-flex uk-flex-column uk-gap-4 uk-step">
+                        <span class="uk-title uk-text-bold uk-text-xsmall">S13</span>
+                        <span class="uk-text-xsmall">Ürün</span>
+                    </div>
+                    <div data-step="15" class="uk-flex-1 uk-position-z-index uk-flex uk-flex-column uk-gap-4 uk-step">
+                        <span class="uk-title uk-text-bold uk-text-xsmall">S14</span>
+                        <span class="uk-text-xsmall">İlgi</span>
+                    </div>
+                    <div data-step="16" class="uk-flex-1 uk-position-z-index uk-flex uk-flex-column uk-gap-4 uk-step">
+                        <span class="uk-title uk-text-bold uk-text-xsmall">S15</span>
+                        <span class="uk-text-xsmall">ESG</span>
+                    </div>
+                    <!-- ONAY -->
+                    <div data-step="17" class="uk-flex-1 uk-position-z-index uk-flex uk-flex-column uk-gap-4 uk-step">
+                        <span class="uk-title uk-text-bold uk-text-xsmall">Onay</span>
+                    </div>
+                </div>
+
+                <div class="uk-modal-body uk-flex-1 uk-flex uk-flex-middle">
+                    <div class="uk-container uk-flex-1">
+                        <div class="uk-grid uk-grid-medium uk-flex-center" uk-grid>
+                            <div data-step="1" id="question1" class="uk-width-4-5@m question-control">
+                                <div class="uk-flex uk-flex-right uk-margin-medium">
+                                    <a href="#" class="uk-modal-close uk-margin-remove" uk-icon="icon: icn-close;"></a>
+                                </div>
+
+                                <div class="uk-grid uk-grid-medium uk-text-center" uk-grid>
+                                    <div class="uk-width-1-2@m">
+                                        <div
+                                            class="uk-border-rounded-large uk-margin-remove-last-child uk-position-relative uk-question-container">
+                                            <div class="uk-grid uk-grid-small uk-child-width-1-2@m" uk-grid>
+                                                <div>
+                                                    <label
+                                                        class="uk-display-block uk-border-rounded-large uk-padding uk-padding-20-vertical uk-background-muted-100"
+                                                        for="question1a">
+                                                        <div class="uk-margin-16">
+                                                            <img src="/Content/images/icons/survey-1.svg" alt="" />
+                                                        </div>
+
+                                                        <div>
+                                                            <div class="uk-text-emphasis uk-text-bold uk-margin-medium">
+                                                                <span>Bireysel</span>
+                                                            </div>
+
+                                                            <input type="radio" id="question1a" name="personType"
+                                                                value="a" class="uk-radio" />
+                                                        </div>
+
+                                                    </label>
+                                                </div>
+
+                                                <div>
+                                                    <label
+                                                        class="uk-display-block uk-border-rounded-large uk-padding uk-padding-20-vertical uk-background-muted-100"
+                                                        for="question1b">
+                                                        <div class="uk-margin-16">
+                                                            <img src="/Content/images/icons/survey-2.svg" alt="" />
+                                                        </div>
+
+                                                        <div>
+                                                            <div class="uk-text-emphasis uk-text-bold uk-margin-medium">
+                                                                <span>Kurumsal</span>
+                                                            </div>
+
+                                                            <input type="radio" id="question1b" name="personType"
+                                                                value="b" class="uk-radio" />
+                                                        </div>
+
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="uk-width-1-2@m">
+                                        <div
+                                            class="uk-border-rounded-large uk-margin-remove-last-child uk-position-relative uk-question-container">
+                                            <div class="uk-grid uk-grid-small uk-child-width-1-2@m" uk-grid>
+                                                <div>
+                                                    <label
+                                                        class="uk-display-block uk-border-rounded-large uk-padding uk-padding-20-vertical uk-background-muted-100"
+                                                        for="question1c">
+                                                        <div class="uk-margin-16">
+                                                            <img src="/Content/images/icons/survey-3.svg" alt="" />
+                                                        </div>
+
+                                                        <div>
+                                                            <div class="uk-text-emphasis uk-text-bold uk-margin-medium">
+                                                                <span>Genel Yat&#x131;r&#x131;mc&#x131;</span>
+                                                            </div>
+
+                                                            <input type="radio" id="question1c" name="investorType"
+                                                                value="a" class="uk-radio" />
+                                                        </div>
+
+                                                    </label>
+                                                </div>
+
+                                                <div>
+                                                    <label
+                                                        class="uk-display-block uk-border-rounded-large uk-padding uk-padding-20-vertical uk-background-muted-100"
+                                                        for="question1d">
+                                                        <div class="uk-margin-16">
+                                                            <img src="/Content/images/icons/survey-4.svg" alt="" />
+                                                        </div>
+
+                                                        <div>
+                                                            <div class="uk-text-emphasis uk-text-bold uk-margin-medium">
+                                                                <span>Kurumsal Yat&#x131;r&#x131;mc&#x131;</span>
+                                                            </div>
+
+                                                            <input type="radio" id="question1d" name="investorType"
+                                                                value="b" class="uk-radio" />
+                                                        </div>
+
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="uk-flex uk-flex-right@m uk-gap-16 uk-margin-32">
+                                    <a href="#" class="uk-button uk-button-primary uk-button-large next-step">Devam</a>
+                                </div>
+                            </div>
+
+                            <div class="uk-width-1-2@m">
+                                <!-- BÖLÜM 1: KAPASİTE SORULARI (Q1-Q5) -->
+
+                                <!-- Q1 - Yaş Aralığı -->
+                                <div data-step="2" id="question1"
+                                    class="uk-border-rounded-large uk-margin-remove-last-child uk-position-relative uk-question-container question-control uk-hidden">
+                                    <a href="#" class="uk-modal-close uk-position-top-right"
+                                        uk-icon="icon: icn-close;"></a>
+                                    <span
+                                        class="uk-display-block uk-text-xsmall uk-text-primary uk-text-bold uk-margin-8">SORU
+                                        1 / 14 - KAPASİTE</span>
+                                    <h4 class="uk-text-normal uk-margin-remove-top uk-margin-32-bottom">Yaş aralığınızı
+                                        seçiniz:</h4>
+
+                                    <div class="uk-text-lead uk-questions">
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="a"
+                                                name="question1">
+                                            18-35 yaş
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="b"
+                                                name="question1">
+                                            36-50 yaş
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="c"
+                                                name="question1">
+                                            51-65 yaş
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="d"
+                                                name="question1">
+                                            65 yaş üstü
+                                        </label>
+                                    </div>
+
+                                    <div class="uk-flex uk-flex-right@m uk-gap-16 uk-margin-32">
+                                        <a href="#"
+                                            class="uk-button uk-button-default uk-button-large previous-step">Geri</a>
+                                        <a href="#"
+                                            class="uk-button uk-button-primary uk-button-large next-step">Devam</a>
+                                    </div>
+                                </div>
+
+                                <!-- Q2 - Yatırım Vadesi -->
+                                <div data-step="3" id="question2"
+                                    class="uk-border-rounded-large uk-margin-remove-last-child uk-position-relative uk-question-container question-control uk-hidden">
+                                    <a href="#" class="uk-modal-close uk-position-top-right"
+                                        uk-icon="icon: icn-close;"></a>
+                                    <span
+                                        class="uk-display-block uk-text-xsmall uk-text-primary uk-text-bold uk-margin-8">SORU
+                                        2 / 14 - KAPASİTE</span>
+                                    <h4 class="uk-text-normal uk-margin-remove-top uk-margin-32-bottom">Bu yatırımı ne
+                                        kadar süreyle tutmayı planlıyorsunuz?</h4>
+
+                                    <div class="uk-text-lead uk-questions">
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="a"
+                                                name="question2">
+                                            1 yıldan kısa
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="b"
+                                                name="question2">
+                                            1-3 yıl
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="c"
+                                                name="question2">
+                                            3-7 yıl
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="d"
+                                                name="question2">
+                                            7 yıldan uzun
+                                        </label>
+                                    </div>
+
+                                    <div class="uk-flex uk-flex-right@m uk-gap-16 uk-margin-32">
+                                        <a href="#"
+                                            class="uk-button uk-button-default uk-button-large previous-step">Geri</a>
+                                        <a href="#"
+                                            class="uk-button uk-button-primary uk-button-large next-step">Devam</a>
+                                    </div>
+                                </div>
+
+                                <!-- Q3 - Toplam Finansal Varlık -->
+                                <div data-step="4" id="question3"
+                                    class="uk-border-rounded-large uk-margin-remove-last-child uk-position-relative uk-question-container question-control uk-hidden">
+                                    <a href="#" class="uk-modal-close uk-position-top-right"
+                                        uk-icon="icon: icn-close;"></a>
+                                    <span
+                                        class="uk-display-block uk-text-xsmall uk-text-primary uk-text-bold uk-margin-8">SORU
+                                        3 / 14 - KAPASİTE</span>
+                                    <h4 class="uk-text-normal uk-margin-remove-top uk-margin-32-bottom">Toplam finansal
+                                        varlıklarınız (mevduat, yatırım, emeklilik vb.) yaklaşık ne kadardır?</h4>
+
+                                    <div class="uk-text-lead uk-questions">
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="a"
+                                                name="question3">
+                                            500.000 TL'den az
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="b"
+                                                name="question3">
+                                            500.000 - 2.000.000 TL
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="c"
+                                                name="question3">
+                                            2.000.000 - 5.000.000 TL
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="d"
+                                                name="question3">
+                                            5.000.000 TL üzeri
+                                        </label>
+                                    </div>
+
+                                    <div class="uk-flex uk-flex-right@m uk-gap-16 uk-margin-32">
+                                        <a href="#"
+                                            class="uk-button uk-button-default uk-button-large previous-step">Geri</a>
+                                        <a href="#"
+                                            class="uk-button uk-button-primary uk-button-large next-step">Devam</a>
+                                    </div>
+                                </div>
+
+                                <!-- Q4 - Yıllık Gelir ve İstikrar -->
+                                <div data-step="5" id="question4"
+                                    class="uk-border-rounded-large uk-margin-remove-last-child uk-position-relative uk-question-container question-control uk-hidden">
+                                    <a href="#" class="uk-modal-close uk-position-top-right"
+                                        uk-icon="icon: icn-close;"></a>
+                                    <span
+                                        class="uk-display-block uk-text-xsmall uk-text-primary uk-text-bold uk-margin-8">SORU
+                                        4 / 14 - KAPASİTE</span>
+                                    <h4 class="uk-text-normal uk-margin-remove-top uk-margin-32-bottom">Yıllık geliriniz
+                                        ve gelir istikrarınız nasıldır?</h4>
+
+                                    <div class="uk-text-lead uk-questions">
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="a"
+                                                name="question4">
+                                            Düşük ve/veya düzensiz gelir
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="b"
+                                                name="question4">
+                                            Orta düzeyde, kısmen istikrarlı gelir
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="c"
+                                                name="question4">
+                                            Yüksek ve istikrarlı gelir
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="d"
+                                                name="question4">
+                                            Çok yüksek ve çeşitlendirilmiş gelir kaynakları
+                                        </label>
+                                    </div>
+
+                                    <div class="uk-flex uk-flex-right@m uk-gap-16 uk-margin-32">
+                                        <a href="#"
+                                            class="uk-button uk-button-default uk-button-large previous-step">Geri</a>
+                                        <a href="#"
+                                            class="uk-button uk-button-primary uk-button-large next-step">Devam</a>
+                                    </div>
+                                </div>
+
+                                <!-- Q5 - Acil Durum Fonu -->
+                                <div data-step="6" id="question5"
+                                    class="uk-border-rounded-large uk-margin-remove-last-child uk-position-relative uk-question-container question-control uk-hidden">
+                                    <a href="#" class="uk-modal-close uk-position-top-right"
+                                        uk-icon="icon: icn-close;"></a>
+                                    <span
+                                        class="uk-display-block uk-text-xsmall uk-text-primary uk-text-bold uk-margin-8">SORU
+                                        5 / 14 - KAPASİTE</span>
+                                    <h4 class="uk-text-normal uk-margin-remove-top uk-margin-32-bottom">Acil durumlar
+                                        için ayrılmış likit bir fonunuz var mı?</h4>
+
+                                    <div class="uk-text-lead uk-questions">
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="a"
+                                                name="question5">
+                                            Hayır, acil durum fonum yok
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="b"
+                                                name="question5">
+                                            Evet, 3-6 aylık giderlerimi karşılayacak kadar
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="c"
+                                                name="question5">
+                                            Evet, 6 aydan fazla giderlerimi karşılayacak kadar
+                                        </label>
+                                    </div>
+
+                                    <div class="uk-flex uk-flex-right@m uk-gap-16 uk-margin-32">
+                                        <a href="#"
+                                            class="uk-button uk-button-default uk-button-large previous-step">Geri</a>
+                                        <a href="#"
+                                            class="uk-button uk-button-primary uk-button-large next-step">Devam</a>
+                                    </div>
+                                </div>
+
+                                <!-- BÖLÜM 2: RİSK TOLERANSI SORULARI (Q6-Q12) -->
+
+                                <!-- Q6 - %20 Kayıp Senaryosu -->
+                                <div data-step="7" id="question6"
+                                    class="uk-border-rounded-large uk-margin-remove-last-child uk-position-relative uk-question-container question-control uk-hidden">
+                                    <a href="#" class="uk-modal-close uk-position-top-right"
+                                        uk-icon="icon: icn-close;"></a>
+                                    <span
+                                        class="uk-display-block uk-text-xsmall uk-text-primary uk-text-bold uk-margin-8">SORU
+                                        6 / 14 - RİSK TOLERANSI</span>
+                                    <h4 class="uk-text-normal uk-margin-remove-top uk-margin-32-bottom">Yatırımınız bir
+                                        ay içinde %20 değer kaybetse ne yaparsınız?</h4>
+
+                                    <div class="uk-text-lead uk-questions">
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="a"
+                                                name="question6">
+                                            Hemen satıp daha güvenli bir yatırıma geçerim
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="b"
+                                                name="question6">
+                                            Hiçbir şey yapmam, toparlanmasını beklerim
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="c"
+                                                name="question6">
+                                            Fiyat düşmüşken ek alım yaparım
+                                        </label>
+                                    </div>
+
+                                    <div class="uk-flex uk-flex-right@m uk-gap-16 uk-margin-32">
+                                        <a href="#"
+                                            class="uk-button uk-button-default uk-button-large previous-step">Geri</a>
+                                        <a href="#"
+                                            class="uk-button uk-button-primary uk-button-large next-step">Devam</a>
+                                    </div>
+                                </div>
+
+                                <!-- Q7 - Genel Risk-Getiri Tercihi -->
+                                <div data-step="8" id="question7"
+                                    class="uk-border-rounded-large uk-margin-remove-last-child uk-position-relative uk-question-container question-control uk-hidden">
+                                    <a href="#" class="uk-modal-close uk-position-top-right"
+                                        uk-icon="icon: icn-close;"></a>
+                                    <span
+                                        class="uk-display-block uk-text-xsmall uk-text-primary uk-text-bold uk-margin-8">SORU
+                                        7 / 14 - RİSK TOLERANSI</span>
+                                    <h4 class="uk-text-normal uk-margin-remove-top uk-margin-32-bottom">Yatırımlarınızda
+                                        genel olarak hangi yaklaşımı tercih edersiniz?</h4>
+
+                                    <div class="uk-text-lead uk-questions">
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="a"
+                                                name="question7">
+                                            Anaparam korunsun, getiri düşük olsa da olur
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="b"
+                                                name="question7">
+                                            Makul bir risk alarak dengeli getiri isterim
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="c"
+                                                name="question7">
+                                            Yüksek getiri için yüksek dalgalanmayı kabul ederim
+                                        </label>
+                                    </div>
+
+                                    <div class="uk-flex uk-flex-right@m uk-gap-16 uk-margin-32">
+                                        <a href="#"
+                                            class="uk-button uk-button-default uk-button-large previous-step">Geri</a>
+                                        <a href="#"
+                                            class="uk-button uk-button-primary uk-button-large next-step">Devam</a>
+                                    </div>
+                                </div>
+
+                                <!-- Q8 - Garantili vs Riskli Getiri -->
+                                <div data-step="9" id="question8"
+                                    class="uk-border-rounded-large uk-margin-remove-last-child uk-position-relative uk-question-container question-control uk-hidden">
+                                    <a href="#" class="uk-modal-close uk-position-top-right"
+                                        uk-icon="icon: icn-close;"></a>
+                                    <span
+                                        class="uk-display-block uk-text-xsmall uk-text-primary uk-text-bold uk-margin-8">SORU
+                                        8 / 14 - RİSK TOLERANSI</span>
+                                    <h4 class="uk-text-normal uk-margin-remove-top uk-margin-32-bottom">Aşağıdaki
+                                        yatırım seçeneklerinden hangisini tercih edersiniz?</h4>
+
+                                    <div class="uk-text-lead uk-questions">
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="a"
+                                                name="question8">
+                                            Yıllık %5 garantili getiri, kayıp riski yok
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="b"
+                                                name="question8">
+                                            %50 ihtimalle %12 kazanç, %50 ihtimalle %4 kayıp (Beklenen: %4)
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="c"
+                                                name="question8">
+                                            %50 ihtimalle %25 kazanç, %50 ihtimalle %15 kayıp (Beklenen: %5)
+                                        </label>
+                                    </div>
+
+                                    <div class="uk-flex uk-flex-right@m uk-gap-16 uk-margin-32">
+                                        <a href="#"
+                                            class="uk-button uk-button-default uk-button-large previous-step">Geri</a>
+                                        <a href="#"
+                                            class="uk-button uk-button-primary uk-button-large next-step">Devam</a>
+                                    </div>
+                                </div>
+
+                                <!-- Q9 - Yatırım Deneyimi -->
+                                <div data-step="10" id="question9"
+                                    class="uk-border-rounded-large uk-margin-remove-last-child uk-position-relative uk-question-container question-control uk-hidden">
+                                    <a href="#" class="uk-modal-close uk-position-top-right"
+                                        uk-icon="icon: icn-close;"></a>
+                                    <span
+                                        class="uk-display-block uk-text-xsmall uk-text-primary uk-text-bold uk-margin-8">SORU
+                                        9 / 14 - RİSK TOLERANSI</span>
+                                    <h4 class="uk-text-normal uk-margin-remove-top uk-margin-32-bottom">Yatırım
+                                        konusundaki deneyiminizi nasıl tanımlarsınız?</h4>
+
+                                    <div class="uk-text-lead uk-questions">
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="a"
+                                                name="question9">
+                                            Çok az deneyimim var, profesyonel yönlendirme isterim
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="b"
+                                                name="question9">
+                                            Bir miktar deneyimim var, temel kavramları biliyorum
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="c"
+                                                name="question9">
+                                            Yıllardır yatırım yapıyorum, kendi kararlarıma güvenirim
+                                        </label>
+                                    </div>
+
+                                    <div class="uk-flex uk-flex-right@m uk-gap-16 uk-margin-32">
+                                        <a href="#"
+                                            class="uk-button uk-button-default uk-button-large previous-step">Geri</a>
+                                        <a href="#"
+                                            class="uk-button uk-button-primary uk-button-large next-step">Devam</a>
+                                    </div>
+                                </div>
+
+                                <!-- Q10 - Kazanç vs Kayıp Psikolojisi -->
+                                <div data-step="11" id="question10"
+                                    class="uk-border-rounded-large uk-margin-remove-last-child uk-position-relative uk-question-container question-control uk-hidden">
+                                    <a href="#" class="uk-modal-close uk-position-top-right"
+                                        uk-icon="icon: icn-close;"></a>
+                                    <span
+                                        class="uk-display-block uk-text-xsmall uk-text-primary uk-text-bold uk-margin-8">SORU
+                                        10 / 14 - RİSK TOLERANSI</span>
+                                    <h4 class="uk-text-normal uk-margin-remove-top uk-margin-32-bottom">Yatırımlarınızda
+                                        kazanç ve kayıp size nasıl hissettirir?</h4>
+
+                                    <div class="uk-text-lead uk-questions">
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="a"
+                                                name="question10">
+                                            Küçük bir kayıp bile beni ciddi şekilde rahatsız eder
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="b"
+                                                name="question10">
+                                            Kazanç ve kayıp beni benzer düzeyde etkiler
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="c"
+                                                name="question10">
+                                            Kısa vadeli kayıplar beni çok rahatsız etmez, uzun vadeli düşünürüm
+                                        </label>
+                                    </div>
+
+                                    <div class="uk-flex uk-flex-right@m uk-gap-16 uk-margin-32">
+                                        <a href="#"
+                                            class="uk-button uk-button-default uk-button-large previous-step">Geri</a>
+                                        <a href="#"
+                                            class="uk-button uk-button-primary uk-button-large next-step">Devam</a>
+                                    </div>
+                                </div>
+
+                                <!-- Q11 - Volatilite Toleransı -->
+                                <div data-step="12" id="question11"
+                                    class="uk-border-rounded-large uk-margin-remove-last-child uk-position-relative uk-question-container question-control uk-hidden">
+                                    <a href="#" class="uk-modal-close uk-position-top-right"
+                                        uk-icon="icon: icn-close;"></a>
+                                    <span
+                                        class="uk-display-block uk-text-xsmall uk-text-primary uk-text-bold uk-margin-8">SORU
+                                        11 / 14 - RİSK TOLERANSI</span>
+                                    <h4 class="uk-text-normal uk-margin-remove-top uk-margin-32-bottom">Portföyünüzün
+                                        değeri bir hafta içinde %10 düşse nasıl hissedersiniz?</h4>
+
+                                    <div class="uk-text-lead uk-questions">
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="a"
+                                                name="question11">
+                                            Çok kaygılı olurum, uyuyamam
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="b"
+                                                name="question11">
+                                            Tedirgin olurum ama tolere edebilirim
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="c"
+                                                name="question11">
+                                            Piyasaların doğal bir parçası, çok rahatsız olmam
+                                        </label>
+                                    </div>
+
+                                    <div class="uk-flex uk-flex-right@m uk-gap-16 uk-margin-32">
+                                        <a href="#"
+                                            class="uk-button uk-button-default uk-button-large previous-step">Geri</a>
+                                        <a href="#"
+                                            class="uk-button uk-button-primary uk-button-large next-step">Devam</a>
+                                    </div>
+                                </div>
+
+                                <!-- Q12 - Büyük Kazanç Senaryosu -->
+                                <div data-step="13" id="question12"
+                                    class="uk-border-rounded-large uk-margin-remove-last-child uk-position-relative uk-question-container question-control uk-hidden">
+                                    <a href="#" class="uk-modal-close uk-position-top-right"
+                                        uk-icon="icon: icn-close;"></a>
+                                    <span
+                                        class="uk-display-block uk-text-xsmall uk-text-primary uk-text-bold uk-margin-8">SORU
+                                        12 / 14 - RİSK TOLERANSI</span>
+                                    <h4 class="uk-text-normal uk-margin-remove-top uk-margin-32-bottom">Yatırımınız kısa
+                                        sürede %30 kazanç sağlasa ne yaparsınız?</h4>
+
+                                    <div class="uk-text-lead uk-questions">
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="a"
+                                                name="question12">
+                                            Hemen satıp kazancı kalıcı hale getiririm
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="b"
+                                                name="question12">
+                                            Bir kısmını satıp portföyü dengelerim
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-radio uk-radio-check uk-flex-none" type="radio" value="c"
+                                                name="question12">
+                                            Tutarım, hatta daha da yükselebileceğini düşünürüm
+                                        </label>
+                                    </div>
+
+                                    <div class="uk-flex uk-flex-right@m uk-gap-16 uk-margin-32">
+                                        <a href="#"
+                                            class="uk-button uk-button-default uk-button-large previous-step">Geri</a>
+                                        <a href="#"
+                                            class="uk-button uk-button-primary uk-button-large next-step">Devam</a>
+                                    </div>
+                                </div>
+
+                                <!-- BÖLÜM 3: UYGUNLUK/TERCİH SORULARI (Q13-Q15) -->
+
+                                <!-- Q13 - Ürün Bilgisi/Deneyimi (Çoklu Seçim) -->
+                                <div data-step="14" id="question13"
+                                    class="uk-border-rounded-large uk-margin-remove-last-child uk-position-relative uk-question-container question-control uk-hidden">
+                                    <a href="#" class="uk-modal-close uk-position-top-right"
+                                        uk-icon="icon: icn-close;"></a>
+                                    <span
+                                        class="uk-display-block uk-text-xsmall uk-text-primary uk-text-bold uk-margin-8">SORU
+                                        13 / 14 - UYGUNLUK</span>
+                                    <h4 class="uk-text-normal uk-margin-remove-top uk-margin-32-bottom">Aşağıdaki
+                                        yatırım araçlarından hangilerinde deneyiminiz var? (Birden fazla seçebilirsiniz)
+                                    </h4>
+
+                                    <div class="uk-text-lead uk-questions">
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-checkbox uk-checkbox-check uk-flex-none" type="checkbox"
+                                                value="a" name="question13a">
+                                            Hisse senedi
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-checkbox uk-checkbox-check uk-flex-none" type="checkbox"
+                                                value="b" name="question13b">
+                                            Tahvil / Kira sertifikası
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-checkbox uk-checkbox-check uk-flex-none" type="checkbox"
+                                                value="c" name="question13c">
+                                            Yatırım fonu / ETF
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-checkbox uk-checkbox-check uk-flex-none" type="checkbox"
+                                                value="d" name="question13d">
+                                            Yabancı para (FX)
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-checkbox uk-checkbox-check uk-flex-none" type="checkbox"
+                                                value="e" name="question13e">
+                                            Türev ürünler (vadeli işlem, opsiyon)
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-checkbox uk-checkbox-check uk-flex-none" type="checkbox"
+                                                value="f" name="question13f">
+                                            Kripto varlıklar
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-checkbox uk-checkbox-check uk-flex-none" type="checkbox"
+                                                value="g" name="question13g">
+                                            Hiçbiri
+                                        </label>
+                                    </div>
+
+                                    <div class="uk-flex uk-flex-right@m uk-gap-16 uk-margin-32">
+                                        <a href="#"
+                                            class="uk-button uk-button-default uk-button-large previous-step">Geri</a>
+                                        <a href="#"
+                                            class="uk-button uk-button-primary uk-button-large next-step">Devam</a>
+                                    </div>
+                                </div>
+
+                                <!-- Q14 - Riskli Ürünlere İlgi (Çoklu Seçim) -->
+                                <div data-step="15" id="question14"
+                                    class="uk-border-rounded-large uk-margin-remove-last-child uk-position-relative uk-question-container question-control uk-hidden">
+                                    <a href="#" class="uk-modal-close uk-position-top-right"
+                                        uk-icon="icon: icn-close;"></a>
+                                    <span
+                                        class="uk-display-block uk-text-xsmall uk-text-primary uk-text-bold uk-margin-8">SORU
+                                        14 / 14 - UYGUNLUK</span>
+                                    <h4 class="uk-text-normal uk-margin-remove-top uk-margin-32-bottom">Aşağıdaki yüksek
+                                        riskli ürünlerden hangilerine ilgi duyarsınız? (Birden fazla seçebilirsiniz)
+                                    </h4>
+
+                                    <div class="uk-text-lead uk-questions">
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-checkbox uk-checkbox-check uk-flex-none" type="checkbox"
+                                                value="a" name="question14a">
+                                            IPO (halka arz) hisseleri
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-checkbox uk-checkbox-check uk-flex-none" type="checkbox"
+                                                value="b" name="question14b">
+                                            Küçük/gelişen ülke hisseleri
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-checkbox uk-checkbox-check uk-flex-none" type="checkbox"
+                                                value="c" name="question14c">
+                                            High-yield (yüksek getirili) tahviller
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-checkbox uk-checkbox-check uk-flex-none" type="checkbox"
+                                                value="d" name="question14d">
+                                            Kripto paralar
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-checkbox uk-checkbox-check uk-flex-none" type="checkbox"
+                                                value="e" name="question14e">
+                                            Kaldıraçlı türev ürünler
+                                        </label>
+                                        <label class="uk-flex uk-gap-12">
+                                            <input class="uk-checkbox uk-checkbox-check uk-flex-none" type="checkbox"
+                                                value="f" name="question14f">
+                                            Hiçbiri
+                                        </label>
+                                    </div>
+
+                                    <div class="uk-flex uk-flex-right@m uk-gap-16 uk-margin-32">
+                                        <a href="#"
+                                            class="uk-button uk-button-default uk-button-large previous-step">Geri</a>
+                                        <a href="#"
+                                            class="uk-button uk-button-primary uk-button-large next-step">Devam</a>
+                                    </div>
+                                </div>
+
+
+                                <!-- Q15 KALDIRILDI: Tüm Kuveyt Türk Portföy fonları zaten katılım finans ilkelerine uygundur -->
+
+                                <!-- Onay Sayfası -->
+                                <div data-step="16" id="questionConfirm"
+                                    class="uk-border-rounded-large uk-margin-remove-last-child uk-position-relative uk-question-container question-control uk-hidden">
+                                    <a href="#" class="uk-modal-close uk-position-top-right"
+                                        uk-icon="icon: icn-close;"></a>
+
+                                    <div class="uk-margin-remove-last-child">
+                                        <h3 class="uk-text-large uk-margin-16">Onay Metni</h3>
+
+                                        <div class="uk-agreement">
+                                            <p>Bu uygulama, sadece Kuveyt Türk Portföy Yönetimi A.Ş.’nin kurucusu olduğu
+                                                yatırım fonları ve sunduğu yatırım hizmetlerine ilişkin öneriler
+                                                sunmaktadır.</p>
+                                            <p>Burada yer alan yatırım bilgi, yorum ve tavsiyeleri yatırım danışmanlığı
+                                                kapsamında değildir. Yatırım danışmanlığı hizmeti, yetkili kuruluşlar
+                                                tarafından kişilerin risk ve getiri tercihleri dikkate alınarak kişiye
+                                                özel sunulmaktadır. Burada yer alan yorum ve tavsiyeler ise genel
+                                                niteliktedir. Bu tavsiyeler mali durumunuz ile risk ve getiri
+                                                tercihlerinize uygun olmayabilir. Bu nedenle, sadece burada yer alan
+                                                bilgilere dayanılarak yatırım kararı verilmesi beklentilerinize uygun
+                                                sonuçlar doğurmayabilir.</p>
+                                        </div>
+
+
+                                        <label
+                                            class="uk-flex uk-flex-middle uk-gap-12 uk-text-small uk-margin-medium"><input
+                                                class="uk-checkbox uk-checkbox-large" type="checkbox" checked> Okudum,
+                                            kabul ediyorum.</label>
+                                    </div>
+
+                                    <div class="uk-flex uk-flex-right@m uk-gap-16 uk-margin-32">
+                                        <a href="#"
+                                            class="uk-button uk-button-default uk-button-large previous-step">Geri</a>
+                                        <a href="#"
+                                            class="uk-button uk-button-primary uk-button-large complete-step">Onayla</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <section class="uk-section uk-background-primary">
+            <div class="uk-container">
+                <div class="uk-grid uk-grid-medium uk-flex-between uk-flex-middle" uk-grid>
+                    <div class="uk-width-2-5@m uk-light">
+                        <h3 class="uk-margin-small uk-margin-16@m">Ay&#x131;n En &#xC7;ok Kazand&#x131;ran Fonlar&#x131;
+                        </h3>
+
+                        <div>
+                            <div class="uk-text-lead uk-margin-remove-last-child uk-margin-medium uk-margin-40@m">
+                                <p>Bugünden itibaren geriye dönük 1 ay içinde en çok kazandıran Kuveyt Türk Portföy
+                                    fonlarını inceleyebilirsiniz.</p>
+                            </div>
+                            <a rel="canonical" href="https://www.kuveytturkportfoy.com.tr/"
+                                class="uk-button uk-button-secondary">&#x130;ncele</a>
+                        </div>
+                    </div>
+
+                    <div class="uk-width-1-2@m">
+                        <div class="uk-slider" uk-slider="finite: true;">
+                            <div class="uk-slider-container uk-margin-medium">
+                                <div class="uk-slider-items uk-child-width-1-1 uk-grid uk-grid-medium"
+                                    uk-height-match="target: .match">
+                                    <div>
+                                        <div
+                                            class="uk-background-default uk-border-rounded-large uk-padding uk-box-shadow-small">
+                                            <div
+                                                class="uk-flex uk-flex-middle uk-gap-12 uk-margin-medium uk-margin-30@m">
+                                                <span class="uk-icon-button uk-icon-button-small">
+                                                    <img src="/media/waxbmi1g/fi_67860.svg" alt="Fi 67860" width="25" />
+                                                </span>
+                                                <span class="uk-text-lead uk-text-bold uk-text-emphasis">&#xC7;oklu
+                                                    Varl&#x131;k Fonlar&#x131;</span>
+                                            </div>
+
+                                            <div class="uk-grid uk-grid-medium uk-child-width-1-2@m uk-flex-bottom"
+                                                uk-grid>
+                                                <div>
+                                                    <h3 class="uk-h2 uk-text-primary uk-margin-16 uk-line-height">KCV
+                                                    </h3>
+                                                    <div class="uk-text-small uk-text-muted-200 uk-margin-4">
+                                                        <span>Kuveyt T&#xFC;rk Portf&#xF6;y</span>
+                                                    </div>
+                                                    <div class="uk-text-small match">
+                                                        <h4 class="uk-margin-remove uk-h5">&#xC7;OKLU VARLIK KATILIM
+                                                            FONU</h4>
+                                                    </div>
+
+                                                    <div class="uk-flex uk-flex-middle uk-gap-16 uk-margin-medium">
+                                                        <div class="uk-progress-circle"
+                                                            style="--color: #F9CA4F; --number: 2;">
+                                                            <svg width="55" height="55">
+                                                                <circle class="uk-circle" cx="27.5" cy="27.5" r="25.5">
+                                                                </circle>
+                                                                <circle class="uk-progress-bar" cx="27.5" cy="27.5"
+                                                                    r="25.5"></circle>
+                                                            </svg>
+                                                            <div
+                                                                class="uk-position-cover uk-flex uk-flex-center uk-flex-middle uk-progress-text uk-text-muted-200 uk-text-small">
+                                                                <span>2</span> / 7
+                                                            </div>
+                                                        </div>
+
+                                                        <div>
+                                                            <h5 class="uk-margin-remove">
+                                                                Risk Seviyesi
+                                                            </h5>
+                                                            <span class="uk-text-small uk-text-muted">Az Riskli</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div>
+                                                    <div
+                                                        class="uk-margin-medium uk-flex uk-gap-12 uk-text-small uk-text-emphasis uk-flex-wrap">
+                                                        <div
+                                                            class="uk-background-muted uk-border-rounded-large uk-padding-small uk-flex-1">
+                                                            <div class="uk-flex uk-flex-column">
+                                                                <span>
+                                                                    Ayl&#x131;k Getiri
+                                                                </span>
+                                                                <span
+                                                                    class="uk-h4 uk-text-primary uk-margin-remove">%3,2</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div
+                                                            class="uk-background-muted uk-border-rounded-large uk-padding-small uk-flex-1">
+                                                            <div class="uk-flex uk-flex-column">
+                                                                <span>
+                                                                    Y&#x131;ll&#x131;k Getiri
+                                                                </span>
+                                                                <span
+                                                                    class="uk-h4 uk-text-primary uk-margin-remove">%45,45</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div
+                                                            class="uk-background-muted uk-border-rounded-large uk-padding-small uk-width-1-1">
+                                                            <div class="uk-flex uk-flex-column">
+                                                                <span>
+                                                                    Fon Birim Fiyat&#x131;
+                                                                </span>
+                                                                <span
+                                                                    class="uk-h4 uk-text-primary uk-margin-remove uk-flex uk-flex-middle uk-gap-4">3,7515
+                                                                    <span uk-icon="icon:icn-chevron-up"></span></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div
+                                            class="uk-background-default uk-border-rounded-large uk-padding uk-box-shadow-small">
+                                            <div
+                                                class="uk-flex uk-flex-middle uk-gap-12 uk-margin-medium uk-margin-30@m">
+                                                <span class="uk-icon-button uk-icon-button-small">
+                                                    <img src="/media/5lnpw35d/fi_8033997.svg" alt="Fi 8033997"
+                                                        width="25" />
+                                                </span>
+                                                <span class="uk-text-lead uk-text-bold uk-text-emphasis">K&#x131;ymetli
+                                                    Madenler</span>
+                                            </div>
+
+                                            <div class="uk-grid uk-grid-medium uk-child-width-1-2@m uk-flex-bottom"
+                                                uk-grid>
+                                                <div>
+                                                    <h3 class="uk-h2 uk-text-primary uk-margin-16 uk-line-height">KUT
+                                                    </h3>
+                                                    <div class="uk-text-small uk-text-muted-200 uk-margin-4">
+                                                        <span>Kuveyt T&#xFC;rk Portf&#xF6;y</span>
+                                                    </div>
+                                                    <div class="uk-text-small match">
+                                                        <h4 class="uk-margin-remove uk-h5">KIYMETL&#x130; MADENLER
+                                                            KATILIM FONU</h4>
+                                                    </div>
+
+                                                    <div class="uk-flex uk-flex-middle uk-gap-16 uk-margin-medium">
+                                                        <div class="uk-progress-circle"
+                                                            style="--color: #EE5C2E; --number: 6;">
+                                                            <svg width="55" height="55">
+                                                                <circle class="uk-circle" cx="27.5" cy="27.5" r="25.5">
+                                                                </circle>
+                                                                <circle class="uk-progress-bar" cx="27.5" cy="27.5"
+                                                                    r="25.5"></circle>
+                                                            </svg>
+                                                            <div
+                                                                class="uk-position-cover uk-flex uk-flex-center uk-flex-middle uk-progress-text uk-text-muted-200 uk-text-small">
+                                                                <span>6</span> / 7
+                                                            </div>
+                                                        </div>
+
+                                                        <div>
+                                                            <h5 class="uk-margin-remove">
+                                                                Risk Seviyesi
+                                                            </h5>
+                                                            <span class="uk-text-small uk-text-muted">Y&#xFC;ksek
+                                                                Riskli</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div>
+                                                    <div
+                                                        class="uk-margin-medium uk-flex uk-gap-12 uk-text-small uk-text-emphasis uk-flex-wrap">
+                                                        <div
+                                                            class="uk-background-muted uk-border-rounded-large uk-padding-small uk-flex-1">
+                                                            <div class="uk-flex uk-flex-column">
+                                                                <span>
+                                                                    Ayl&#x131;k Getiri
+                                                                </span>
+                                                                <span
+                                                                    class="uk-h4 uk-text-primary uk-margin-remove">%11,06</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div
+                                                            class="uk-background-muted uk-border-rounded-large uk-padding-small uk-flex-1">
+                                                            <div class="uk-flex uk-flex-column">
+                                                                <span>
+                                                                    Y&#x131;ll&#x131;k Getiri
+                                                                </span>
+                                                                <span
+                                                                    class="uk-h4 uk-text-primary uk-margin-remove">%97,16</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div
+                                                            class="uk-background-muted uk-border-rounded-large uk-padding-small uk-width-1-1">
+                                                            <div class="uk-flex uk-flex-column">
+                                                                <span>
+                                                                    Fon Birim Fiyat&#x131;
+                                                                </span>
+                                                                <span
+                                                                    class="uk-h4 uk-text-danger uk-margin-remove uk-flex uk-flex-middle uk-gap-4">9,7741
+                                                                    <span uk-icon="icon:icn-chevron-down"></span></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div
+                                            class="uk-background-default uk-border-rounded-large uk-padding uk-box-shadow-small">
+                                            <div
+                                                class="uk-flex uk-flex-middle uk-gap-12 uk-margin-medium uk-margin-30@m">
+                                                <span class="uk-icon-button uk-icon-button-small">
+                                                    <img src="/media/5lnpw35d/fi_8033997.svg" alt="Fi 8033997"
+                                                        width="25" />
+                                                </span>
+                                                <span class="uk-text-lead uk-text-bold uk-text-emphasis">K&#x131;ymetli
+                                                    Madenler</span>
+                                            </div>
+
+                                            <div class="uk-grid uk-grid-medium uk-child-width-1-2@m uk-flex-bottom"
+                                                uk-grid>
+                                                <div>
+                                                    <h3 class="uk-h2 uk-text-primary uk-margin-16 uk-line-height">KGM
+                                                    </h3>
+                                                    <div class="uk-text-small uk-text-muted-200 uk-margin-4">
+                                                        <span>Kuveyt T&#xFC;rk Portf&#xF6;y</span>
+                                                    </div>
+                                                    <div class="uk-text-small match">
+                                                        <h4 class="uk-margin-remove uk-h5">G&#xDC;M&#xDC;&#x15E; KATILIM
+                                                            FON SEPET&#x130; FONU</h4>
+                                                    </div>
+
+                                                    <div class="uk-flex uk-flex-middle uk-gap-16 uk-margin-medium">
+                                                        <div class="uk-progress-circle"
+                                                            style="--color: #EE5C2E; --number: 6;">
+                                                            <svg width="55" height="55">
+                                                                <circle class="uk-circle" cx="27.5" cy="27.5" r="25.5">
+                                                                </circle>
+                                                                <circle class="uk-progress-bar" cx="27.5" cy="27.5"
+                                                                    r="25.5"></circle>
+                                                            </svg>
+                                                            <div
+                                                                class="uk-position-cover uk-flex uk-flex-center uk-flex-middle uk-progress-text uk-text-muted-200 uk-text-small">
+                                                                <span>6</span> / 7
+                                                            </div>
+                                                        </div>
+
+                                                        <div>
+                                                            <h5 class="uk-margin-remove">
+                                                                Risk Seviyesi
+                                                            </h5>
+                                                            <span class="uk-text-small uk-text-muted">Y&#xFC;ksek
+                                                                Riskli</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div>
+                                                    <div
+                                                        class="uk-margin-medium uk-flex uk-gap-12 uk-text-small uk-text-emphasis uk-flex-wrap">
+                                                        <div
+                                                            class="uk-background-muted uk-border-rounded-large uk-padding-small uk-flex-1">
+                                                            <div class="uk-flex uk-flex-column">
+                                                                <span>
+                                                                    Ayl&#x131;k Getiri
+                                                                </span>
+                                                                <span
+                                                                    class="uk-h4 uk-text-primary uk-margin-remove">%20,11</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div
+                                                            class="uk-background-muted uk-border-rounded-large uk-padding-small uk-flex-1">
+                                                            <div class="uk-flex uk-flex-column">
+                                                                <span>
+                                                                    Y&#x131;ll&#x131;k Getiri
+                                                                </span>
+                                                                <span
+                                                                    class="uk-h4 uk-text-primary uk-margin-remove">%114,93</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div
+                                                            class="uk-background-muted uk-border-rounded-large uk-padding-small uk-width-1-1">
+                                                            <div class="uk-flex uk-flex-column">
+                                                                <span>
+                                                                    Fon Birim Fiyat&#x131;
+                                                                </span>
+                                                                <span
+                                                                    class="uk-h4 uk-text-danger uk-margin-remove uk-flex uk-flex-middle uk-gap-4">2,3332
+                                                                    <span uk-icon="icon:icn-chevron-down"></span></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="uk-flex uk-flex-center uk-flex-middle uk-gap-16 uk-light">
+                                <a class="uk-slidenav uk-slidenav-previous" href=""
+                                    uk-icon="icon: icn-arrow-left; ratio: .7;" uk-slider-item="previous"></a>
+                                <ul class="uk-slider-nav uk-dotnav"></ul>
+                                <a class="uk-slidenav uk-slidenav-next" href=""
+                                    uk-icon="icon: icn-arrow-right; ratio: .7;" uk-slider-item="next"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+
+
+
+    <footer>
+        <section class="uk-section uk-background-muted-150 uk-padding-40-bottom">
+            <div class="uk-container">
+                <div class="uk-grid uk-grid-medium" uk-grid>
+                    <div class="uk-width-1-3@m uk-flex uk-flex-column">
+                        <div class="uk-margin-medium uk-margin-40@m uk-text-emphasis">
+                            <a href="https://www.kuveytturkportfoy.com.tr/" class="uk-link-reset">
+                                <picture>
+                                    <source media="(min-width: 768px)" srcset="/Content/images/logos/logo.svg"
+                                        width="240">
+                                    <img src="/Content/images/logos/logo.svg" uk-svg alt="" width="278" loading="lazy">
+                                </picture>
+                            </a>
+                        </div>
+
+                        <ul class="uk-iconnav uk-iconnav-secondary">
+
+                            <li><a href="https://www.instagram.com/kuveytturkpys/" uk-icon="icn-instagram"></a></li>
+                            <li><a href="https://x.com/kuveytturkpys/highlights" uk-icon="icn-x"></a></li>
+                            <li><a href="https://tr.linkedin.com/company/kuveytturkportfoy" uk-icon="icn-linkedin"></a>
+                            </li>
+                        </ul>
+
+                        <form id="newsletterForm" class="uk-margin-large" method="post"
+                            action="/umbraco/api/form/SaveNewsletterForm">
+                            <h6 class="uk-margin-8">E-B&#xFC;ltene Abone Ol</h6>
+
+                            <div class="uk-inline uk-display-block uk-width-medium@m uk-margin-16">
+                                <button type="submit" class="uk-form-icon uk-form-icon-flip uk-border"
+                                    uk-icon="icon: icn-chevron-right"></button>
+                                <input class="uk-input uk-form-line uk-form-border-secondary uk-text-xsmall"
+                                    type="email" name="EMail" id="EMail" placeholder="E-Posta Giriniz"
+                                    data-rule-required="true" data-msg-required="Bu alan gereklidir"
+                                    data-msg-email="Ge&#xE7;erli mail adresi giriniz.">
+                            </div>
+
+                            <label
+                                class="uk-text-xsmall uk-flex uk-flex-middle uk-gap-column-8 uk-child-link-underline uk-flex-wrap">
+                                <input class="uk-checkbox uk-form-border-secondary uk-flex-none" name="Checkbox"
+                                    id="Checkbox" type="checkbox" data-rule-required="true"
+                                    data-msg-required="Bu alan gereklidir">
+                                <span><a href="#">Kişisel Verilerin Korunması</a> metnini okudum, anladım.<< /span>
+                            </label>
+                        </form>
+
+                        <div class="uk-margin-auto-top">
+                            <ul
+                                class="uk-subnav uk-subnav-divider uk-subnav-large uk-margin-remove-bottom uk-text-bold">
+
+                                <li><a href="tel:0216 265 50 50">0216 265 50 50</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="uk-width-2-3@m">
+                        <div class="uk-grid uk-grid-medium uk-child-width-1-2 uk-child-width-1-4@m uk-margin-large"
+                            uk-grid>
+
+                            <div>
+                                <ul class="uk-nav uk-nav-secondary">
+                                    <li class="uk-nav-header">Kurumsal</li>
+                                    <li><a href="https://www.kuveytturkportfoy.com.tr/kurumsal/kuveyt-turk-portfoy/">Kuveyt
+                                            T&#xFC;rk Portf&#xF6;y</a></li>
+                                    <li><a href="https://www.kuveytturkportfoy.com.tr/kurumsal/vizyon-misyon/">Vizyon
+                                            &amp; Misyon</a></li>
+                                    <li><a href="https://www.kuveytturkportfoy.com.tr/kurumsal/insan-kaynaklari/">&#x130;nsan
+                                            Kaynaklar&#x131;</a></li>
+                                    <li><a
+                                            href="https://www.kuveytturkportfoy.com.tr/kurumsal/degerlerimiz/">De&#x11F;erlerimiz</a>
+                                    </li>
+                                    <li><a href="https://www.kuveytturkportfoy.com.tr/kurumsal/kurumsal-dokumanlar/">Kurumsal
+                                            Dok&#xFC;manlar</a></li>
+                                    <li><a href="https://www.kuveytturkportfoy.com.tr/kurumsal/yonetim-kurulu/">Y&#xF6;netim
+                                            Kurulu</a></li>
+                                    <li><a href="https://www.kuveytturkportfoy.com.tr/kurumsal/basinda-biz/">Bas&#x131;nda
+                                            Biz</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <ul class="uk-nav uk-nav-secondary">
+                                    <li class="uk-nav-header">Yat&#x131;r&#x131;m Evreni</li>
+                                    <li><a href="https://www.kuveytturkportfoy.com.tr/yatirim-evreni/yatirim-fonlari/">Yat&#x131;r&#x131;m
+                                            Fonlar&#x131;</a></li>
+                                    <li><a
+                                            href="https://www.kuveytturkportfoy.com.tr/yatirim-evreni/emeklilik-fonlari/">Emeklilik
+                                            Fonlar&#x131;</a></li>
+                                    <li><a
+                                            href="https://www.kuveytturkportfoy.com.tr/yatirim-evreni/girisim-sermayesi-yatirim-fonlari/">Giri&#x15F;im
+                                            Sermayesi Yat&#x131;r&#x131;m Fonlar&#x131;</a></li>
+                                    <li><a
+                                            href="https://www.kuveytturkportfoy.com.tr/yatirim-evreni/ozel-portfoy-yonetimi/">&#xD6;zel
+                                            Portf&#xF6;y Y&#xF6;netimi</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <ul class="uk-nav uk-nav-secondary">
+                                    <li class="uk-nav-header">Fon Getirileri</li>
+                                    <li><a href="https://www.kuveytturkportfoy.com.tr/fon-getirileri/">Fon
+                                            Getirileri</a></li>
+                                    <li><a
+                                            href="https://www.kuveytturkportfoy.com.tr/fon-getirileri/fon-getiri-hesaplama/">Fon
+                                            Getiri Hesaplama</a></li>
+                                    <li><a
+                                            href="https://www.kuveytturkportfoy.com.tr/fon-getirileri/fon-karsilastirma/">Fon
+                                            Kar&#x15F;&#x131;la&#x15F;t&#x131;rma</a></li>
+                                    <li><a href="https://www.kuveytturkportfoy.com.tr/fon-getirileri/valor-hesaplama/">Val&#xF6;r
+                                            Hesaplama</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <ul class="uk-nav uk-nav-secondary">
+                                    <li class="uk-nav-header">Yat&#x131;r&#x131;mc&#x131; K&#x131;lavuzu</li>
+                                    <li><a
+                                            href="https://www.kuveytturkportfoy.com.tr/yatirimci-kilavuzu/bulten/">B&#xFC;lten</a>
+                                    </li>
+                                    <li><a
+                                            href="https://www.kuveytturkportfoy.com.tr/yatirimci-kilavuzu/aylik-fon-dagilim-onerileri/">Ayl&#x131;k
+                                            Fon Da&#x11F;&#x131;l&#x131;m &#xD6;nerileri</a></li>
+                                    <li><a
+                                            href="https://www.kuveytturkportfoy.com.tr/yatirimci-kilavuzu/hangi-yatirim-fonu-bana-gore/">Hangi
+                                            Yat&#x131;r&#x131;m Fonu Bana G&#xF6;re</a></li>
+                                    <li><a
+                                            href="https://www.kuveytturkportfoy.com.tr/yatirimci-kilavuzu/yatirim-sozluk/yatirim-sozluk/">Yat&#x131;r&#x131;m
+                                            S&#xF6;zl&#xFC;k</a></li>
+                                    <li><a
+                                            href="https://www.kuveytturkportfoy.com.tr/yatirimci-kilavuzu/arindirma-islemleri/">Ar&#x131;nd&#x131;rma
+                                            Hesaplama</a></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <ul class="uk-nav uk-nav-secondary">
+                                    <li class="uk-nav-header">Bize Ula&#x15F;&#x131;n</li>
+                                    <li><a
+                                            href="https://www.kuveytturkportfoy.com.tr/iletisim/">&#x130;leti&#x15F;im</a>
+                                    </li>
+                                    <li><a href="https://e-sirket.mkk.com.tr/?page=company&amp;company=14215"
+                                            target="_blank">Bilgi Toplumu Hizmetleri</a></li>
+                                </ul>
+                            </div>
+
+                        </div>
+
+                        <div class="uk-grid uk-grid-medium uk-child-width-auto uk-flex-between uk-flex-middle" uk-grid>
+                            <div>
+                                <ul class="uk-subnav uk-subnav-default uk-subnav-small-m uk-margin-remove-top">
+
+                                    <li><a href="https://www.kuveytturkportfoy.com.tr/sikca-sorulan-sorular/">S&#x131;k&#xE7;a
+                                            Sorulan Sorular</a></li>
+                                    <li><a href="https://www.kuveytturkportfoy.com.tr/blog/">Blog</a></li>
+                                    <li><a href="/media/4xjcei1p/aydinlatma-metni.pdf" target="_blank">KVKK
+                                            Ayd&#x131;nlatma Metni</a></li>
+                                    <li><a href="/media/5mxixydp/yasal-uyari-kisisel-verileri-saklama-ve-imha-politikasi.pdf"
+                                            target="_blank">KVKK Politikas&#x131;</a></li>
+                                    <li><a href="/media/z1falqdw/&#xE7;erez-metni-pdf.pdf" target="_blank">&#xC7;erez
+                                            Politikas&#x131;</a></li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <a href="#" class="uk-icon uk-icon-button uk-icon-button-small uk-icon-button-primary"
+                                    uk-icon="icon: icn-chevron-up;" uk-scroll></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="uk-section uk-section-xsmall uk-background-muted-150 uk-border-top">
+            <div class="uk-container">
+                <div class="uk-grid uk-grid-column-medium uk-flex-between uk-flex-middle" uk-grid>
+                    <div class="uk-width-auto">
+                        <small>&#xA9; 2025 Kuveyt T&#xFC;rk Portf&#xF6;y</small>
+                    </div>
+
+                    <div class="uk-width-auto">
+                        <a href="https://www.clockwork.com.tr/" target="_blank">
+                            <img src="/Content/images/logos/logo-clockwork.svg" alt="Clockwork Logo" loading="lazy"
+                                width="100" height="15">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </footer>
+
+    <div
+        class="uk-flex uk-flex-center uk-flex-middle uk-overlay uk-overlay-default uk-position-cover uk-position-fixed uk-position-z-index-high uk-hidden loading">
+        <span class="uk-text-emphasis" uk-spinner="ratio: 3"></span>
+    </div>
+
+    <script defer src="/Content/lib/js/jquery-3.7.1.min.js"></script>
+    <script defer src="/Content/lib/js/jquery.validate.min.js"></script>
+    <script defer src="/Content/lib/js/jquery.mask.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script defer src="https://npmcdn.com/flatpickr/dist/l10n/tr.js"></script>
+
+    <script src="/Content/js/theme.js?v=13062025"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var scriptsLoaded = false;
+
+            function loadAllScripts() {
+                if (scriptsLoaded) return;
+
+                // Initialize dataLayer for Google Analytics
+                window.dataLayer = window.dataLayer || [];
+                function gtag() { dataLayer.push(arguments); }
+                gtag('js', new Date());
+
+                // Recaptcha
+                var recaptchaScript = document.createElement('script');
+                recaptchaScript.src = 'https://www.google.com/recaptcha/api.js?render=6LcyBfAqAAAAABz8l1keVZ39uttnTccul0zEBvaP';
+                recaptchaScript.defer = true;
+                document.body.appendChild(recaptchaScript);
+
+                // Talktomy
+                var talktomyScript = document.createElement('script');
+                talktomyScript.src = 'https://talktomy.site/embed.js';
+                talktomyScript.defer = true;
+                talktomyScript.setAttribute('data-website-id', 'qcDnm5zJGx7FWaM3NGa15y');
+                talktomyScript.setAttribute('data-color', '#42b38e');
+                talktomyScript.setAttribute('data-icon', 'icon1');
+                document.body.appendChild(talktomyScript);
+
+                // Efilli
+                var efilliScript = document.createElement('script');
+                if (window.location.hostname.includes('dev.clockwork.ist')) {
+                    efilliScript.src = 'https://bundles.efilli.com/kuveytturkportfoy.dev.clockwork.ist.prod.js';
+                } else {
+                    efilliScript.src = 'https://bundles.efilli.com/kuveytturkportfoy.com.tr.prod.js';
+                }
+                document.body.appendChild(efilliScript);
+
+                // Google Analytics Scripts
+                var gaScripts = [
+                    'https://www.googletagmanager.com/gtag/js?id=AW-11307781812',
+                    'https://www.googletagmanager.com/gtag/js?id=UA-190603266-1',
+                    'https://www.googletagmanager.com/gtag/js?id=G-4GFS1JYTM4'
+                ];
+
+                gaScripts.forEach(function (src) {
+                    var script = document.createElement('script');
+                    script.src = src;
+                    script.async = true;
+                    script.onload = function () {
+                        // Configure each GA property after script loads
+                        if (src.includes('G-4GFS1JYTM4')) {
+                            gtag('config', 'G-4GFS1JYTM4');
+                        } else if (src.includes('UA-190603266-1')) {
+                            gtag('config', 'UA-190603266-1');
+                        } else if (src.includes('AW-11307781812')) {
+                            gtag('config', 'AW-11307781812');
+                        }
+                    };
+                    document.head.appendChild(script);
+                });
+
+                // Google Tag Manager
+                (function (w, d, s, l, i) {
+                    w[l] = w[l] || [];
+                    w[l].push({
+                        'gtm.start': new Date().getTime(),
+                        event: 'gtm.js'
+                    });
+                    var f = d.getElementsByTagName(s)[0],
+                        j = d.createElement(s),
+                        dl = l != 'dataLayer' ? '&l=' + l : '';
+                    j.async = true;
+                    j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+                    f.parentNode.insertBefore(j, f);
+                })(window, document, 'script', 'dataLayer', 'GTM-N7HBSJC');
+
+                // Facebook Pixel - First Instance
+                !function (f, b, e, v, n, t, s) {
+                    if (f.fbq) return;
+                    n = f.fbq = function () {
+                        n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+                    };
+                    if (!f._fbq) f._fbq = n;
+                    n.push = n;
+                    n.loaded = !0;
+                    n.version = '2.0';
+                    n.queue = [];
+                    t = b.createElement(e);
+                    t.async = !0;
+                    t.src = v;
+                    s = b.getElementsByTagName(e)[0];
+                    s.parentNode.insertBefore(t, s)
+                }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+
+                // Initialize Facebook Pixels
+                fbq('init', '351289865242877');
+                fbq('init', '477570256532611');
+                fbq('track', 'PageView');
+
+                // Define gtag_report_conversion function
+                window.gtag_report_conversion = function (url) {
+                    var callback = function () {
+                        if (typeof (url) != 'undefined') {
+                            window.location = url;
+                        }
+                    };
+
+                    gtag('event', 'conversion', {
+                        'send_to': 'AW-11307781812/Az0rCJj41tQYELSd_I8q',
+                        'event_callback': callback
+                    });
+
+                    return false;
+                };
+
+                scriptsLoaded = true;
+            }
+
+            // Trigger loading on user interaction
+            var events = ['scroll', 'click', 'mousemove', 'keydown', 'touchstart'];
+            events.forEach(function (event) {
+                window.addEventListener(event, loadAllScripts, { once: true });
+            });
+        });
+    </script>
+
+    <!-- Portfolio API Client -->
+    <script src="../Content/js/portfolio-api-client.js"></script>
+    <script src="../Content/js/fund-data.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            $("#newsletterForm").validate({
+                ignore: ".ignore",
+                errorClass: 'uk-form-danger',
+                submitHandler: function (form) {
+                    grecaptcha.ready(function () {
+                        grecaptcha.execute('6LcyBfAqAAAAABz8l1keVZ39uttnTccul0zEBvaP', { action: 'submit' }).then(function (token) {
+                            var formData = new FormData(form);
+                            formData.append("grecaptcharesponse", token);
+
+                            $.ajax({
+                                url: $(form).attr("action"),
+                                type: 'post',
+                                data: formData,
+                                contentType: false,
+                                processData: false,
+                                beforeSend: function () {
+                                    $('.loading').removeClass('uk-hidden');
+                                },
+                                success: function (data) {
+                                    $('.loading').addClass('uk-hidden');
+                                    UIkit.notification({ message: `Form Ba&#x15F;ar&#x131;l&#x131; &#x15E;ekilde G&#xF6;nderildi`, status: 'success' });
+                                    $(form)[0].reset();
+                                },
+                                error: function (request, status, error) {
+                                    $('.loading').addClass('uk-hidden');
+                                    if (request.status && request.status == 412) {
+                                        UIkit.notification({
+                                            message: 'Captcha ge&#xE7;erli de&#x11F;il',
+                                            status: 'danger'
+                                        });
+                                    } else {
+                                        UIkit.notification({
+                                            message: 'Form G&#xF6;nderilirken Hata Olu&#x15F;tu',
+                                            status: 'danger'
+                                        });
+                                    }
+                                }
+                            });
+                        })
+                    })
+                }
+            });
+        });
+    </script>
+
+    <!-- IPS entegrasyonu (backend /api'ye göre relative) -->
+    <script>
+        window.IPS_CONFIG = {
+            baseUrl: window.location.origin.includes('localhost') ? 'http://localhost:8001/api' : '/api',
+            timeoutMs: 15000,
+        };
+    </script>
+    <script src="/Content/js/ips-integration.js"></script>
+
+    <!-- Portfolio Optimizer - Risk Hesaplama -->
+    <script src="/Content/js/portfolio-optimizer.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Next step butonu tıklandığında
+            var lang = $('html').attr('lang');
+
+            $('.next-step').on('click', function (e) {
+                e.preventDefault();
+
+                const currentStep = $(this).closest('.question-control');
+                const currentStepNumber = parseInt(currentStep.data('step'));
+
+                // İlk adım için özel kontrol
+                if (currentStepNumber === 1) {
+                    const personTypeSelected = currentStep.find('input[name="personType"]:checked').length > 0;
+                    const investorTypeSelected = currentStep.find('input[name="investorType"]:checked').length > 0;
+
+                    if (!personTypeSelected || !investorTypeSelected) {
+                        UIkit.notification({
+                            message: 'Lütfen her iki alandan da seçim yapınız',
+                            status: 'danger',
+                            pos: 'top-center',
+                            timeout: 3000
+                        });
+                        return;
+                    }
+                } else {
+                    // Diğer adımlar için normal radio button kontrolü
+                    const radioButtons = currentStep.find('input[type="radio"]');
+                    if (radioButtons.length && !radioButtons.is(':checked')) {
+                        UIkit.notification({
+                            message: 'Lütfen bir seçim yapınız',
+                            status: 'danger',
+                            pos: 'top-center',
+                            timeout: 3000
+                        });
+                        return;
+                    }
+                }
+
+                // Mevcut adımı gizle
+                currentStep.addClass('uk-hidden');
+
+                // Sonraki adımı göster
+                $(`[data-step="${currentStepNumber + 1}"]`).removeClass('uk-hidden');
+
+                // Step göstergelerini güncelle - mevcut ve önceki adımlar aktif kalacak
+                $('.uk-survey-step .uk-step').each(function () {
+                    const stepNum = parseInt($(this).data('step'));
+                    if (stepNum <= currentStepNumber + 1) {
+                        $(this).addClass('uk-active');
+                    } else {
+                        $(this).removeClass('uk-active');
+                    }
+                });
+            });
+
+            // Previous step butonu tıklandığında
+            $('.previous-step').on('click', function (e) {
+                e.preventDefault();
+
+                const currentStep = $(this).closest('.question-control');
+                const currentStepNumber = parseInt(currentStep.data('step'));
+
+                // Mevcut adımı gizle
+                currentStep.addClass('uk-hidden');
+
+                // Önceki adımı göster
+                $(`[data-step="${currentStepNumber - 1}"]`).removeClass('uk-hidden');
+
+                // Step göstergelerini güncelle - mevcut adıma kadar aktif
+                $('.uk-survey-step .uk-step').each(function () {
+                    const stepNum = parseInt($(this).data('step'));
+                    if (stepNum <= currentStepNumber - 1) {
+                        $(this).addClass('uk-active');
+                    } else {
+                        $(this).removeClass('uk-active');
+                    }
+                });
+            });
+
+            // Complete step butonu tıklandığında
+            $('.complete-step').on('click', async function (e) {
+                e.preventDefault();
+
+                console.log('🚀 ONAYLA BUTONUNA TIKLANDI!');
+
+                const agreementChecked = $(this).closest('.question-control').find('input[type="checkbox"]').is(':checked');
+                console.log('✓ Checkbox durumu:', agreementChecked);
+
+                if (!agreementChecked) {
+                    UIkit.notification({
+                        message: 'Lütfen onay kutusunu işaretleyiniz',
+                        status: 'danger',
+                        pos: 'top-center',
+                        timeout: 3000
+                    });
+                    return;
+                }
+
+                try {
+                    console.log('📋 Anket cevapları toplanıyor...');
+
+                    // ═══════════════════════════════════════════════════════════════
+                    // YENİ 15 SORULU MODEL - TÜM CEVAPLARI TOPLAMA
+                    // ═══════════════════════════════════════════════════════════════
+
+                    // Yatırımcı Tipi
+                    const investorType = $('input[name="investorType"]:checked').val();
+                    const personType = $('input[name="personType"]:checked').val();
+                    console.log('Yatırımcı Tipi:', investorType, personType);
+
+                    // Kapasite Soruları (Q1-Q5)
+                    const q1 = $('input[name="question1"]:checked').val();
+                    const q1_text = $('input[name="question1"]:checked').parent().text().trim();
+
+                    const q2 = $('input[name="question2"]:checked').val();
+                    const q2_text = $('input[name="question2"]:checked').parent().text().trim();
+
+                    const q3 = $('input[name="question3"]:checked').val();
+                    const q3_text = $('input[name="question3"]:checked').parent().text().trim();
+
+                    const q4 = $('input[name="question4"]:checked').val();
+                    const q4_text = $('input[name="question4"]:checked').parent().text().trim();
+
+                    const q5 = $('input[name="question5"]:checked').val();
+                    const q5_text = $('input[name="question5"]:checked').parent().text().trim();
+
+                    // Risk Toleransı Soruları (Q6-Q12)
+                    const q6 = $('input[name="question6"]:checked').val();
+                    const q6_text = $('input[name="question6"]:checked').parent().text().trim();
+
+                    const q7 = $('input[name="question7"]:checked').val();
+                    const q7_text = $('input[name="question7"]:checked').parent().text().trim();
+
+                    const q8 = $('input[name="question8"]:checked').val();
+                    const q8_text = $('input[name="question8"]:checked').parent().text().trim();
+
+                    const q9 = $('input[name="question9"]:checked').val();
+                    const q9_text = $('input[name="question9"]:checked').parent().text().trim();
+
+                    const q10 = $('input[name="question10"]:checked').val();
+                    const q10_text = $('input[name="question10"]:checked').parent().text().trim();
+
+                    const q11 = $('input[name="question11"]:checked').val();
+                    const q11_text = $('input[name="question11"]:checked').parent().text().trim();
+
+                    const q12 = $('input[name="question12"]:checked').val();
+                    const q12_text = $('input[name="question12"]:checked').parent().text().trim();
+
+                    // Uygunluk Soruları (Q13-Q15) - Q13 ve Q14 çoklu seçim
+                    const q13_selections = [];
+                    $('input[name^="question13"]:checked').each(function () {
+                        q13_selections.push({
+                            value: $(this).val(),
+                            text: $(this).parent().text().trim()
+                        });
+                    });
+
+                    const q14_selections = [];
+                    $('input[name^="question14"]:checked').each(function () {
+                        q14_selections.push({
+                            value: $(this).val(),
+                            text: $(this).parent().text().trim()
+                        });
+                    });
+
+                    const q15 = $('input[name="question15"]:checked').val();
+                    const q15_text = $('input[name="question15"]:checked').parent().text().trim();
+
+                    // Anket cevapları objesi
+                    const surveyAnswers = {
+                        investorType: investorType,
+                        personType: personType,
+                        q1: q1, q1_text: q1_text,
+                        q2: q2, q2_text: q2_text,
+                        q3: q3, q3_text: q3_text,
+                        q4: q4, q4_text: q4_text,
+                        q5: q5, q5_text: q5_text,
+                        q6: q6, q6_text: q6_text,
+                        q7: q7, q7_text: q7_text,
+                        q8: q8, q8_text: q8_text,
+                        q9: q9, q9_text: q9_text,
+                        q10: q10, q10_text: q10_text,
+                        q11: q11, q11_text: q11_text,
+                        q12: q12, q12_text: q12_text,
+                        q13: q13_selections,
+                        q14: q14_selections,
+                        q15: q15, q15_text: q15_text,
+                        timestamp: new Date().toISOString()
+                    };
+
+                    console.log('📋 Anket Cevapları:', surveyAnswers);
+
+                    // Portfolio Optimizer ile risk skoru hesapla
+                    let riskResult = null;
+                    let optimizerError = null;
+
+                    console.log('');
+                    console.log('╔══════════════════════════════════════════════════════════════════╗');
+                    console.log('║           📊 RİSK HESAPLAMA - DETAYLI LOG                       ║');
+                    console.log('╚══════════════════════════════════════════════════════════════════╝');
+                    console.log('');
+                    console.log('📥 GİRDİ - Anket Cevapları:');
+                    console.log('   Q6 (Kayıp Senaryosu):', q6, '→', surveyAnswers.q6_text || '(text yok)');
+                    console.log('   Q7 (Risk-Getiri):', q7, '→', surveyAnswers.q7_text || '(text yok)');
+                    console.log('   Q8 (Garantili vs Riskli):', q8, '→', surveyAnswers.q8_text || '(text yok)');
+                    console.log('   Q9 (Deneyim):', q9, '→', surveyAnswers.q9_text || '(text yok)');
+                    console.log('   Q10 (Kayıp Psikolojisi):', q10, '→', surveyAnswers.q10_text || '(text yok)');
+                    console.log('   Q11 (Volatilite):', q11, '→', surveyAnswers.q11_text || '(text yok)');
+                    console.log('   Q12 (Kazanç Senaryosu):', q12, '→', surveyAnswers.q12_text || '(text yok)');
+                    console.log('');
+
+                    if (typeof PortfolioOptimizer !== 'undefined') {
+                        try {
+                            // Boş CSV ile başlat, sadece anket skor hesaplaması için kullanılıyor
+                            const optimizer = new PortfolioOptimizer('');
+                            riskResult = optimizer.calculateRiskScore(surveyAnswers);
+
+                            console.log('📤 ÇIKTI - Risk Hesaplama Sonucu:');
+                            console.log('   Risk Skoru:', riskResult.riskScore?.toFixed(2) || 'N/A');
+                            console.log('   Profil:', riskResult.profile);
+                            console.log('   Profil Adı:', riskResult.profileName);
+                            console.log('');
+                            console.log('🎯 Backend\'e gönderilecek profil:', riskResult.profile);
+                            console.log('   → LOW için max cap: %40');
+                            console.log('   → MEDIUM için max cap: %60');
+                            console.log('   → HIGH için max cap: %70');
+                            console.log('');
+                        } catch (e) {
+                            optimizerError = e;
+                            console.warn('⚠️ PortfolioOptimizer hata verdi, basit hesaplamaya düşülüyor...', e);
+                        }
+                    } else {
+                        console.warn('⚠️ PortfolioOptimizer bulunamadı, basit hesaplama yapılıyor...');
+                    }
+
+                    if (!riskResult) {
+                        // Basit risk hesaplama (fallback) - 4 seçenekli (a, b, c, d)
+                        const riskWeights = { q6: 0.20, q7: 0.20, q8: 0.15, q9: 0.05, q10: 0.15, q11: 0.15, q12: 0.10 };
+                        const riskMap = { 'a': 0, 'b': 35, 'c': 70, 'd': 100 };
+
+                        let weightedSum = 0;
+                        weightedSum += (riskMap[q6] ?? 50) * riskWeights.q6;
+                        weightedSum += (riskMap[q7] ?? 50) * riskWeights.q7;
+                        weightedSum += (riskMap[q8] ?? 50) * riskWeights.q8;
+                        weightedSum += (riskMap[q9] ?? 50) * riskWeights.q9;
+                        weightedSum += (riskMap[q10] ?? 50) * riskWeights.q10;
+                        weightedSum += (riskMap[q11] ?? 50) * riskWeights.q11;
+                        weightedSum += (riskMap[q12] ?? 50) * riskWeights.q12;
+
+                        let profile = 'medium';
+                        if (weightedSum <= 35) profile = 'low';
+                        else if (weightedSum >= 65) profile = 'high';
+
+                        riskResult = {
+                            riskScore: weightedSum,
+                            profile: profile,
+                            profileName: profile === 'low' ? 'Sağlamcı (Muhafazakar)' :
+                                profile === 'high' ? 'Agresif (Dinamik)' : 'Temkinli (Dengeli)'
+                        };
+                    }
+
+                    // Sonucu localStorage'a kaydet
+                    const resultData = {
+                        surveyAnswers: surveyAnswers,
+                        riskResult: riskResult,
+                        timestamp: new Date().toISOString()
+                    };
+
+                    localStorage.setItem('riskProfiliSonuc', JSON.stringify(resultData));
+                    localStorage.setItem('surveyAnswers', JSON.stringify(surveyAnswers));
+
+                    console.log('✅ Risk sonucu kaydedildi');
+
+                    // IPS entegrasyonu (backend /api/ips/*)
+                    if (window.IPS && typeof window.IPS.generateIPS === 'function') {
+                        const ipsAnswers = {
+                            q1: { value: q1, text: q1_text },
+                            q2: { value: q2, text: q2_text },
+                            q3: { value: q3, text: q3_text },
+                            q4: { value: q4, text: q4_text },
+                            q5: { value: q5, text: q5_text },
+                            q6: { value: q6, text: q6_text },
+                            q7: { value: q7, text: q7_text },
+                            q8: { value: q8, text: q8_text },
+                            q9: { value: q9, text: q9_text },
+                            q10: { value: q10, text: q10_text },
+                            q11: { value: q11, text: q11_text },
+                            q12: { value: q12, text: q12_text },
+                        };
+
+                        try {
+                            await window.IPS.generateIPS(ipsAnswers);
+                            // IPS modalı açıkken yönlendirme yapma; kullanıcı modalı kapatana kadar sayfada kalsın.
+                            return;
+                        } catch (ipsErr) {
+                            console.warn('⚠️ IPS entegrasyon hatası, yönlendirme devam edecek:', ipsErr);
+                        }
+                    }
+
+                    // Backend API'ye portföy optimizasyonu isteği gönder
+                    console.log('🌐 Backend API\'ye bağlanılıyor...');
+
+                    // Fon verilerini hazırla (FUND_DATA_CSV'den gerçek fiyatları parse et)
+                    let fundsForAPI = [];
+                    try {
+                        if (typeof FUND_DATA_CSV !== 'undefined' && FUND_DATA_CSV) {
+                            const lines = FUND_DATA_CSV.trim().split('\n');
+
+                            // Fon bazlı fiyat serilerini topla
+                            const fundPrices = {};
+                            const fundNames = {};
+
+                            for (let i = 1; i < lines.length; i++) {
+                                const cols = lines[i].split(',');
+                                if (cols.length >= 4) {
+                                    const code = cols[1].replace(/"/g, '').trim();
+                                    const name = cols[2].replace(/"/g, '').trim();
+                                    const price = parseFloat(cols[3]);
+
+                                    if (code && !isNaN(price)) {
+                                        if (!fundPrices[code]) {
+                                            fundPrices[code] = [];
+                                            fundNames[code] = name;
+                                        }
+                                        fundPrices[code].push(price);
+                                    }
+                                }
+                            }
+
+                            // Fiyatlardan günlük getirileri hesapla
+                            console.log('📊 Fon verileri parse ediliyor...');
+
+                            // Risk profiline göre maksimum fon risk seviyesi belirle
+                            const maxRiskLevel = riskResult.profile === 'low' ? 3 :
+                                riskResult.profile === 'medium' ? 5 : 7;
+                            console.log(`📊 Risk Profili: ${riskResult.profile}, Max Fon Risk Seviyesi: ${maxRiskLevel}`);
+
+                            // Fon risk seviyelerini belirle (isimden)
+                            function getFundRiskLevel(fundName) {
+                                const upperName = fundName.toUpperCase();
+                                if (upperName.includes('PARA PİYASASI') || upperName.includes('KISA VADELİ')) return 1;
+                                if (upperName.includes('KİRA SERTİFİKALARI') || upperName.includes('TEMKİNLİ')) return 2;
+                                if (upperName.includes('DENGELİ')) return 3;
+                                if (upperName.includes('KARMA') || upperName.includes('SERBEST')) return 4;
+                                if (upperName.includes('DİNAMİK') || upperName.includes('ALTIN') || upperName.includes('KIYMETLİ')) return 5;
+                                if (upperName.includes('HİSSE') || upperName.includes('AGRESİF') || upperName.includes('TEKNOLOJİ') || upperName.includes('ENERJİ')) return 6;
+                                return 4; // Varsayılan
+                            }
+
+                            let validFundCount = 0;
+
+                            for (const code in fundPrices) {
+                                const prices = fundPrices[code];
+                                const fundName = fundNames[code] || '';
+                                const fundRiskLevel = getFundRiskLevel(fundName);
+
+                                // Risk seviyesi kontrolü - sadece uygun fonları dahil et
+                                if (fundRiskLevel > maxRiskLevel) {
+                                    console.log(`   ⏭️ ${code} atlandı (Risk: ${fundRiskLevel} > Max: ${maxRiskLevel})`);
+                                    continue;
+                                }
+
+                                if (prices.length >= 10) { // En az 10 gün veri olmalı
+                                    const returns = [];
+                                    for (let j = 1; j < prices.length; j++) {
+                                        const dailyReturn = (prices[j] - prices[j - 1]) / prices[j - 1];
+                                        if (!isNaN(dailyReturn) && isFinite(dailyReturn)) {
+                                            returns.push(dailyReturn);
+                                        }
+                                    }
+
+                                    if (returns.length >= 5) {
+                                        fundsForAPI.push({
+                                            code: code,
+                                            name: fundNames[code],
+                                            returns: returns,
+                                            riskLevel: fundRiskLevel
+                                        });
+                                        console.log(`   ✅ ${code} eklendi (Risk: ${fundRiskLevel})`);
+                                        validFundCount++;
+                                        if (validFundCount >= 10) break; // Max 10 fon
+                                    }
+                                }
+                            }
+                            console.log(`✅ ${fundsForAPI.length} uygun fon için getiri verisi hazırlandı (Risk ≤ ${maxRiskLevel})`);
+                        }
+                    } catch (parseErr) {
+                        console.warn('⚠️ Fon verisi parse hatası:', parseErr);
+                    }
+
+                    // Backend API çağrısı
+                    let backendResult = null;
+                    if (window.portfolioAPIClient && fundsForAPI.length > 0) {
+                        try {
+                            const isAPIAvailable = await window.portfolioAPIClient.healthCheck();
+                            if (isAPIAvailable) {
+                                console.log('✅ Backend API erişilebilir');
+                                backendResult = await window.portfolioAPIClient.optimize(
+                                    fundsForAPI,
+                                    riskResult.profile,
+                                    5
+                                );
+                                console.log('📊 Backend Optimizasyon Sonucu:', backendResult);
+
+                                // Backend sonucunu da kaydet
+                                localStorage.setItem('backendOptimizationResult', JSON.stringify(backendResult));
+                            } else {
+                                console.warn('⚠️ Backend API erişilemez, frontend hesaplaması kullanılacak');
+                            }
+                        } catch (apiErr) {
+                            console.warn('⚠️ Backend API hatası:', apiErr.message);
+                        }
+                    }
+
+                    console.log('✅ Tamamlandı, sonuç sayfasına yönlendiriliyor...');
+
+                    // Sonuç sayfasına yönlendir
+                    setTimeout(() => {
+                        window.location.href = '/risk-profili-hesaplama/risk-profili-anketi-sonuc/';
+                    }, 500);
+
+                } catch (error) {
+                    console.error('❌ HATA:', error);
+                    UIkit.notification({
+                        message: 'Bir hata oluştu: ' + error.message,
+                        status: 'danger',
+                        pos: 'top-center',
+                        timeout: 5000
+                    });
+                }
+            });
+        });
+
+        // ====================================================================
+        // "Hiçbiri" Mutual Exclusivity Logic for Q13 and Q14
+        // Hiçbiri seçildiğinde diğer checkboxlar temizlenir, 
+        // başka bir seçenek seçildiğinde Hiçbiri temizlenir
+        // ====================================================================
+        document.addEventListener('DOMContentLoaded', function () {
+            // Q13: question13g (Hiçbiri) ve diğer checkboxlar (question13a-f)
+            const q13Hicbiri = document.querySelector('input[name="question13g"]');
+            const q13Others = document.querySelectorAll('input[name^="question13"]:not([name="question13g"])');
+
+            if (q13Hicbiri) {
+                // Hiçbiri seçildiğinde diğerlerini temizle
+                q13Hicbiri.addEventListener('change', function () {
+                    if (this.checked) {
+                        q13Others.forEach(cb => cb.checked = false);
+                    }
+                });
+
+                // Diğer bir seçenek seçildiğinde Hiçbiri'ni temizle
+                q13Others.forEach(cb => {
+                    cb.addEventListener('change', function () {
+                        if (this.checked) {
+                            q13Hicbiri.checked = false;
+                        }
+                    });
+                });
+            }
+
+            // Q14: question14f (Hiçbiri) ve diğer checkboxlar (question14a-e)
+            const q14Hicbiri = document.querySelector('input[name="question14f"]');
+            const q14Others = document.querySelectorAll('input[name^="question14"]:not([name="question14f"])');
+
+            if (q14Hicbiri) {
+                // Hiçbiri seçildiğinde diğerlerini temizle
+                q14Hicbiri.addEventListener('change', function () {
+                    if (this.checked) {
+                        q14Others.forEach(cb => cb.checked = false);
+                    }
+                });
+
+                // Diğer bir seçenek seçildiğinde Hiçbiri'ni temizle
+                q14Others.forEach(cb => {
+                    cb.addEventListener('change', function () {
+                        if (this.checked) {
+                            q14Hicbiri.checked = false;
+                        }
+                    });
+                });
+            }
+
+            console.log('✅ Hiçbiri mutual exclusivity logic initialized for Q13 and Q14');
+        });
+    </script>
+
+
+
+</body>
+
+</html>

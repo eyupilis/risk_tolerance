@@ -1,0 +1,4 @@
+# HTTrack Website Copier Cookie File
+# This file format is compatible with Netscape cookies
+.www.kuveytturkportfoy.com.tr	TRUE	/	FALSE	1999999999	TS017e2f9a	011bb3ba6eb20cb62c6d0b64c19214b716fc6c664e204a67c8fefeee7028779696bcb31d5b22acb9b0798f12c3bde4af4b87bb4910
+

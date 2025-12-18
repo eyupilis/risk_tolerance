@@ -1,0 +1,273 @@
+/**
+ * IPS Rapor Yazdırma Stilleri
+ * Kuveyt Türk Portföy - Investment Policy Statement
+ */
+
+/* ===== EKRAN STİLLERİ ===== */
+.ips-report {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.ips-section {
+    page-break-inside: avoid;
+    margin-bottom: 20px;
+}
+
+.ips-header {
+    background: linear-gradient(135deg, #00a65108 0%, #ffffff 100%);
+}
+
+.ips-answer-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.ips-answer-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.ips-mini-score {
+    transition: transform 0.2s;
+}
+
+.ips-mini-score:hover {
+    transform: scale(1.1);
+}
+
+/* ===== YAZDIR STİLLERİ ===== */
+@media print {
+    /* Genel ayarlar */
+    body {
+        font-size: 11pt;
+        line-height: 1.4;
+        color: #000 !important;
+        background: #fff !important;
+    }
+
+    /* Header ve footer gizle */
+    header, footer, nav, 
+    .uk-navbar, .site-header, .site-footer,
+    .uk-offcanvas, .cookie-banner,
+    button, .uk-button {
+        display: none !important;
+    }
+
+    /* IPS raporu tam genişlik */
+    .ips-report {
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    /* Sayfa bölümleri */
+    .ips-section {
+        border: none !important;
+        box-shadow: none !important;
+        page-break-inside: avoid;
+        margin-bottom: 15px !important;
+        padding: 15px !important;
+    }
+
+    /* Header özel */
+    .ips-header {
+        background: #fff !important;
+        border-bottom: 2px solid #00a651 !important;
+        margin-bottom: 20px !important;
+    }
+
+    /* Kartlar */
+    .uk-card {
+        border: 1px solid #ddd !important;
+        box-shadow: none !important;
+    }
+
+    /* Grafikler */
+    canvas {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+
+    /* Chart container'ları */
+    .ips-section canvas {
+        page-break-inside: avoid;
+    }
+
+    /* Linkler */
+    a {
+        color: #000 !important;
+        text-decoration: none !important;
+    }
+
+    /* Badge'ler */
+    .uk-badge, .uk-label {
+        border: 1px solid currentColor !important;
+        background: transparent !important;
+    }
+
+    /* Alert'ler */
+    .uk-alert {
+        border: 1px solid #f39c12 !important;
+        background: #fff9e6 !important;
+    }
+
+    /* İmza bölümü */
+    .ips-section:last-child {
+        page-break-inside: avoid;
+    }
+
+    /* Tablo */
+    table {
+        border-collapse: collapse !important;
+    }
+
+    th, td {
+        border: 1px solid #ddd !important;
+        padding: 8px !important;
+    }
+
+    /* Sayfa numarası */
+    @page {
+        margin: 1.5cm;
+        @bottom-center {
+            content: "Sayfa " counter(page) " / " counter(pages);
+        }
+    }
+
+    /* İlk sayfa */
+    @page :first {
+        margin-top: 1cm;
+    }
+
+    /* Başlık seviyeleri */
+    h1, h2, h3, h4, h5 {
+        page-break-after: avoid;
+        color: #000 !important;
+    }
+
+    /* Grid sistemini düzelt */
+    [uk-grid], .uk-grid {
+        display: block !important;
+    }
+
+    .uk-width-1-2\@m,
+    .uk-width-1-3\@m,
+    .uk-child-width-1-2\@m > *,
+    .uk-child-width-1-3\@m > * {
+        width: 100% !important;
+        margin-bottom: 10px !important;
+    }
+
+    /* Print butonlarını gizle */
+    button[onclick*="print"],
+    button[onclick*="PDF"] {
+        display: none !important;
+    }
+}
+
+/* ===== A4 Sayfa Düzeni ===== */
+@media print {
+    .ips-report,
+    .ips-full-report {
+        width: 210mm;
+    }
+}
+
+/* ===== YENİ KAPSAMLI IPS STİLLERİ (v2.0) ===== */
+.ips-full-report {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.ips-full-report .ips-cover-page {
+    page-break-after: always;
+}
+
+.ips-full-report .ips-toc {
+    page-break-after: always;
+}
+
+.ips-full-report .ips-section {
+    page-break-inside: avoid;
+    margin-bottom: 25px;
+}
+
+.ips-full-report .uk-heading-bullet {
+    color: #00a651;
+    padding-left: 15px;
+    border-left: 3px solid #00a651;
+    margin-top: 20px;
+}
+
+.ips-full-report table {
+    font-size: 0.95rem;
+}
+
+.ips-full-report table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+.ips-full-report .uk-badge {
+    font-size: 0.75rem;
+    padding: 4px 10px;
+}
+
+.ips-full-report .uk-alert {
+    border-radius: 8px;
+}
+
+.ips-full-report .uk-panel {
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.ips-full-report .uk-panel:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* TOC Stili */
+.ips-full-report .ips-toc a {
+    transition: color 0.2s;
+}
+
+.ips-full-report .ips-toc a:hover {
+    color: #00a651 !important;
+}
+
+/* Risk Göstergesi */
+.ips-full-report .risk-indicator {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Yazdırma için ek stiller */
+@media print {
+    .ips-full-report .ips-cover-page {
+        background: #00a651 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    
+    .ips-full-report .no-print {
+        display: none !important;
+    }
+    
+    .ips-full-report .uk-panel {
+        box-shadow: none !important;
+        transform: none !important;
+    }
+    
+    .ips-full-report .ips-section {
+        border: 1px solid #e5e5e5 !important;
+        margin-bottom: 15px !important;
+    }
+}
+

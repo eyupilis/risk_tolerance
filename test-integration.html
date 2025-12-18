@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Integrated Portfolio Test</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .success {
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .error {
+            color: #c0392b;
+            font-weight: bold;
+        }
+
+        .card {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #e0e0e0;
+        }
+
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #2980b9;
+        }
+
+        pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 13px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            color: white;
+            background: #7f8c8d;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>🚀 Backend Entegrasyon Testi</h1>
+
+    <div class="card">
+        <h3>1. Sistem Kontrolü</h3>
+        <p>API Durumu: <span id="api-status">Kontrol ediliyor...</span></p>
+        <p>Log Dosyası: <code>backend/portfolio-optimizer/optimization.log</code></p>
+    </div>
+
+    <div class="card">
+        <h3>2. Optimizasyon Testi</h3>
+        <p>Aşağıdaki buton, CSV verisini okuyacak, işleyecek ve Python Backend'e göndererek optimize edilmiş portföyü
+            alacaktır.</p>
+        <button onclick="runTest()">Testi Başlat</button>
+    </div>
+
+    <div id="results" style="display:none;">
+        <div class="card">
+            <h3>📊 Sonuçlar</h3>
+            <div id="output"></div>
+        </div>
+
+        <div class="card">
+            <h3>🔍 Gelen Yanıt (JSON)</h3>
+            <pre id="json-output"></pre>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="www.kuveytturkportfoy.com.tr/Content/js/fund-data.js"></script>
+    <script src="www.kuveytturkportfoy.com.tr/Content/js/portfolio-optimizer.js"></script>
+
+    <script>
+        const API_URL = 'http://localhost:8000/api';
+
+        // Check API on load
+        fetch(`${API_URL}/health`)
+            .then(r => r.json())
+            .then(d => {
+                document.getElementById('api-status').innerHTML = '<span class="success">✅ Çevrimiçi</span> (' + d.version + ')';
+            })
+            .catch(e => {
+                document.getElementById('api-status').innerHTML = '<span class="error">❌ Hata: ' + e.message + '</span> (Backend çalışmıyor olabilir)';
+            });
+
+        async function runTest() {
+            const out = document.getElementById('output');
+            const jsonOut = document.getElementById('json-output');
+            const resultsDiv = document.getElementById('results');
+
+            out.innerHTML = '⏳ Veri işleniyor ve Backend\'e gönderiliyor...';
+            resultsDiv.style.display = 'block';
+
+            try {
+                // Initialize Optimizer
+                if (typeof FUND_DATA_CSV === 'undefined') throw new Error('Fon verisi (fund-data.js) yüklenemedi!');
+                const optimizer = new PortfolioOptimizer(FUND_DATA_CSV);
+
+                // define test profile
+                const profile = { profile: 'medium' };
+
+                // Call NEW backend method
+                const start = performance.now();
+                const result = await optimizer.optimizeWithBackend(profile);
+                const duration = (performance.now() - start).toFixed(0);
+
+                // Render Results
+                let html = `<p class="success">✨ İşlem Başarılı! (${duration}ms)</p>`;
+                html += `<p><strong>Kullanılan Metod:</strong> ${result.method}</p>`;
+                html += `<p><strong>Beklenen Getiri:</strong> ${(result.statistics.expectedReturn * 100).toFixed(2)}%</p>`;
+                html += `<p><strong>Sharpe Oranı:</strong> ${result.statistics.sharpeRatio.toFixed(3)}</p>`;
+
+                html += `<table><thead><tr><th>Fon Kodu</th><th>Fon Adı</th><th>Ağırlık</th></tr></thead><tbody>`;
+                result.funds.forEach(f => {
+                    html += `<tr>
+                        <td><strong>${f.code}</strong></td>
+                        <td>${f.name}</td>
+                        <td>%${f.allocation.toFixed(2)}</td>
+                    </tr>`;
+                });
+                html += `</tbody></table>`;
+
+                out.innerHTML = html;
+                jsonOut.textContent = JSON.stringify(result, null, 2);
+
+            } catch (error) {
+                out.innerHTML = `<p class="error">💥 Hata Oluştu:</p><p>${error.message}</p>`;
+                console.error(error);
+            }
+        }
+    </script>
+</body>
+
+</html>

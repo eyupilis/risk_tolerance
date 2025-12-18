@@ -1,0 +1,48 @@
+HTTrack3.49-2 launched on Wed, 05 Nov 2025 15:57:38 at https://www.kuveytturkportfoy.com.tr/risk-profili-hesaplama/ +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/*
+(webhttrack -q -%i -w https://www.kuveytturkportfoy.com.tr/risk-profili-hesaplama/ -O "/Users/eyupi/websites/kuveyturkportfoy" -n -%P -N0 -s2 -p7 -D -a -K0 -c4 -%k -A25000 -F "Mozilla/4.5 (compatible; HTTrack 3.0x; Windows 98)" -%F "<!-- Mirrored from %s%s by HTTrack Website Copier/3.x [XR&CO'2014], %s -->" +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -%s -%u )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+15:57:41	Warning: 	Note: due to https://www.kuveytturkportfoy.com.tr remote robots.txt rules, links beginning with these path will be forbidden: /umbraco/, /404/ (see in the options to disable this)
+15:57:56	Warning: 	file not stored in cache due to bogus state (incomplete type with OK (200), size 0): https://www.facebook.com/tr?id=477570256532611&ev=PageView&noscript=1
+15:58:27	Warning: 	Moved Permanently for www.google-analytics.com/
+15:58:27	Warning: 	File has moved from www.google-analytics.com/ to https://www.google.com/analytics/
+15:58:27	Warning: 	Moved Permanently for connect.facebook.net/robots.txt
+15:58:27	Warning: 	Redirected link is identical because of 'URL Hack' option: connect.facebook.net/robots.txt and https://connect.facebook.net/robots.txt
+15:58:27	Warning: 	Warning moved treated for connect.facebook.net/robots.txt (real one is https://connect.facebook.net/robots.txt)
+15:58:28	Warning: 	Moved Permanently for connect.facebook.net/
+15:58:28	Warning: 	Redirected link is identical because of 'URL Hack' option: connect.facebook.net/ and https://connect.facebook.net/
+15:58:28	Warning: 	File has moved from connect.facebook.net/ to https://connect.facebook.net/
+15:58:29	Error: 	"Not Found" (404) at link www.googletagmanager.com/ (from https://www.kuveytturkportfoy.com.tr/risk-profili-hesaplama/)
+15:58:30	Error: 	"Not Found" (404) at link https://fonts.googleapis.com/ (from https://www.kuveytturkportfoy.com.tr/risk-profili-hesaplama/)
+15:58:31	Error: 	"Not Found" (404) at link https://fonts.gstatic.com/ (from https://www.kuveytturkportfoy.com.tr/risk-profili-hesaplama/)
+15:58:56	Warning: 	File seems complete (same size), but there was a cache read error (4294967295): https://www.kuveytturkportfoy.com.tr/Content/uikit/dist/js/uikit.min.js?v=11032025
+15:58:56	Warning: 	File seems complete (same size), but there was a cache read error (4294967295): https://www.kuveytturkportfoy.com.tr/media/5mxixydp/yasal-uyari-kisisel-verileri-saklama-ve-imha-politikasi.pdf
+15:58:57	Warning: 	File seems complete (same size), but there was a cache read error (4294967295): https://www.google.com/recaptcha/api.js?render=6LcyBfAqAAAAABz8l1keVZ39uttnTccul0zEBvaP
+15:58:57	Warning: 	File seems complete (same size), but there was a cache read error (4294967295): https://www.kuveytturkportfoy.com.tr/media/4xjcei1p/aydinlatma-metni.pdf
+15:58:58	Warning: 	HTML file (624 bytes) retransferred due to lack of cache: connect.facebook.net/
+15:58:59	Warning: 	Moved Permanently for connect.facebook.net/
+15:58:59	Warning: 	Redirected link is identical because of 'URL Hack' option: connect.facebook.net/ and https://connect.facebook.net/
+15:58:59	Warning: 	File has moved from connect.facebook.net/ to https://connect.facebook.net/
+15:59:00	Warning: 	File seems complete (same size), but there was a cache read error (4294967295): https://www.kuveytturkportfoy.com.tr/media/gc0pgbwb/banner-web-aylikfondagilim.png?format=webp
+15:59:00	Warning: 	File seems complete (same size), but there was a cache read error (4294967295): https://www.kuveytturkportfoy.com.tr/media/z1falqdw/çerez-metni-pdf.pdf
+15:59:01	Warning: 	File seems complete (same size), but there was a cache read error (4294967295): https://www.kuveytturkportfoy.com.tr/media/fl5f1xd3/banner-web-12.png
+15:59:05	Error: 	"Bad Request" (400) at link https://www.googletagmanager.com/gtm.js?id= (from https://www.kuveytturkportfoy.com.tr/risk-profili-hesaplama/)
+15:59:13	Error: 	"Not Found" (404) at link https://www.kuveytturkportfoy.com.tr/Content/uikit/images/backgrounds/divider-icon.svg (from https://www.kuveytturkportfoy.com.tr/Content/uikit/dist/css/uikit.custom-theme.min.css?v=220420252)
+15:59:13	Error: 	"Not Found" (404) at link https://www.kuveytturkportfoy.com.tr/risk-profili-hesaplama/signals/config/ (from https://connect.facebook.net/en_US/fbevents.js)
+15:59:13	Error: 	"Not Found" (404) at link https://www.kuveytturkportfoy.com.tr/risk-profili-hesaplama/a/ (from https://connect.facebook.net/en_US/fbevents.js)
+15:59:13	Error: 	"Not Found" (404) at link https://www.kuveytturkportfoy.com.tr/risk-profili-hesaplama/signals/plugins/ (from https://connect.facebook.net/en_US/fbevents.js)
+15:59:13	Error: 	"Not Found" (404) at link https://www.kuveytturkportfoy.com.tr/risk-profili-hesaplama/POST/ (from https://connect.facebook.net/en_US/fbevents.js)
+15:59:13	Error: 	"Not Found" (404) at link https://www.kuveytturkportfoy.com.tr/risk-profili-hesaplama/schema.org/ (from https://connect.facebook.net/en_US/fbevents.js)
+15:59:13	Error: 	"Not Found" (404) at link https://www.kuveytturkportfoy.com.tr/risk-profili-hesaplama/b.resolvedLink/ (from https://connect.facebook.net/en_US/fbevents.js)
+15:59:13	Error: 	"Not Found" (404) at link https://www.kuveytturkportfoy.com.tr/risk-profili-hesaplama/d/ (from https://connect.facebook.net/en_US/fbevents.js)
+15:59:13	Error: 	"Not Found" (404) at link https://www.kuveytturkportfoy.com.tr/signals/iwl.js (from https://connect.facebook.net/en_US/fbevents.js)
+15:59:13	Error: 	"Not Found" (404) at link https://www.kuveytturkportfoy.com.tr/signals/iwl.js?pixel_id= (from https://connect.facebook.net/en_US/fbevents.js)
+15:59:13	Error: 	"Not Found" (404) at link https://www.kuveytturkportfoy.com.tr/risk-profili-hesaplama/c.dl/ (from https://connect.facebook.net/en_US/fbevents.js)
+15:59:14	Error: 	"Not Found" (404) at link https://www.kuveytturkportfoy.com.tr/risk-profili-hesaplama/c.rl/ (from https://connect.facebook.net/en_US/fbevents.js)
+
+HTTrack Website Copier/3.49-2 mirror complete in 1 minutes 36 seconds : 80 links scanned, 65 files written (3671683 bytes overall) [3391363 bytes received at 35326 bytes/sec], 901858 bytes transferred using HTTP compression in 11 files, ratio 33%, 1.0 requests per connection
+(16 errors, 21 warnings, 0 messages)

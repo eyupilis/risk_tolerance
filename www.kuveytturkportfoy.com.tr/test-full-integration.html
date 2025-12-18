@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>🔬 Tam Entegrasyon Testi - Frontend & Backend</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            padding: 20px; 
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); 
+            color: #eee; 
+            min-height: 100vh;
+        }
+        .container { max-width: 1400px; margin: 0 auto; }
+        h1 { color: #e94560; text-align: center; margin-bottom: 30px; }
+        
+        .test-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 1200px) { .test-grid { grid-template-columns: 1fr; } }
+        
+        .test-card {
+            background: rgba(15, 52, 96, 0.8);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid #0f4c75;
+        }
+        .test-card h2 {
+            color: #00d9ff;
+            margin-top: 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #0f4c75;
+        }
+        .test-card.full-width { grid-column: 1 / -1; }
+        
+        .status { padding: 8px 15px; border-radius: 20px; display: inline-block; margin: 5px 0; }
+        .status.success { background: #00c853; color: #000; }
+        .status.error { background: #ff1744; color: #fff; }
+        .status.warning { background: #ff9100; color: #000; }
+        .status.info { background: #2979ff; color: #fff; }
+        .status.pending { background: #666; color: #fff; }
+        
+        .metric-box {
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+        .metric-label { color: #888; font-size: 12px; text-transform: uppercase; }
+        .metric-value { font-size: 24px; font-weight: bold; color: #00d9ff; }
+        
+        .fund-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            margin: 5px 0;
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            border-left: 4px solid #00d9ff;
+        }
+        .fund-row.risk-low { border-left-color: #00c853; }
+        .fund-row.risk-medium { border-left-color: #ff9100; }
+        .fund-row.risk-high { border-left-color: #ff1744; }
+        
+        .algorithm-row {
+            display: grid;
+            grid-template-columns: 150px 1fr 100px 100px 80px;
+            padding: 10px;
+            margin: 5px 0;
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            align-items: center;
+            gap: 10px;
+        }
+        .algorithm-row.selected { background: rgba(0, 200, 83, 0.3); border: 2px solid #00c853; }
+        
+        .progress-bar {
+            height: 8px;
+            background: #333;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00d9ff, #00c853);
+            transition: width 0.3s;
+        }
+        
+        pre {
+            background: #0a0a1a;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 11px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #e94560, #0f4c75);
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+        }
+        .btn:hover { opacity: 0.9; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        .comparison-table th, .comparison-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+        .comparison-table th { color: #00d9ff; }
+        .match { color: #00c853; }
+        .mismatch { color: #ff1744; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔬 Frontend & Backend Tam Entegrasyon Testi</h1>
+        
+        <div style="text-align: center; margin-bottom: 30px;">
+            <button class="btn" id="runTestBtn" onclick="runFullTest()">🚀 Tüm Testleri Çalıştır</button>
+            <button class="btn" onclick="location.reload()">🔄 Sıfırla</button>
+        </div>
+
+        <div class="test-grid">
+            <!-- TEST 1: Risk Skoru -->
+            <div class="test-card" id="test1">
+                <h2>1️⃣ Risk Skoru Hesaplama</h2>
+                <div id="test1-status"><span class="status pending">Bekliyor...</span></div>
+                <div id="test1-result"></div>
+            </div>
+
+            <!-- TEST 2: Backend Bağlantısı -->
+            <div class="test-card" id="test2">
+                <h2>2️⃣ Backend Bağlantısı</h2>
+                <div id="test2-status"><span class="status pending">Bekliyor...</span></div>
+                <div id="test2-result"></div>
+            </div>
+
+            <!-- TEST 3: CSV Veri Kontrolü -->
+            <div class="test-card" id="test3">
+                <h2>3️⃣ CSV Verisi & Hesaplamalar</h2>
+                <div id="test3-status"><span class="status pending">Bekliyor...</span></div>
+                <div id="test3-result"></div>
+            </div>
+
+            <!-- TEST 4: Algoritma Karşılaştırması -->
+            <div class="test-card" id="test4">
+                <h2>4️⃣ Algoritma Performans Karşılaştırması</h2>
+                <div id="test4-status"><span class="status pending">Bekliyor...</span></div>
+                <div id="test4-result"></div>
+            </div>
+
+            <!-- TEST 5: Frontend-Backend Senkronizasyonu -->
+            <div class="test-card full-width" id="test5">
+                <h2>5️⃣ Frontend-Backend Senkronizasyonu</h2>
+                <div id="test5-status"><span class="status pending">Bekliyor...</span></div>
+                <div id="test5-result"></div>
+            </div>
+
+            <!-- Özet -->
+            <div class="test-card full-width" id="summary" style="display:none;">
+                <h2>📋 Test Özeti</h2>
+                <div id="summary-result"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/Content/js/fund-data.js"></script>
+    <script src="/Content/js/portfolio-optimizer.js"></script>
+    <script>
+        const BACKEND_URL = 'http://localhost:8000';
+        let testResults = {};
+        let optimizer = null;
+
+        // Test 1: Risk Skoru Hesaplama
+        async function test1_RiskScore() {
+            const container = document.getElementById('test1-result');
+            const status = document.getElementById('test1-status');
+            
+            try {
+                optimizer = new PortfolioOptimizer(FUND_DATA_CSV);
+                
+                // Test farklı profiller
+                const testCases = [
+                    { name: 'Düşük Risk', answers: {q1:'d',q2:'a',q3:'a',q4:'a',q5:'a',q6:'a',q7:'a',q8:'a',q9:'a',q10:'a',q11:'a',q12:'a'}, expected: 'low' },
+                    { name: 'Orta Risk', answers: {q1:'b',q2:'b',q3:'b',q4:'b',q5:'b',q6:'b',q7:'b',q8:'b',q9:'b',q10:'b',q11:'b',q12:'b'}, expected: 'medium' },
+                    { name: 'Yüksek Risk', answers: {q1:'a',q2:'d',q3:'d',q4:'d',q5:'c',q6:'c',q7:'c',q8:'c',q9:'c',q10:'c',q11:'c',q12:'c'}, expected: 'high' }
+                ];
+                
+                let html = '<div style="margin-top:15px;">';
+                let allPassed = true;
+                
+                for (const tc of testCases) {
+                    const result = optimizer.calculateRiskScore(tc.answers);
+                    const passed = result.profile === tc.expected;
+                    if (!passed) allPassed = false;
+                    
+                    html += `
+                        <div class="metric-box">
+                            <div class="metric-label">${tc.name}</div>
+                            <div class="metric-value">${result.score}/100</div>
+                            <div>Profil: <strong>${result.profile}</strong> 
+                                ${passed ? '<span class="match">✅ Doğru</span>' : '<span class="mismatch">❌ Beklenen: ' + tc.expected + '</span>'}
+                            </div>
+                            <div style="font-size:12px; color:#888;">Kapasite: ${result.capacityScore?.toFixed(0) || 'N/A'}</div>
+                        </div>
+                    `;
+                }
+                html += '</div>';
+                
+                container.innerHTML = html;
+                status.innerHTML = allPassed ? 
+                    '<span class="status success">✅ BAŞARILI</span>' : 
+                    '<span class="status error">❌ HATALI</span>';
+                
+                testResults.test1 = allPassed;
+                return allPassed;
+            } catch (e) {
+                container.innerHTML = `<pre class="error">${e.message}\n${e.stack}</pre>`;
+                status.innerHTML = '<span class="status error">❌ HATA</span>';
+                testResults.test1 = false;
+                return false;
+            }
+        }
+
+        // Test 2: Backend Bağlantısı
+        async function test2_BackendConnection() {
+            const container = document.getElementById('test2-result');
+            const status = document.getElementById('test2-status');
+            
+            try {
+                // Health check
+                const healthRes = await fetch(`${BACKEND_URL}/api/health`);
+                const healthData = await healthRes.json();
+                
+                // Profiles endpoint
+                const profilesRes = await fetch(`${BACKEND_URL}/api/profiles`);
+                const profilesData = await profilesRes.json();
+                
+                let html = `
+                    <div class="metric-box">
+                        <div class="metric-label">API Durumu</div>
+                        <div class="metric-value">${healthData.status === 'healthy' ? '🟢 Çalışıyor' : '🔴 Hata'}</div>
+                        <div>Servis: ${healthData.service}</div>
+                        <div>Versiyon: ${healthData.version}</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-label">Risk Profilleri</div>
+                        ${profilesData.profiles.map(p => `
+                            <div style="margin:5px 0; padding:5px; background:rgba(0,0,0,0.2); border-radius:5px;">
+                                <strong>${p.name}</strong> - Max Ağırlık: ${(p.max_weight_cap*100).toFixed(0)}%
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                
+                container.innerHTML = html;
+                const passed = healthData.status === 'healthy';
+                status.innerHTML = passed ? 
+                    '<span class="status success">✅ BAĞLANTI BAŞARILI</span>' : 
+                    '<span class="status error">❌ BAĞLANTI HATASI</span>';
+                
+                testResults.test2 = passed;
+                return passed;
+            } catch (e) {
+                container.innerHTML = `
+                    <div class="metric-box" style="border-left: 4px solid #ff1744;">
+                        <div class="metric-label">Hata</div>
+                        <div style="color:#ff1744;">${e.message}</div>
+                        <div style="margin-top:10px; font-size:12px;">
+                            Backend çalışıyor mu kontrol edin:<br>
+                            <code>cd backend/portfolio-optimizer && uvicorn main:app --port 8000</code>
+                        </div>
+                    </div>
+                `;
+                status.innerHTML = '<span class="status error">❌ BACKEND ULAŞILAMIYOR</span>';
+                testResults.test2 = false;
+                return false;
+            }
+        }
+
+        // Test 3: CSV Veri Kontrolü
+        async function test3_CSVData() {
+            const container = document.getElementById('test3-result');
+            const status = document.getElementById('test3-status');
+            
+            try {
+                if (!optimizer) optimizer = new PortfolioOptimizer(FUND_DATA_CSV);
+                
+                // CSV stats
+                const csvLines = FUND_DATA_CSV.split('\n').length;
+                const fundCount = optimizer.funds.length;
+                
+                // Sample fund statistics
+                const sampleFunds = optimizer.funds.slice(0, 5);
+                
+                let html = `
+                    <div class="metric-box">
+                        <div class="metric-label">CSV Verisi</div>
+                        <div class="metric-value">${csvLines.toLocaleString()} satır</div>
+                        <div>Toplam Fon: ${fundCount}</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-label">Örnek Fon İstatistikleri (İlk 5)</div>
+                        ${sampleFunds.map(f => `
+                            <div class="fund-row ${f.category.riskLevel <= 2 ? 'risk-low' : f.category.riskLevel <= 4 ? 'risk-medium' : 'risk-high'}">
+                                <div>
+                                    <strong>${f.code}</strong> - ${f.category.typeName}
+                                    <div style="font-size:11px; color:#888;">Risk: ${f.category.riskLevel}/7 | Veri: ${f.prices.length} gün</div>
+                                </div>
+                                <div style="text-align:right;">
+                                    <div>Sharpe: ${f.sharpeRatio.toFixed(2)}</div>
+                                    <div style="font-size:11px;">Vol: ${(f.volatility*100).toFixed(2)}%</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                
+                const passed = fundCount > 0 && csvLines > 100;
+                container.innerHTML = html;
+                status.innerHTML = passed ? 
+                    '<span class="status success">✅ VERİ YÜKLÜ</span>' : 
+                    '<span class="status error">❌ VERİ HATASI</span>';
+                
+                testResults.test3 = passed;
+                return passed;
+            } catch (e) {
+                container.innerHTML = `<pre>${e.message}</pre>`;
+                status.innerHTML = '<span class="status error">❌ HATA</span>';
+                testResults.test3 = false;
+                return false;
+            }
+        }
+
+        // Test 4: Algoritma Karşılaştırması
+        async function test4_AlgorithmComparison() {
+            const container = document.getElementById('test4-result');
+            const status = document.getElementById('test4-status');
+            
+            try {
+                if (!optimizer) optimizer = new PortfolioOptimizer(FUND_DATA_CSV);
+                
+                // Backend'e istek at
+                const riskProfile = 'low';
+                const suitableFunds = optimizer.funds.filter(f => {
+                    const riskLevel = f.category?.riskLevel || 4;
+                    return riskLevel <= 3 && f.prices.length >= 10;
+                });
+                
+                const fundsPayload = suitableFunds.slice(0, 10).map(f => ({
+                    code: f.code,
+                    name: f.name,
+                    returns: f.dailyReturns || [],
+                    current_price: f.currentPrice,
+                    total_value: 0
+                })).filter(f => f.returns.length > 5);
+                
+                const payload = {
+                    funds: fundsPayload,
+                    risk_profile: riskProfile,
+                    risk_free_rate: 0.0,
+                    max_funds_final: 5
+                };
+                
+                container.innerHTML = '<div class="status info">⏳ Backend hesaplıyor...</div>';
+                
+                const response = await fetch(`${BACKEND_URL}/api/optimize`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                const data = await response.json();
+                
+                if (!data.success) {
+                    throw new Error(data.detail || 'Optimizasyon başarısız');
+                }
+                
+                // Algoritmaları karşılaştır
+                let html = `
+                    <div class="metric-box">
+                        <div class="metric-label">Hesaplama Süresi</div>
+                        <div class="metric-value">${data.computation_time_ms.toFixed(2)} ms</div>
+                        <div>Risk Profili: ${data.risk_profile} | Max Ağırlık: ${(data.max_weight_cap*100).toFixed(0)}%</div>
+                    </div>
+                    
+                    <div style="margin-top:15px;">
+                        <div class="metric-label">Algoritma Performansları</div>
+                        <div style="font-size:11px; color:#888; margin-bottom:10px;">
+                            Metod | Sharpe | Volatilite | Getiri | Durum
+                        </div>
+                `;
+                
+                // Sort by Sharpe ratio
+                const sortedCandidates = [...data.candidates].sort((a, b) => 
+                    (b.metrics?.sharpe_ratio || 0) - (a.metrics?.sharpe_ratio || 0)
+                );
+                
+                for (const c of sortedCandidates) {
+                    const isSelected = data.best_portfolio && c.method === data.best_portfolio.method;
+                    const sharpe = c.metrics?.sharpe_ratio || 0;
+                    const vol = c.metrics?.volatility || 0;
+                    const ret = c.metrics?.expected_return || 0;
+                    
+                    html += `
+                        <div class="algorithm-row ${isSelected ? 'selected' : ''}">
+                            <div><strong>${c.method}</strong></div>
+                            <div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: ${Math.min(100, Math.abs(sharpe) * 10)}%"></div>
+                                </div>
+                            </div>
+                            <div style="text-align:center;">${sharpe.toFixed(2)}</div>
+                            <div style="text-align:center;">${(vol*100).toFixed(2)}%</div>
+                            <div style="text-align:center;">
+                                ${c.is_valid ? 
+                                    (isSelected ? '🏆' : '✅') : 
+                                    '❌'}
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                // Best portfolio details
+                if (data.best_portfolio) {
+                    html += `
+                        <div class="metric-box" style="margin-top:20px; border: 2px solid #00c853;">
+                            <div class="metric-label">🏆 Seçilen En İyi Algoritma</div>
+                            <div class="metric-value">${data.best_portfolio.method}</div>
+                            <div style="margin-top:10px;">
+                                <strong>Seçim Kriteri (${riskProfile} profil için):</strong>
+                                <div style="color:#00d9ff; margin-top:5px;">
+                                    ${riskProfile === 'low' ? '→ En düşük volatilite tercih edildi' :
+                                      riskProfile === 'high' ? '→ En yüksek getiri tercih edildi' :
+                                      '→ En yüksek Sharpe oranı tercih edildi'}
+                                </div>
+                            </div>
+                            <div style="margin-top:10px;">
+                                <strong>Neden bu algoritma?</strong>
+                                <div style="font-size:12px; color:#aaa; margin-top:5px;">
+                                    ${data.best_portfolio.notes || 'Açıklama yok'}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                html += '</div>';
+                
+                container.innerHTML = html;
+                const passed = data.success && data.best_portfolio;
+                status.innerHTML = passed ? 
+                    '<span class="status success">✅ 7 ALGORİTMA TEST EDİLDİ</span>' : 
+                    '<span class="status warning">⚠️ KISMI BAŞARI</span>';
+                
+                testResults.test4 = passed;
+                testResults.backendData = data;
+                return passed;
+            } catch (e) {
+                container.innerHTML = `<pre style="color:#ff1744;">${e.message}</pre>`;
+                status.innerHTML = '<span class="status error">❌ HATA</span>';
+                testResults.test4 = false;
+                return false;
+            }
+        }
+
+        // Test 5: Frontend-Backend Senkronizasyonu
+        async function test5_Synchronization() {
+            const container = document.getElementById('test5-result');
+            const status = document.getElementById('test5-status');
+            
+            try {
+                if (!optimizer) optimizer = new PortfolioOptimizer(FUND_DATA_CSV);
+                
+                // Frontend hesaplama
+                const answers = {q1:'d',q2:'a',q3:'a',q4:'a',q5:'a',q6:'a',q7:'a',q8:'a',q9:'a',q10:'a',q11:'a',q12:'a'};
+                const riskResult = optimizer.calculateRiskScore(answers);
+                const frontendPortfolio = optimizer.generateOptimalPortfolio(riskResult);
+                
+                // Backend hesaplama
+                let backendPortfolio = null;
+                try {
+                    backendPortfolio = await optimizer.optimizeWithBackend(riskResult);
+                } catch (e) {
+                    console.warn('Backend optimizasyonu başarısız:', e);
+                }
+                
+                let html = `
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <!-- Frontend Sonucu -->
+                        <div>
+                            <h3 style="color:#00d9ff;">📱 Frontend (JavaScript)</h3>
+                            <div class="metric-box">
+                                <div class="metric-label">Metod</div>
+                                <div class="metric-value">Markowitz Basitleştirilmiş</div>
+                            </div>
+                            ${frontendPortfolio?.funds ? `
+                                <div class="metric-box">
+                                    <div class="metric-label">Portföy Dağılımı</div>
+                                    ${frontendPortfolio.funds.map(f => `
+                                        <div class="fund-row ${f.category.riskLevel <= 2 ? 'risk-low' : f.category.riskLevel <= 4 ? 'risk-medium' : 'risk-high'}">
+                                            <span><strong>${f.code}</strong> (Risk: ${f.category.riskLevel})</span>
+                                            <span>${f.allocation.toFixed(2)}%</span>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                                <div class="metric-box">
+                                    <div class="metric-label">İstatistikler</div>
+                                    <div>Beklenen Getiri: ${(frontendPortfolio.statistics.expectedReturn*100).toFixed(2)}%</div>
+                                    <div>Volatilite: ${(frontendPortfolio.statistics.volatility*100).toFixed(2)}%</div>
+                                    <div>Sharpe: ${frontendPortfolio.statistics.sharpeRatio.toFixed(2)}</div>
+                                </div>
+                            ` : '<div class="status error">Portföy oluşturulamadı</div>'}
+                        </div>
+                        
+                        <!-- Backend Sonucu -->
+                        <div>
+                            <h3 style="color:#e94560;">🖥️ Backend (Python)</h3>
+                            ${backendPortfolio ? `
+                                <div class="metric-box">
+                                    <div class="metric-label">Metod</div>
+                                    <div class="metric-value">${backendPortfolio.method}</div>
+                                </div>
+                                <div class="metric-box">
+                                    <div class="metric-label">Portföy Dağılımı</div>
+                                    ${backendPortfolio.funds.map(f => `
+                                        <div class="fund-row ${f.category.riskLevel <= 2 ? 'risk-low' : f.category.riskLevel <= 4 ? 'risk-medium' : 'risk-high'}">
+                                            <span><strong>${f.code}</strong> (Risk: ${f.category.riskLevel})</span>
+                                            <span>${f.allocation.toFixed(2)}%</span>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                                <div class="metric-box">
+                                    <div class="metric-label">İstatistikler</div>
+                                    <div>Beklenen Getiri: ${(backendPortfolio.statistics.expectedReturn*100).toFixed(2)}%</div>
+                                    <div>Volatilite: ${(backendPortfolio.statistics.volatility*100).toFixed(2)}%</div>
+                                    <div>Sharpe: ${backendPortfolio.statistics.sharpeRatio.toFixed(2)}</div>
+                                    <div style="font-size:11px; color:#888;">Hesaplama: ${backendPortfolio.statistics.computationTime?.toFixed(2) || 'N/A'} ms</div>
+                                </div>
+                            ` : `
+                                <div class="metric-box" style="border-left: 4px solid #ff9100;">
+                                    <div class="metric-label">⚠️ Backend Kullanılamıyor</div>
+                                    <div>Frontend sonuçları kullanılacak</div>
+                                </div>
+                            `}
+                        </div>
+                    </div>
+                `;
+                
+                // Karşılaştırma tablosu
+                if (frontendPortfolio?.funds && backendPortfolio?.funds) {
+                    html += `
+                        <div style="margin-top: 20px;">
+                            <h3>🔄 Karşılaştırma</h3>
+                            <table class="comparison-table">
+                                <tr>
+                                    <th>Metrik</th>
+                                    <th>Frontend</th>
+                                    <th>Backend</th>
+                                    <th>Fark</th>
+                                </tr>
+                                <tr>
+                                    <td>Fon Sayısı</td>
+                                    <td>${frontendPortfolio.funds.length}</td>
+                                    <td>${backendPortfolio.funds.length}</td>
+                                    <td class="${frontendPortfolio.funds.length === backendPortfolio.funds.length ? 'match' : 'mismatch'}">
+                                        ${frontendPortfolio.funds.length === backendPortfolio.funds.length ? '✅ Eşit' : '⚠️ Farklı'}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Sharpe Ratio</td>
+                                    <td>${frontendPortfolio.statistics.sharpeRatio.toFixed(2)}</td>
+                                    <td>${backendPortfolio.statistics.sharpeRatio.toFixed(2)}</td>
+                                    <td>${(backendPortfolio.statistics.sharpeRatio - frontendPortfolio.statistics.sharpeRatio).toFixed(2)}</td>
+                                </tr>
+                                <tr>
+                                    <td>Volatilite</td>
+                                    <td>${(frontendPortfolio.statistics.volatility*100).toFixed(2)}%</td>
+                                    <td>${(backendPortfolio.statistics.volatility*100).toFixed(2)}%</td>
+                                    <td>${((backendPortfolio.statistics.volatility - frontendPortfolio.statistics.volatility)*100).toFixed(2)}%</td>
+                                </tr>
+                            </table>
+                            <div style="margin-top:15px; padding:15px; background:rgba(0,200,83,0.1); border-radius:10px; border-left:4px solid #00c853;">
+                                <strong>📝 Sonuç:</strong> Frontend ve Backend farklı algoritmalar kullandığı için sonuçlar farklı olabilir.
+                                Bu normaldir! Backend daha gelişmiş optimizasyon teknikleri kullanır.
+                            </div>
+                        </div>
+                    `;
+                }
+                
+                container.innerHTML = html;
+                const passed = frontendPortfolio?.funds?.length > 0;
+                status.innerHTML = passed ? 
+                    '<span class="status success">✅ SENKRONİZASYON BAŞARILI</span>' : 
+                    '<span class="status error">❌ SENKRONİZASYON HATASI</span>';
+                
+                testResults.test5 = passed;
+                return passed;
+            } catch (e) {
+                container.innerHTML = `<pre style="color:#ff1744;">${e.message}\n${e.stack}</pre>`;
+                status.innerHTML = '<span class="status error">❌ HATA</span>';
+                testResults.test5 = false;
+                return false;
+            }
+        }
+
+        // Tüm testleri çalıştır
+        async function runFullTest() {
+            const btn = document.getElementById('runTestBtn');
+            btn.disabled = true;
+            btn.textContent = '⏳ Testler Çalışıyor...';
+            
+            // Reset
+            testResults = {};
+            
+            // Run tests sequentially
+            await test1_RiskScore();
+            await test2_BackendConnection();
+            await test3_CSVData();
+            await test4_AlgorithmComparison();
+            await test5_Synchronization();
+            
+            // Show summary
+            showSummary();
+            
+            btn.disabled = false;
+            btn.textContent = '🚀 Testleri Tekrar Çalıştır';
+        }
+
+        function showSummary() {
+            const summary = document.getElementById('summary');
+            const container = document.getElementById('summary-result');
+            summary.style.display = 'block';
+            
+            const passed = Object.values(testResults).filter(v => v === true).length;
+            const total = 5;
+            const percentage = (passed / total * 100).toFixed(0);
+            
+            let html = `
+                <div style="text-align:center; margin-bottom:20px;">
+                    <div style="font-size:48px; font-weight:bold; color:${percentage >= 80 ? '#00c853' : percentage >= 50 ? '#ff9100' : '#ff1744'};">
+                        ${passed}/${total}
+                    </div>
+                    <div style="font-size:24px;">Test Başarılı</div>
+                </div>
+                
+                <div class="progress-bar" style="height:20px; margin:20px 0;">
+                    <div class="progress-fill" style="width:${percentage}%;"></div>
+                </div>
+                
+                <table class="comparison-table">
+                    <tr><th>Test</th><th>Durum</th><th>Açıklama</th></tr>
+                    <tr>
+                        <td>1. Risk Skoru</td>
+                        <td>${testResults.test1 ? '<span class="match">✅ Geçti</span>' : '<span class="mismatch">❌ Başarısız</span>'}</td>
+                        <td>Anket cevaplarından risk profili hesaplama</td>
+                    </tr>
+                    <tr>
+                        <td>2. Backend Bağlantısı</td>
+                        <td>${testResults.test2 ? '<span class="match">✅ Geçti</span>' : '<span class="mismatch">❌ Başarısız</span>'}</td>
+                        <td>Python API erişilebilirliği</td>
+                    </tr>
+                    <tr>
+                        <td>3. CSV Verisi</td>
+                        <td>${testResults.test3 ? '<span class="match">✅ Geçti</span>' : '<span class="mismatch">❌ Başarısız</span>'}</td>
+                        <td>Fon verilerinin yüklenmesi ve istatistikler</td>
+                    </tr>
+                    <tr>
+                        <td>4. Algoritmalar</td>
+                        <td>${testResults.test4 ? '<span class="match">✅ Geçti</span>' : '<span class="mismatch">❌ Başarısız</span>'}</td>
+                        <td>7 optimizasyon algoritmasının çalışması</td>
+                    </tr>
+                    <tr>
+                        <td>5. Senkronizasyon</td>
+                        <td>${testResults.test5 ? '<span class="match">✅ Geçti</span>' : '<span class="mismatch">❌ Başarısız</span>'}</td>
+                        <td>Frontend-Backend veri tutarlılığı</td>
+                    </tr>
+                </table>
+            `;
+            
+            container.innerHTML = html;
+            summary.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
+

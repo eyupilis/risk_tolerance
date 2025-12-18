@@ -1,0 +1,55 @@
+[ ] NAME:Current Task List DESCRIPTION:Root task for conversation __NEW_AGENT__
+-[/] NAME:IPS Tutarsızlık Ajanı Frontend Entegrasyonu DESCRIPTION:Tutarsızlık ajanının frontend'e tam entegre edilmesi
+-[x] NAME:Mevcut mimariyi analiz et DESCRIPTION:Frontend'in mevcut akışını ve eksiklikleri tespit et
+-[x] NAME:Anket sayfasına ips-integration.js ekle DESCRIPTION:risk-profili-hesaplama/index.html dosyasına ips-integration.js script'i ekle
+-[x] NAME:Anket submit akışını IPS API ile entegre et DESCRIPTION:Anket tamamlandığında IPS API çağrısı yap, tutarsızlık varsa modal göster
+-[x] NAME:Doğrulama modalından sonra akışı tamamla DESCRIPTION:Kullanıcı doğrulama verince /confirm endpoint'i çağır ve sonuç sayfasına yönlendir
+-[/] NAME:Test et ve logları kontrol et DESCRIPTION:Tam akışı test et - anket -> tutarsızlık -> doğrulama -> sonuç
+-[x] NAME:Profile & Risk Expert Agent DESCRIPTION:İlk expert agent'ı oluştur - Bölüm 1+2 için AI içerik üretimi
+-[x] NAME:Strategy Expert Agent DESCRIPTION:Bölüm 3+5 için strateji ve varlık dağılımı içeriği
+-[x] NAME:Constraints Expert Agent DESCRIPTION:Bölüm 4+6 için kısıtlar ve izleme içeriği
+-[-] NAME:ESG & Legal Expert Agent DESCRIPTION:ESG politikası Strategy Expert'te, yasal kısıtlar Constraints Expert'te zaten mevcut - ayrı agent gerekli değil
+-[/] NAME:Frontend Entegrasyonu DESCRIPTION:ips-report.js'i güncelleyerek AI içeriklerini render et
+-[/] NAME:IPS Raporu Geliştirme Projesi DESCRIPTION:IPS raporundaki eksikliklerin giderilmesi için kapsamlı geliştirme projesi. Her geliştirme: Plan → Onay → Uygulama → Test → Sonraki adım şeklinde ilerleyecek.
+--[/] NAME:Geliştirme 1: expert_content Entegrasyonu DESCRIPTION:En kritik eksik: Backend'den gelen expert_content'in IPS raporuna tam entegrasyonu. investor_profile.summary, demographics_analysis, investment_personality gibi AI metinlerinin rapora yansıtılması.
+--[x] NAME:1.1 Plan: expert_content akışı ve render noktaları DESCRIPTION:Hangi dosyalarda ne değişiklik yapılacak, hangi bölümlere hangi alanlar enjekte edilecek detaylı plan.
+--[x] NAME:1.2 Kullanıcı Onayı Bekleniyor DESCRIPTION:Planın kullanıcı tarafından onaylanması bekleniyor.
+--[x] NAME:1.3 Uygulama: Kod değişiklikleri DESCRIPTION:Onay sonrası ips-report.js, ips-report-renderer.js ve index.html dosyalarına gerekli değişikliklerin uygulanması.
+--[/] NAME:1.4 Kullanıcı Testi Bekleniyor DESCRIPTION:Anket sayfasında tutarsızlık olmasa bile confirmForIPS çağrısı yapılacak şekilde kod düzeltildi. Backend şeması da güncellendi.
+--[ ] NAME:1.5 Test Onayı ve Sonraki Adıma Geçiş DESCRIPTION:Test başarılıysa bir sonraki geliştirmeye geçiş.
+--[ ] NAME:Geliştirme 2: Risk Profili Analizi Bölümü DESCRIPTION:Bölüm 4'teki boş alanların doldurulması: Genel Risk Profili, Risk Kapasitesi, Risk İstekliliği, Risk Bileşenleri.
+--[ ] NAME:2.1 Plan: Risk analizi alanları ve veri kaynakları DESCRIPTION:expert_content.risk_analysis ve backend risk verilerinin nasıl kullanılacağının planı.
+--[ ] NAME:2.2 Kullanıcı Onayı Bekleniyor DESCRIPTION:Planın onaylanması bekleniyor.
+--[ ] NAME:2.3 Uygulama DESCRIPTION:Kod değişikliklerinin uygulanması.
+--[ ] NAME:2.4 Kullanıcı Testi Bekleniyor DESCRIPTION:Test ve sonuç bildirimi bekleniyor.
+--[ ] NAME:2.5 Test Onayı ve Sonraki Adıma Geçiş DESCRIPTION:Başarılıysa bir sonraki geliştirmeye geçiş.
+--[ ] NAME:Geliştirme 3: Kısıtlamalar Bölümü DESCRIPTION:Bölüm 5'teki boş alanlar: Likidite Kısıtlamaları, Zaman Ufku, Yasal ve Düzlenleyici kısıtların doldurulması.
+--[ ] NAME:3.1 Plan DESCRIPTION:Kısıtlamalar için veri kaynakları ve render planı.
+--[ ] NAME:3.2 Kullanıcı Onayı DESCRIPTION:Plan onayı bekleniyor.
+--[ ] NAME:3.3 Uygulama DESCRIPTION:Kod değişiklikleri.
+--[ ] NAME:3.4 Kullanıcı Testi DESCRIPTION:Test bekleniyor.
+--[ ] NAME:3.5 Onay ve Geçiş DESCRIPTION:Sonraki adıma geçiş.
+--[ ] NAME:Geliştirme 4: Varlık Tahsisi Tabloları DESCRIPTION:Bölüm 6'daki boş tablolar: Stratejik Varlık Dağılımı, Taktik Bantlar, Hedef Varlık Dağılımı tablolarının optimizer verileriyle doldurulması.
+--[ ] NAME:4.1 Plan DESCRIPTION:Fon → varlık sınıfı mapping ve tablo üretim planı.
+--[ ] NAME:4.2 Kullanıcı Onayı DESCRIPTION:Plan onayı.
+--[ ] NAME:4.3 Uygulama DESCRIPTION:Kod değişiklikleri.
+--[ ] NAME:4.4 Kullanıcı Testi DESCRIPTION:Test bekleniyor.
+--[ ] NAME:4.5 Onay ve Geçiş DESCRIPTION:Sonraki adıma geçiş.
+--[ ] NAME:Geliştirme 5: Risk Yönetimi Bölümü DESCRIPTION:Bölüm 8'deki boş tablolar: Risk Ölçütleri ve Risk Limitleri tablolarının doldurulması.
+--[ ] NAME:5.1 Plan DESCRIPTION:Risk ölçütleri ve limit tanımları planı.
+--[ ] NAME:5.2 Kullanıcı Onayı DESCRIPTION:Plan onayı.
+--[ ] NAME:5.3 Uygulama DESCRIPTION:Kod değişiklikleri.
+--[ ] NAME:5.4 Kullanıcı Testi DESCRIPTION:Test bekleniyor.
+--[ ] NAME:5.5 Onay ve Geçiş DESCRIPTION:Sonraki adıma geçiş.
+--[ ] NAME:Geliştirme 6: Davranışsal Bulgular Bölümü DESCRIPTION:Bölüm 10: Güçlü yönler, dikkat noktaları, davranışsal eğilimlerin expert_content'ten alınıp gösterilmesi.
+--[ ] NAME:6.1 Plan DESCRIPTION:Davranışsal bulgular veri kaynakları ve render planı.
+--[ ] NAME:6.2 Kullanıcı Onayı DESCRIPTION:Plan onayı.
+--[ ] NAME:6.3 Uygulama DESCRIPTION:Kod değişiklikleri.
+--[ ] NAME:6.4 Kullanıcı Testi DESCRIPTION:Test bekleniyor.
+--[ ] NAME:6.5 Onay ve Geçiş DESCRIPTION:Sonraki adıma geçiş.
+--[ ] NAME:Geliştirme 7: İzleme ve Raporlama / KPI'lar DESCRIPTION:Bölüm 11: Temel Performans Göstergeleri tablosunun doldurulması.
+--[ ] NAME:7.1 Plan DESCRIPTION:KPI listesi ve render planı.
+--[ ] NAME:7.2 Kullanıcı Onayı DESCRIPTION:Plan onayı.
+--[ ] NAME:7.3 Uygulama DESCRIPTION:Kod değişiklikleri.
+--[ ] NAME:7.4 Kullanıcı Testi DESCRIPTION:Test bekleniyor.
+--[ ] NAME:7.5 Final Onay DESCRIPTION:Tüm geliştirmeler tamamlandı, proje kapatılıyor.

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Portfolio Optimizer Test</title>
+</head>
+<body>
+    <h1>Portfolio Optimizer Test</h1>
+    <div id="output"></div>
+    
+    <script src="www.kuveytturkportfoy.com.tr/Content/js/fund-data.js"></script>
+    <script src="www.kuveytturkportfoy.com.tr/Content/js/portfolio-optimizer.js"></script>
+    
+    <script>
+        const output = document.getElementById('output');
+        
+        function log(message, data = null) {
+            const div = document.createElement('div');
+            div.style.margin = '10px 0';
+            div.style.padding = '10px';
+            div.style.border = '1px solid #ddd';
+            div.innerHTML = `<strong>${message}</strong>`;
+            if (data) {
+                const pre = document.createElement('pre');
+                pre.textContent = JSON.stringify(data, null, 2);
+                div.appendChild(pre);
+            }
+            output.appendChild(div);
+        }
+        
+        try {
+            log('1. Checking FUND_DATA_CSV...');
+            if (typeof FUND_DATA_CSV === 'undefined') {
+                throw new Error('FUND_DATA_CSV not loaded!');
+            }
+            log('✓ FUND_DATA_CSV loaded', { 
+                length: FUND_DATA_CSV.length,
+                lines: FUND_DATA_CSV.split('\n').length
+            });
+            
+            log('2. Initializing PortfolioOptimizer...');
+            const optimizer = new PortfolioOptimizer(FUND_DATA_CSV);
+            log('✓ PortfolioOptimizer created successfully', { fundsCount: optimizer.funds.length });
+            
+            // Test with HIGH RISK answers
+            const highRiskAnswers = {
+                q1: 'a',
+                q2: 'a',  // 18-25 yaş - en genç
+                q3: 'd',  // Yüksek lisans+ - en yüksek eğitim
+                q4: 'd',  // Yüksek gelir
+                q5: 'd',  // Yüksek finansal varlık
+                q6: 'd',  // 5+ yıl deneyim
+                q7: 'c',  // Agresif risk toleransı
+                q8: 'd',  // Yüksek getiri tercih
+                q9: 'c',  // Aktif yatırım tarzı
+                q10: '95', // Risk slider çok yüksek
+                q13: 'c', // Piyasa düşerse daha fazla alırım
+                q14: 'c', // Bekleyebilirim
+                q15: 'c'  // Hemen yatırım yaparım
+            };
+            
+            log('3. Testing HIGH RISK profile...', highRiskAnswers);
+            const riskProfile = optimizer.calculateRiskScore(highRiskAnswers);
+            log('✓ Risk Score Calculated', riskProfile);
+            
+            log('4. Generating portfolio...');
+            const portfolio = optimizer.generateOptimalPortfolio(riskProfile);
+            log('✓ Portfolio Generated', portfolio);
+            
+            log('5. Getting recommendations...');
+            const recommendations = optimizer.getFundRecommendations(portfolio);
+            log('✓ Recommendations Generated', recommendations);
+            
+            // Test with LOW RISK answers
+            const lowRiskAnswers = {
+                q1: 'a',
+                q2: 'd',  // 55+ yaş
+                q3: 'a',  // İlköğretim
+                q4: 'a',  // Düşük gelir
+                q5: 'a',  // Düşük varlık
+                q6: 'a',  // Deneyimsiz
+                q7: 'a',  // Muhafazakar
+                q8: 'a',  // Güvenlik odaklı
+                q9: 'a',  // Pasif
+                q10: '10', // Düşük risk
+                q13: 'a', // Hemen satarım
+                q14: 'a', // Hemen çekerim
+                q15: 'a'  // Araştırırım
+            };
+            
+            log('6. Testing LOW RISK profile...', lowRiskAnswers);
+            const lowRisk = optimizer.calculateRiskScore(lowRiskAnswers);
+            log('✓ Risk Score Calculated', lowRisk);
+            
+            log('7. Generating low risk portfolio...');
+            const lowPortfolio = optimizer.generateOptimalPortfolio(lowRisk);
+            log('✓ Low Risk Portfolio Generated', lowPortfolio);
+            
+        } catch (error) {
+            log('❌ ERROR OCCURRED', {
+                message: error.message,
+                stack: error.stack
+            });
+        }
+    </script>
+</body>
+</html>
