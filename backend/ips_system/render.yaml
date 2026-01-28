@@ -1,0 +1,17 @@
+# Render.com Blueprint Configuration
+# https://render.com/docs/blueprint-spec
+
+services:
+  # Main IPS System Backend
+  - type: web
+    name: ips-system
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: ALLOWED_ORIGINS
+        value: "*"
+      - key: PYTHON_VERSION
+        value: "3.11.0"
+    autoDeploy: true

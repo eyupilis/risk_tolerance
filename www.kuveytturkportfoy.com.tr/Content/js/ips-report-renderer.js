@@ -6,6 +6,8 @@
  * Tablet/mobil düzenleme desteği
  */
 
+const IPS_LOGO_BASE64 = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iTGF5ZXJfMiIgZGF0YS1uYW1lPSJMYXllciAyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NTkuMzYgMTQzLjciPgogIDxkZWZzPgogICAgPHN0eWxlPgogICAgICAuY2xzLTEgewogICAgICAgIGZpbGw6ICNmZmZmZmY7CiAgICAgIH0KICAgIDwvc3R5bGU+CiAgPC9kZWZzPgogIDxnIGlkPSJMYXllcl8xLTIiIGRhdGEtbmFtZT0iTGF5ZXIgMSI+CiAgICA8Zz4KICAgICAgPGc+CiAgICAgICAgPHJlY3QgY2xhc3M9ImNscy0xIiB4PSIzNjUuNjIiIHk9IjE5LjkiIHdpZHRoPSIxLjUyIiBoZWlnaHQ9IjI5LjkyIi8+CiAgICAgICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMzc3LjM0LDIwLjdoMTEuMDljNi41NywwLDksMi42OSw5LDcuNjh2My44OGMwLDQuOTUtMi42NSw3LjY0LTkuMjYsNy42NGgtNS40NnY5LjIyaC01LjM4di0yOC40MlpNMzg4LjEzLDI1LjQ0aC01LjQydjkuNzNoNS40MmMzLjAzLDAsMy45My0xLjExLDMuOTMtMy40NnYtMi45YzAtMi4zNS0uOTgtMy4zNy0zLjkzLTMuMzdaIi8+CiAgICAgICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNNDA4Ljk1LDQ5LjU1Yy03LjEzLDAtOS4wNS0zLjkzLTkuMDUtOC4xOXYtNS4yNWMwLTQuMjcsMS45Mi04LjE5LDkuMDUtOC4xOXM5LjA1LDMuOTMsOS4wNSw4LjE5djUuMjVjMCw0LjI3LTEuOTIsOC4xOS05LjA1LDguMTlaTTQwOC45NSwzMi4zNWMtMi43NywwLTMuODQsMS4yNC0zLjg0LDMuNTh2NS41OWMwLDIuMzUsMS4wNywzLjU4LDMuODQsMy41OHMzLjg0LTEuMjQsMy44NC0zLjU4di01LjU5YzAtMi4zNS0xLjA3LTMuNTgtMy44NC0zLjU4WiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTQzMi4wNCwzMi42OWMtMi4wMS45LTMuNjMsMS44My01LjUsMy4wM3YxMy40aC01LjIxdi0yMC43OGg0LjM5bC4zNCwyLjNjMS4xNS0uNzcsMy42My0yLjIyLDUuNDYtMi43M2wuNTEsNC43OFoiLz4KICAgICAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik00NDcuMSw0OC43NGMtMS4xMS40Ny0zLjI0LjgxLTQuNTYuODEtMy44LDAtNS43Mi0xLjc5LTUuNzItNS41di0xMS41NmgtMy4xMnYtNC4xNGgzLjEydi01LjE2bDUuMi0uNzN2NS44OWg1LjMzbC0uMzQsNC4xNGgtNC45OXYxMC44OGMwLDEuMTEuNTEsMS44MywxLjg4LDEuODMuNzcsMCwxLjcxLS4xNywyLjYtLjQzbC42LDMuOTdaIi8+CiAgICAgICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNNDYzLjE0LDIzLjZjLS45OC0uMjEtMi4xMy0uMzQtMi45OS0uMzQtMi4wNSwwLTIuMzUuOS0yLjM1LDIuNDd2Mi42aDUuMjlsLS4zLDQuMTRoLTQuOTl2MTYuNjRoLTUuMjF2LTE2LjY0aC0zLjMzdi00LjE0aDMuMzN2LTIuOWMwLTQuMzEsMi4wMS02LjQ0LDYuNjEtNi40NCwxLjYyLDAsMy4xMS4yMSw0LjQ4LjZsLS41NSw0LjAxWiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTQ3My45NCw0OS41NWMtNy4xMywwLTkuMDUtMy45My05LjA1LTguMTl2LTUuMjVjMC00LjI3LDEuOTItOC4xOSw5LjA1LTguMTlzOS4wNSwzLjkzLDkuMDUsOC4xOXY1LjI1YzAsNC4yNy0xLjkyLDguMTktOS4wNSw4LjE5Wk00NjcuNzUsMjFoNC4zMXY0LjQ4aC00LjMxdi00LjQ4Wk00NzMuOTQsMzIuMzVjLTIuNzcsMC0zLjg0LDEuMjQtMy44NCwzLjU4djUuNTljMCwyLjM1LDEuMDcsMy41OCwzLjg0LDMuNThzMy44NC0xLjI0LDMuODQtMy41OHYtNS41OWMwLTIuMzUtMS4wNy0zLjU4LTMuODQtMy41OFpNNDc1LjgxLDIxaDQuMzF2NC40OGgtNC4zMXYtNC40OFoiLz4KICAgICAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik00OTcuOTIsNDkuMTJsLTIuNzcsOC40MWgtNC45NWwyLjYtOC40MWgtMS44NGwtNi41Ny0yMC43OGg1LjMzbDQuNzQsMTUuNzksNC43OC0xNS43OWg1LjMzbC02LjY2LDIwLjc4WiIvPgogICAgICAgIDxwb2x5Z29uIGNsYXNzPSJjbHMtMSIgcG9pbnRzPSIyNzYuMzEgMTguMDEgMjgwLjMgMTQuMDIgMjc2LjMxIDEwLjA0IDI3Mi4zNCAxNC4wMiAyNzYuMzEgMTguMDEiLz4KICAgICAgICA8cG9seWdvbiBjbGFzcz0iY2xzLTEiIHBvaW50cz0iMjgxLjY3IDE0LjAyIDI4NS42NSAxMC4wNCAyODkuNjQgMTQuMDIgMjg1LjY1IDE4LjAxIDI4MS42NyAxNC4wMiIvPgogICAgICAgIDxwb2x5Z29uIGNsYXNzPSJjbHMtMSIgcG9pbnRzPSIyNjYuODEgMTQuMDIgMjQxIDE0LjAyIDI0MSAyMC42MyAyNTAuMTEgMjAuNjMgMjUwLjExIDQ5LjEgMjU3LjcgNDkuMSAyNTcuNyAyMC42MyAyNjYuODEgMjAuNjMgMjY2LjgxIDE0LjAyIi8+CiAgICAgICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMzE4Ljc0LDQwLjc0aDQuODR2LTIwLjExaC0yNC40NXYyOC40N2g3LjU5di04LjM2aDMuMTdsNiw4LjM2aDguODJsLTUuOTctOC4zNlpNMzE1Ljk4LDM0LjEzaC05LjI2di02LjloOS4yNnY2LjlaIi8+CiAgICAgICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMzI5LjQ2LDQ5LjFoNy41OHYtMTEuMTVoNS43OGMzLjE4LDAsNSwuMDQsNSwzLjI2djcuOWg3LjZ2LTguMDRjMC01LjYyLS44My04LjU3LTcuNDYtOS40NGw3Ljg3LTEwLjk4aC04Ljg2bC03LjY1LDEwLjdoLTIuMjl2LTEwLjdoLTcuNTh2MjguNDdaIi8+CiAgICAgICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMjg1LjY1LDM5LjEydi0xOC40OWg3LjZ2MTguOThjMCw3LjU5LTMuNTgsOS43Mi0xMS45Miw5LjcyLTExLjQsMC0xMi42MS0yLjg4LTEyLjYxLTkuNzJ2LTE4Ljk4aDcuNTh2MTguODNjMCwzLjIzLDEuODMsMy4yNiw1LjAzLDMuMjZzNC4zMS0uMjcsNC4zMS0zLjZaIi8+CiAgICAgICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMjAwLjU5LDMxLjUyYy0zLjE5LDAtNS4wMS0uMDItNS4wMS0zLjI2di03LjY0aC03LjU5djcuOGMwLDUuODkuOSw4Ljg1LDguNDYsOS41NXYxMS4xMmg3LjU5di0xMS4xMmM1Ljg5LS42MSw4LjQ3LTMuMTIsOC40Ny05LjU2di03LjhoLTcuNTl2Ny4yOWMwLDMuMzQtMS4xLDMuNi00LjMzLDMuNloiLz4KICAgICAgICA8cG9seWdvbiBjbGFzcz0iY2xzLTEiIHBvaW50cz0iMTgzLjIxIDI2Ljg1IDE3MC4yNyAyNi44NSAxNzAuMjcgMzEuNzEgMTgyLjQxIDMxLjcxIDE4Mi40MSAzNy45NCAxNzAuMjcgMzcuOTQgMTcwLjI3IDQyLjg3IDE4My40NyA0Mi44NyAxODMuNDcgNDkuMSAxNjIuNjcgNDkuMSAxNjIuNjcgMjAuNjMgMTgzLjIxIDIwLjYzIDE4My4yMSAyNi44NSIvPgogICAgICAgIDxwb2x5Z29uIGNsYXNzPSJjbHMtMSIgcG9pbnRzPSIxMTguOCA0Mi44NyAxMDkuNDcgNDIuODcgMTA5LjQ3IDIwLjYzIDEwMS44NyAyMC42MyAxMDEuODcgNDkuMSAxMjYuNCA0OS4xIDEyNi40IDIwLjYzIDExOC44IDIwLjYzIDExOC44IDQyLjg3Ii8+CiAgICAgICAgPHBvbHlnb24gY2xhc3M9ImNscy0xIiBwb2ludHM9IjIzOS4wOSAyNy4yMyAyMzEuOCAyNy4yMyAyMzEuOCA0OS4xIDIyNC4yMSA0OS4xIDIyNC4yMSAyNy4yMyAyMTYuOTIgMjcuMjMgMjE2LjkyIDIwLjYzIDIzOS4wOSAyMC42MyAyMzkuMDkgMjcuMjMiLz4KICAgICAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik03MC4wMiw0OS4zM2g3LjU5di0xNC40Nmg1Ljc3YzMuMTksMCw1LjAxLjA1LDUuMDEsMy4yN3YxMS4xOWg3LjZ2LTExLjM1YzAtNS42Ny0uODQtOC42MS03LjYxLTkuNDZsOC4xLTE0LjI3aC04LjhsLTcuOTUsMTQuMDFoLTIuMTJ2LTE0LjAxaC03LjU5djM1LjA4WiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTEzOS44NiwyMC42M3YxMS41OGMwLDMuOTkuOTcsNi40NSwzLjU3LDkuMjNsMS4xMSwxLjE3LDEuMTYtMS4xN2MyLjU1LTIuNzMsMy41LTUuMzIsMy41LTkuMjN2LTExLjU4aDcuNTl2MTEuNThjMCw5Ljk3LTUuMTMsMTMuODEtOC4wNSwxNi44OWgtOC40MmMtMi45MS0zLjA4LTguMDQtNi45Mi04LjA0LTE2Ljg5di0xMS41OGg3LjU4WiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTI3LjQ5LDU2LjQ0bC0yLjc2LDEuNzItMS44Mi00LjQyLDQuNTgsMi43Wk0yMy4wOSw0NC4zMmw0LjQzLDIuNzQtMi42MiwxLjc3LTEuODEtNC41MVpNMjIuOTUsMzQuOGw0LjY0LDIuOC0yLjcyLDEuOTctMS45Mi00Ljc3Wk0zMC4zMSw0Mi40Nmw0LjU0LTIuODItMS43Niw0LjYyLTIuNzgtMS44Wk0yMy4wMiw0OS4wNGw4LjUxLDUuMTUtMi41NywxLjY3LTQuNDEtMi40OC0xLjUyLTQuMzRaTTI2LjM1LDQ5LjMzbDguNDEtNS4wOS0xLjM2LDQuMDktNC4zOCwyLjk2LTIuNjgtMS45NlpNMjMuMDMsMzkuNzRsOC41Nyw0LjkyLTIuODMsMS45My00LjI4LTIuNTktMS40Ny00LjI2Wk0yNi4yMyw0MC4wNGw4LjU0LTUuMTQtMS41NCw0LjQtNC4xNiwyLjUxLTIuODQtMS43N1pNMjUuOTYsMzUuMTJoNS43bC0yLjcxLDIuMTQtMi45OS0yLjE0Wk0zMC4zMSw1MS42Mmw0LjU0LTIuODEtMS43Niw0LjYyLTIuNzgtMS44MVpNMjguOCwzMS44OXMtNC41OS0xMy4yNC01LjQ2LTE1LjljLS4zNi0xLjA4LS41MS0yLjAxLjE4LTIuOTFsNS4yOC02LjkyLDUuMjcsNi45MmMuNjkuOS41NCwxLjgzLjE5LDIuOTEtLjg3LDIuNjUtNS40NSwxNS45LTUuNDUsMTUuOVpNNTQuNzYsMzMuNGgtMjQuMzRzMTEuMDktNS43LDExLjA5LTUuN2M2LjE4LTMuMTksOC4yMy0uNTIsMTAuNDksMi4yOGwyLjc2LDMuNDJaTTI5Ljg4LDMyLjE4bDcuNjUtMTMuNzFjLjk5LTEuNzcsMy41My0yLjY2LDUuNzUtMS4zM2w4LjYsNS4xNmgtNC4zMmMtMS44OS4wMS0zLjQuNzQtNC43NywxLjYybC0xMi45MSw4LjI2Wk0yLjgzLDMzLjRsMi43Ni0zLjQyYzIuMjYtMi44LDQuMy01LjQ3LDEwLjQ5LTIuMjhsMTEuMDksNS43MUgyLjgzWk0yNy43MSwzMi4xOGwtMTIuOTEtOC4yNmMtMS4zNy0uODgtMi44OC0xLjYtNC43OC0xLjZoLTQuMzFzOC42LTUuMTgsOC42LTUuMThjMi4yMi0xLjMzLDQuNzYtLjQ0LDUuNzUsMS4zM2w3LjY1LDEzLjcxWk0yNS44NSw1OS4wOGw4LjkxLTUuMjctMS43LDUuMTJjLTEuMzcuMi0yLjc2LjMxLTQuMTguMzEtMS4wMiwwLTIuMDMtLjA1LTMuMDItLjE2WiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTI4LjgsMy4wMUMxMi44OSwzLjAxLDAsMTUuOSwwLDMxLjgxczEyLjg5LDI4LjgsMjguOCwyOC44LDI4LjgtMTIuODksMjguOC0yOC44UzQ0LjcxLDMuMDEsMjguOCwzLjAxWk0yOC44LDU5LjIzYy0xNS4xNCwwLTI3LjQyLTEyLjI4LTI3LjQyLTI3LjQyUzEzLjY2LDQuMzgsMjguOCw0LjM4czI3LjQzLDEyLjI5LDI3LjQzLDI3LjQzLTEyLjI4LDI3LjQyLTI3LjQzLDI3LjQyWiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTMxMS41NCwxMDAuNzVoLTQuMzV2LTIuM2MtMS43OSwxLjYyLTQsMi43My03LjA3LDIuNzMtMy41OCwwLTQuODEtMS45Mi00LjgxLTQuNzMsMC0uNjguMDktMS40MS4yMS0yLjE3bDEuMDctNi4wNWMuOTQtNS4zMywxLjkyLTguNjUsMTAuMS04LjY1Ljc3LDAsMi4yNi4xMywzLjQxLjM4bDEuNDktOC40NCw1LjI0LS43Mi01LjI4LDI5Ljk1Wk0zMDkuMzYsODQuMTNjLS45NC0uMjEtMi4zLS4yNi0zLjAyLS4yNi0zLjI4LDAtNC4xMywxLjMyLTQuNiw0LjA1bC0xLjI4LDcuMzNjLS4wNC4yNi0uMDQuMzgtLjA0LjUxLDAsLjc3LjUxLDEuMTEsMS40NSwxLjExLDIuMTcsMCw0LjY5LTEuNzUsNS43OS0zLjExbDEuNy05LjYzWiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTMyMi40LDk0LjdjLS4yMSwxLjE5LS4yNiwyLjIyLDEuNjIsMi4yMiwyLjIyLDAsNS4yOC0xLjAyLDcuOTctMi4zOWwxLjExLDMuOTJjLTIuNTEsMS41My02LjM1LDIuNzMtOS44LDIuNzMtNS41LDAtNi42LTMuMDctNS44NC03LjQxbDEuMTEtNi4zMWMuODktNC45LDMuMi03Ljg4LDkuNDYtNy44OCwzLjk2LDAsNi42NSwyLjA1LDYuNjUsNS40MSwwLDMuNzEtMi40Myw1Ljg0LTguMSw3LjU4LTIuNTEuNzctMy4wMi44OS00LDEuMTVsLS4xNy45OFpNMzI5Ljc3LDg1LjJjMC0uOTQtLjgxLTEuNjItMi4xNy0xLjYyLTIuMzQsMC0zLjQ5LDEuNDUtMy44MywzLjQxbC0uMzgsMi4xM2MuNzItLjIxLDEuMDItLjMsMy4xMS0uOTQsMi4zLS43MiwzLjI4LTEuNjIsMy4yOC0yLjk4WiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTM1Mi4xNCwxMDMuOWMtLjgxLDQuNTItMi45OCw1LjY3LTcuNzEsNS42Ny0yLDAtNi4wNS0uNTUtOS4yOS0xLjYybC45OC0zLjc5YzIuNi43Nyw1LjU4LDEuNDEsOC4xOCwxLjQxLDIuMTMsMCwyLjU2LS42NCwyLjg1LTIuNDNsLjgxLTQuNTZjLTIuMywxLjI4LTQuNDcsMS43NS02LjU2LDEuNzUtMy41OCwwLTQuODEtMS45Mi00LjgxLTQuNzMsMC0uNjguMDktMS40MS4yMS0yLjE3bC45NC01LjJjMS4xNS02LjQ4LDIuODEtOC42NSwxMC4yNy04LjY1LDIuNjgsMCw2LjAxLjcyLDguMTQsMS41OGwtNC4wMSwyMi43NVpNMzUwLjUyLDg0LjE4Yy0uOTQtLjE3LTEuOTYtLjMtMy4wMi0uMy0zLjI4LDAtNC4xMywxLjM2LTQuNiw0LjA5bC0xLjE1LDYuNDNjLS4wNC4yNi0uMDQuMzgtLjA0LjUxLDAsLjc3LjUxLDEuMTEsMS40NSwxLjExLDEuNjIsMCwzLjc1LS43Miw1LjU4LTEuOTJsMS43OS05LjkzWk0zNDMuMjgsNzMuMzFsMi42OC0xLjA3Yy4zNCwxLjYyLDEuMTUsMi43NywzLjIsMi43N3MzLjItMS4zMiwzLjk2LTIuOThsMi40NywxLjMyYy0uNzcsMi4zLTIuNzcsNC42NC02LjgyLDQuNjQtMy4zNywwLTUuMjgtMi4zLTUuNS00LjY5WiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTM2My4zNSw5NC43Yy0uMjEsMS4xOS0uMjYsMi4yMiwxLjYyLDIuMjIsMi4yMiwwLDUuMjgtMS4wMiw3Ljk3LTIuMzlsMS4xMSwzLjkyYy0yLjUxLDEuNTMtNi4zNSwyLjczLTkuOCwyLjczLTUuNSwwLTYuNi0zLjA3LTUuODQtNy40MWwxLjExLTYuMzFjLjg5LTQuOSwzLjItNy44OCw5LjQ2LTcuODgsMy45NiwwLDYuNjUsMi4wNSw2LjY1LDUuNDEsMCwzLjcxLTIuNDMsNS44NC04LjEsNy41OC0yLjUxLjc3LTMuMDIuODktNCwxLjE1bC0uMTcuOThaTTM3MC43Miw4NS4yYzAtLjk0LS44MS0xLjYyLTIuMTctMS42Mi0yLjM0LDAtMy40OSwxLjQ1LTMuODMsMy40MWwtLjM4LDIuMTNjLjcyLS4yMSwxLjAyLS4zLDMuMTEtLjk0LDIuMy0uNzIsMy4yOC0xLjYyLDMuMjgtMi45OFoiLz4KICAgICAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0zOTAuNjYsODQuMjZjLTIuNDMsMS4zMi0zLjk2LDIuMy02LjE4LDMuNzFsLTIuMjYsMTIuNzhoLTUuMTFsMy41OC0yMC4zMiw0LjQ3LS43Ny0uMjEsMy4wMmMxLjQ1LTEuMDcsMy41OC0yLjM0LDUuMzMtMy4wN2wuMzgsNC42NFoiLz4KICAgICAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik00MDMuMjMsMTAwLjc1bC0yLjk4LTIwLjI0LDUuMDctLjcyLDEuOTYsMTYuNDUsNC45LTExLjAzYy40Ny0xLjExLjYtMiwuNi0yLjg1LDAtLjY4LS4wOS0xLjI4LS4zLTEuOTZsNC45OC0uNzJjLjI2LjgxLjM4LDEuODMuMzgsMi42LDAsMS4wMi0uMTMsMi40Ny0uNzIsMy43MWwtNi44NiwxNC43OGgtNy4wM1oiLz4KICAgICAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik00MjQuMjMsOTQuN2MtLjIxLDEuMTktLjI2LDIuMjIsMS42MiwyLjIyLDIuMjIsMCw1LjI4LTEuMDIsNy45Ny0yLjM5bDEuMTEsMy45MmMtMi41MSwxLjUzLTYuMzUsMi43My05LjgsMi43My01LjUsMC02LjYtMy4wNy01Ljg0LTcuNDFsMS4xMS02LjMxYy44OS00LjksMy4yLTcuODgsOS40Ni03Ljg4LDMuOTYsMCw2LjY1LDIuMDUsNi42NSw1LjQxLDAsMy43MS0yLjQzLDUuODQtOC4xLDcuNTgtMi41MS43Ny0zLjAyLjg5LTQsMS4xNWwtLjE3Ljk4Wk00MzEuNjEsODUuMmMwLS45NC0uODEtMS42Mi0yLjE3LTEuNjItMi4zNCwwLTMuNDksMS40NS0zLjgzLDMuNDFsLS4zOCwyLjEzYy43Mi0uMjEsMS4wMi0uMywzLjExLS45NCwyLjMtLjcyLDMuMjgtMS42MiwzLjI4LTIuOThaIi8+CiAgICAgICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNNDUxLjU1LDg0LjI2Yy0yLjQzLDEuMzItMy45NiwyLjMtNi4xOCwzLjcxbC0yLjI2LDEyLjc4aC01LjExbDMuNTgtMjAuMzIsNC40Ny0uNzctLjIxLDMuMDJjMS40NS0xLjA3LDMuNTgtMi4zNCw1LjMzLTMuMDdsLjM4LDQuNjRaIi8+CiAgICAgICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNNDU1LDgwLjM4bDUuMjQtLjcyLTMuNzEsMjEuMDloLTUuMTFsMy41OC0yMC4zN1pNNDU2LjU3LDcxLjUybDUuMjQtLjcyLTEuMDIsNS43OS01LjI0Ljc3LDEuMDItNS44NFoiLz4KICAgICAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik00NzUuNjIsODQuMjZjLTIuNDMsMS4zMi0zLjk2LDIuMy02LjE4LDMuNzFsLTIuMjYsMTIuNzhoLTUuMTFsMy41OC0yMC4zMiw0LjQ3LS43Ny0uMjEsMy4wMmMxLjQ1LTEuMDcsMy41OC0yLjM0LDUuMzMtMy4wN2wuMzgsNC42NFoiLz4KICAgICAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik00NzkuMDcsODAuMzhsNS4yNC0uNzItMy43MSwyMS4wOWgtNS4xMWwzLjU4LTIwLjM3Wk00ODAuNjUsNzEuNTJsNS4yNC0uNzItMS4wMiw1Ljc5LTUuMjQuNzcsMS4wMi01Ljg0WiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTQ4Ni42NSw5Ni43OWwxMC44Mi0xMi43NGgtOC44MmwuNi00LjA1aDE0LjE5bC0uMDQsMy45Mi0xMC44NiwxMi43NGg4Ljk1bC0uNjgsNC4wOWgtMTMuOThsLS4xNy0zLjk2WiIvPgogICAgICA8L2c+CiAgICAgIDxnPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTU2Mi41OCw3My4zN3YyOC44NWM0LjEyLDMuMTgsOC42OSw1LjcyLDEzLjU4LDcuNTF2LTIxLjI0Yy01Ljc3LTMuNTEtMTAuNTEtOC43Ny0xMy41OC0xNS4xMloiLz4KICAgICAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik01NTkuMzksMjIuNzNjMC0uOTIsMC0xLjg0LDAtMi43NywwLTIuMTEsMC00LjIxLDAtNi4zMiwwLTQuMDIsMC04LjA1LDAtMTIuMDcsMC0uMywwLS42MS0uMDItLjkxLDAtLjE4LS4xNS0uMzUtLjI5LS4zNi0uMjYtLjAxLS41Mi0uMDMtLjc4LS4wMy0zLjA4LjAxLTIuMDMuMDMtNS4xLjA0LTEuNzMsMC0zLjQ1LjAyLTUuMTguMDItLjIyLDAtLjQzLDAtLjY1LjAyLS4xMi4wMi0uMjUuMDctLjM0LjE1LS4xNi4xNC0uMy4zMS0uNDMuNDgtMS4yOSwxLjU5LTIuNzYsMi45OC00LjM2LDQuMjUtMS45LDEuNTEtMy45NCwyLjgyLTYuMDgsMy45Ni00LjUyLDIuNDMtOS4zLDQuMTgtMTQuMjcsNS40My0uMzQuMDgtLjY3LjE3LTEuMDEuMjUtLjIuMDUtLjMuMTctLjMxLjM2LS4wMS4yNi0uMDIuNTItLjAyLjc4LDAsNS4xNSwwLDEwLjMsMCwxNS40NSwwLC4yNi4wMi41Mi4wNi43NywwLC4wNi4xMS4xNS4xOC4xNi4xNy4wMi4zNC4wMS41MSwwLDIuNi0uMTcsNS4xNS0uNjUsNy42Ny0xLjI2LDMuMjgtLjc5LDYuNS0xLjgsOS42Ni0yLjk5LjI0LS4wOS40OC0uMTguNzMtLjI3LjI1LS4wOS40Ni4wMy40Ni4yNi4wMS44Mi4wMiwxLjY0LjAyLDIuNDcsMCwxMi40NiwwLDI0LjkyLDAsMzcuMzloLjAxYzAsMi43NywwLDUuNTQsMCw4LjMxLDAsMTAuMTcsMCwyMC4zNCwwLDMwLjUxLDAsLjM5LDAsLjc4LjAyLDEuMTcsMCwuMjQuMTcuNDMuMzkuNDMuMzUuMDEuNjkuMDEsMS4wNC4wMSwzLjk2LDAsNy45MiwwLDExLjg5LDAsMi45NiwwLDEuOCwwLDQuNzYsMCwxLjYzLDAsMS40My4xNywxLjQzLTEuNDcsMC01LjY3LDAtMTEuMzQsMC0xNy4wMSwwLS4zNSwwLS43LDAtMS4wNSwwLTEuMDQsMC0yLjA3LDAtMy4xMSwwLS4wMSwwLS4wMiwwLS4wM1YyMi44MXMwLS4wNSwwLS4wN1oiLz4KICAgICAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik01ODIuOSwxMDYuMjRjMCwxLjY5LDEuODQsMy41Myw0LjQ4LDMuNTMsMS44NCwwLDMuMjMtMS40NywzLjIzLTMuNDVzLTIuMTMtMy45Ny00LjExLTMuOTdjLTEuODQsMC0zLjYsMS43Ni0zLjYsMy44OVoiLz4KICAgICAgICA8cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik02MjEuOSw4MS43Yy0xLjQ3LDAtNi41NCw2LjYxLTEwLjgsMTQuOTgtMy4wOCw2LjAyLTcuNzEsMTAuNTgtOS4yNSwxMC41OC0uMjksMC0uNTEtLjI5LS41MS0uNTksMC0zLjc1LDUuOC0xMS4wMiw1LjgtMTUuNTcsMC0yLjc5LTIuMDYtNi4wMi0zLjg5LTYuMDItLjczLDAtMS4wMy4yOS0xLjAzLjg4LDAsNi4wMi01Ljk1LDEzLTUuOTUsMTguODgsMCwyLjk0LDIuNzksNS4xNCw1LjI5LDUuMTRzNC43LTIuNjQsOC4zNy03LjJjLTMuODIsMTQuMTgtMTMuMzcsMzguMjctMjYuNTIsMzguMjctMi41NywwLTQuMTktMS4xOC00Ljk5LTEuMTgtLjM3LDAtLjczLjQ0LS43My44OCwwLC45NSwyLjcyLDIuOTQsNy4wNSwyLjk0LDIxLjc0LDAsMjcuMS0yNS43MSwzMC44NS00MS44NywzLjM4LTE0LjYyLDguMzctMTcuNTUsOC4zNy0xOC4wNywwLS41OS0uNTktMi4wNi0yLjA2LTIuMDZaIi8+CiAgICAgICAgPHBhdGggY2xhc3M9ImNscy0xIiBkPSJNNjU4LjExLDkzLjgyYy0uMjIsMC0uMzcuMjItLjY2LjU5LTQuMzMsNi4xNy0xMS44MywxNi4wOS0xMy43MywxNi4wOS0uNTksMC0xLjEtLjUxLTEuMS0xLjQ3LDAtMTEuMDIsMTUuNzktMzYuNTgsMTUuNzktNDQuOTUsMC0zLjc1LTIuMTMtNS45NS0yLjcyLTUuOTVzLS44OC41OS0uODgsMS42MmMtLjExLDcuMDctMTAuOTUsMjIuNDgtMTUuNzgsMzUuMDYtMi43MiwzLjczLTkuNDgsMTEuNzItMTEuMzIsMTEuNzItLjU5LDAtMS4yNS0uMzctMS4yNS0xLjYyLjE1LTUuNDQsNi41NC0xMS45Nyw2LjY4LTE4LjM2LDAtMS40LTEuMTctMi43Mi0xLjc2LTIuNzItLjUxLDAtLjczLjY2LTEuMjUsMS41NC00LjQ4LDcuNDItOS4zMywxMS4wOS05LjMzLDE2LjM4LDAsNC45MiwzLjc1LDcuNjQsNy4wNSw3LjY0LDIuNjQsMCw2LjMtMy44LDkuMTMtNy40Ni0uMTUuOTYtLjI0LDEuODgtLjI0LDIuNzYsMCw1Ljk1LDQuMDQsOC43NCw2LjYxLDguNzQsNC45OSwwLDEyLjEyLTExLjM4LDE1LjQyLTE2LjgyLjM3LS41OS41OS0xLjAzLjU5LTEuNDcsMC0uNTEtLjU5LTEuMzItMS4yNS0xLjMyWiIvPgogICAgICAgIDxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTU5Mi44NiwxOS40N2MxOC44LDAsMzQuMSwxNi41LDM0LjEsMzYuNzgsMCw1LjQ2LTEuMTEsMTAuNjMtMy4xLDE1LjNoMTkuMTljMS4yOC00Ljg3LDEuOTctOS45OSwxLjk3LTE1LjMsMC0zMS4wMi0yMy40LTU2LjI1LTUyLjE2LTU2LjI1LTExLjI4LDAtMjEuNzMsMy44OS0zMC4yNywxMC40N3YyOC44NWM1LjY5LTExLjc5LDE3LjEyLTE5Ljg2LDMwLjI3LTE5Ljg2WiIvPgogICAgICA8L2c+CiAgICA8L2c+CiAgPC9nPgo8L3N2Zz4=';
+
 const IPSReportRenderer = {
 
     // UIKit ikon mapping (emoji yerine)
@@ -58,6 +60,7 @@ const IPSReportRenderer = {
     // Düzenleme modu
     editMode: false,
     changedFields: {},
+    pdfInProgress: false,
 
     /**
      * Tam IPS raporu render et
@@ -69,41 +72,572 @@ const IPSReportRenderer = {
             return;
         }
 
-        // Expert AI içeriklerini sakla (bölüm render fonksiyonlarında kullanılacak)
-        this.expertContent = ipsData.expertContent || null;
-        if (this.expertContent) {
-            console.log('[IPS Renderer] Expert AI içerikleri yüklendi:', Object.keys(this.expertContent));
+        if (this.isV3Data(ipsData)) {
+            return this.renderFullReportV3(ipsData, containerId);
         }
+
+        // Expert AI içeriklerini PROFİL BAZLI oluştur (backend tutarsızlığını önle)
+        const profile = ipsData.riskAnalysis?.content?.overallProfile || {};
+        const profileType = profile.profile || ipsData.metadata?.riskProfile || 'medium';
+        const profileScore = profile.score || profile.normalizedScore || 50;
+
+        try {
+            this.expertContent = this.generateConsistentExpertContent(profileType, profileScore, ipsData);
+        } catch (e) {
+            console.error('[IPS Renderer] Expert content oluşturma hatası:', e);
+            this.expertContent = {};
+        }
+        console.log('[IPS Renderer] Profil bazlı expert content oluşturuldu: ' + profileType + ' (skor: ' + profileScore + ')');
+
+        // Her bölümü ayrı ayrı render et, hata olursa o bölümü atla
+        const safeRender = (fn, label) => {
+            try {
+                return fn();
+            } catch (e) {
+                console.error('[IPS Renderer] Bölüm hatası (' + label + '):', e);
+                return '<div style="padding:12px;background:#fff3cd;border:1px solid #ffc107;border-radius:4px;margin:8px 0;"><strong>' + label + '</strong> render edilemedi: ' + (e.message || e) + '</div>';
+            }
+        };
 
         const html = `
             <div class="ips-full-report" id="ipsFullReport">
-                ${this.renderToolbar(ipsData)}
-                ${this.renderCoverPage(ipsData)}
-                ${this.renderTableOfContents(ipsData)}
-                ${this.renderScopeSection(ipsData.scopeAndPurpose)}
-                ${this.renderGovernanceSection(ipsData.governance)}
-                ${this.renderObjectivesSection(ipsData.investmentObjectives)}
-                ${this.renderRiskAnalysisSection(ipsData.riskAnalysis)}
-                ${this.renderConstraintsSection(ipsData.constraints)}
-                ${this.renderAssetAllocationSection(ipsData.assetAllocation)}
-                ${this.renderInvestmentUniverseSection(ipsData.investmentUniverse)}
-                ${this.renderRiskManagementSection(ipsData.riskManagement)}
-                ${this.renderParticipationFinanceSection(ipsData.participationFinance)}
-                ${this.renderBehavioralSection(ipsData.behavioralFindings)}
-                ${this.renderMonitoringSection(ipsData.monitoringAndReporting)}
-                ${this.renderApprovalSection(ipsData.reviewAndApproval)}
+                ${safeRender(() => this.renderToolbar(ipsData), 'Toolbar')}
+                ${safeRender(() => this.renderCoverPage(ipsData), 'Kapak')}
+                ${safeRender(() => this.renderTableOfContents(ipsData), 'İçindekiler')}
+                ${safeRender(() => this.renderScopeSection(ipsData.scopeAndPurpose), '1. Kapsam')}
+                ${safeRender(() => this.renderGovernanceSection(ipsData.governance), '2. Yönetişim')}
+                ${safeRender(() => this.renderObjectivesSection(ipsData.investmentObjectives), '3. Hedefler')}
+                ${safeRender(() => this.renderRiskAnalysisSection(ipsData.riskAnalysis), '4. Risk Analizi')}
+                ${safeRender(() => this.renderConstraintsSection(ipsData.constraints), '5. Kısıtlamalar')}
+                ${safeRender(() => this.renderAssetAllocationSection(ipsData.assetAllocation), '6. Varlık Tahsisi')}
+                ${safeRender(() => this.renderInvestmentUniverseSection(ipsData.investmentUniverse), '7. Yatırım Evreni')}
+                ${safeRender(() => this.renderRiskManagementSection(ipsData.riskManagement), '8. Risk Yönetimi')}
+                ${safeRender(() => this.renderParticipationFinanceSection(ipsData.participationFinance), '9. Katılım Finans')}
+                ${safeRender(() => this.renderBehavioralSection(ipsData.behavioralFindings), '10. Davranışsal')}
+                ${safeRender(() => this.renderMonitoringSection(ipsData.monitoringAndReporting), '11. İzleme')}
+                ${safeRender(() => this.renderApprovalSection(ipsData.reviewAndApproval), '12. Onay')}
             </div>
         `;
 
         container.innerHTML = html;
         this.attachEventListeners();
+        this.applySavedCustomizations();
+        this.applySavedSignatures();
 
         // Chart'ları render et
         setTimeout(() => {
-            this.renderCharts();
+            try {
+                this.renderCharts();
+            } catch (e) {
+                console.warn('[IPS Renderer] Chart render hatası:', e);
+            }
         }, 100);
 
         return this;
+    },
+
+    isV3Data: function (ipsData) {
+        if (!ipsData) return false;
+        const version = ipsData.metadata?.version || '';
+        if (String(version).startsWith('3')) return true;
+        if (Array.isArray(ipsData.sections)) return true;
+        return false;
+    },
+
+    /**
+     * V3 IPS raporu render et
+     */
+    renderFullReportV3: function (ipsData, containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) {
+            console.error('IPS Report container not found:', containerId);
+            return;
+        }
+
+        const html = `
+            <div class="ips-full-report" id="ipsFullReport">
+                ${this.renderToolbar(ipsData)}
+                ${this.renderLLMStatusBannerV3()}
+                ${this.renderCoverPageV3(ipsData)}
+                ${this.renderTableOfContentsV3(ipsData)}
+                ${this.renderComponentsTableV3(ipsData)}
+                ${this.renderSectionDetailsV3(ipsData)}
+            </div>
+        `;
+
+        container.innerHTML = html;
+        this.attachEventListeners();
+        this.applySavedCustomizations();
+        this.applySavedSignatures();
+        return this;
+    },
+    renderLLMStatusBannerV3: function () {
+        return `<div class="ips-llm-status" id="ipsLLMStatus" style="display:none;"></div>`;
+    },
+
+    renderCoverPageV3: function (ipsData) {
+        const meta = ipsData.metadata || {};
+        const riskProfile = this.escapeHtml(meta.riskProfile || 'medium');
+        const riskScore = meta.riskScore ?? '-';
+        const generatedAt = meta.generatedAt ? this.formatDate(meta.generatedAt) : this.formatDate(new Date().toISOString());
+        const nextReviewAt = meta.nextReviewAt ? this.formatDate(meta.nextReviewAt) : this.formatDate(new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString());
+
+        return `
+            <div class="ips-cover-page" id="ipsCover">
+                <div class="ips-cover-brand">
+                    <img src="${IPS_LOGO_BASE64}" alt="Kuveyt Türk Portföy" class="ips-cover-logo">
+                    <div class="ips-cover-brand-text">
+                        <div class="ips-cover-brand-title">Kuveyt Türk Portföy</div>
+                        <div class="ips-cover-brand-sub">Kurumsal Yatırım Politikası Beyanı</div>
+                    </div>
+                </div>
+                <h1 class="ips-cover-title">YATIRIM POLİTİKASI BEYANI</h1>
+                <p class="ips-cover-subtitle">Investment Policy Statement (IPS)</p>
+
+                <div class="ips-profile-badge">
+                    <div class="ips-profile-level">${riskProfile.toUpperCase()}</div>
+                    <div class="ips-profile-score">Risk Skoru: ${riskScore}/100</div>
+                </div>
+
+                <div style="margin-top: 32px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 420px; margin-left: auto; margin-right: auto;">
+                    <div style="text-align: left;">
+                        <div style="font-size: 0.75rem; opacity: 0.7; margin-bottom: 4px;">Değerlendirme Tarihi</div>
+                        <div style="font-size: 1rem; font-weight: 600;">${generatedAt}</div>
+                    </div>
+                    <div style="text-align: left;">
+                        <div style="font-size: 0.75rem; opacity: 0.7; margin-bottom: 4px;">Sonraki Gözden Geçirme</div>
+                        <div style="font-size: 1rem; font-weight: 600;">${nextReviewAt}</div>
+                    </div>
+                </div>
+            </div>
+        `;
+    },
+
+    renderTableOfContentsV3: function (ipsData) {
+        const sections = Array.isArray(ipsData.sections) ? ipsData.sections : [];
+        const items = sections.map((section, idx) => `
+            <li class="ips-toc-item">
+                <a href="#ips-section-${this.escapeHtml(section.id || String(idx))}" class="ips-toc-link" uk-scroll>
+                    <strong>${idx + 1}.</strong> ${this.escapeHtml(section.title || 'Bölüm')}
+                </a>
+                <span class="ips-toc-number">${idx + 1}</span>
+            </li>
+        `).join('');
+
+        return `
+            <div class="ips-toc" id="ips-toc">
+                <h3 class="ips-toc-title">
+                    <span uk-icon="icon: list; ratio: 1.2"></span>
+                    İçindekiler
+                </h3>
+                <ul class="ips-toc-list">
+                    ${items}
+                </ul>
+            </div>
+        `;
+    },
+
+    renderComponentsTableV3: function (ipsData) {
+        const sections = Array.isArray(ipsData.sections) ? ipsData.sections : [];
+
+        const rows = sections.map((section) => {
+            const content = section.content || {};
+            const summary = content.summary ? `<div class="uk-text-small">${this.escapeHtml(content.summary)}</div>` : '<div class="uk-text-muted">-</div>';
+            const keyParams = Array.isArray(content.keyParameters) && content.keyParameters.length
+                ? `<ul class="uk-list uk-list-bullet uk-margin-remove">${content.keyParameters.map(item => `<li>${this.escapeHtml(item)}</li>`).join('')}</ul>`
+                : '<div class="uk-text-muted">-</div>';
+            const purpose = Array.isArray(content.purposeAndBenefits) && content.purposeAndBenefits.length
+                ? `<ul class="uk-list uk-list-bullet uk-margin-remove">${content.purposeAndBenefits.map(item => `<li>${this.escapeHtml(item)}</li>`).join('')}</ul>`
+                : '<div class="uk-text-muted">-</div>';
+            const stakeholders = Array.isArray(content.stakeholders) && content.stakeholders.length
+                ? this.escapeHtml(content.stakeholders.join(', '))
+                : '-';
+            const review = this.escapeHtml(content.reviewFrequency || '-');
+            const sources = Array.isArray(section.linkedQuestions) && section.linkedQuestions.length
+                ? this.escapeHtml(section.linkedQuestions.map(q => String(q).toUpperCase()).join(', '))
+                : 'Sabit';
+
+            return `
+                <tr>
+                    <td><strong>${this.escapeHtml(section.title || '-')}</strong></td>
+                    <td>${this.escapeHtml(section.description || '-')}</td>
+                    <td>${summary}${keyParams}</td>
+                    <td>${purpose}</td>
+                    <td>${stakeholders}</td>
+                    <td>${review}</td>
+                    <td>${sources}</td>
+                </tr>
+            `;
+        }).join('');
+
+        return `
+            <div class="ips-section uk-card uk-card-default uk-card-body uk-margin-bottom" id="ips-components-table">
+                <h3 class="uk-card-title">
+                    <span uk-icon="icon: grid; ratio: 1" class="uk-text-primary"></span> IPS Temel Bileşenler
+                </h3>
+                <div class="uk-overflow-auto">
+                    <table class="uk-table uk-table-divider uk-table-small ips-components-table">
+                        <thead>
+                            <tr>
+                                <th>Bileşen Adı</th>
+                                <th>Açıklama</th>
+                                <th>Temel İçerik ve Parametreler</th>
+                                <th>Fayda ve Amaç</th>
+                                <th>İlgili Paydaşlar</th>
+                                <th>Gözden Geçirme Sıklığı</th>
+                                <th>Kaynak</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${rows || ''}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        `;
+    },
+
+    renderSectionDetailsV3: function (ipsData) {
+        const sections = Array.isArray(ipsData.sections) ? ipsData.sections : [];
+        const cards = sections.map((section, idx) => {
+            const content = section.content || {};
+            const keyParams = Array.isArray(content.keyParameters) ? content.keyParameters : [];
+            const benefits = Array.isArray(content.purposeAndBenefits) ? content.purposeAndBenefits : [];
+            const stakeholders = Array.isArray(content.stakeholders) ? content.stakeholders : [];
+            const linked = Array.isArray(section.linkedQuestions) ? section.linkedQuestions : [];
+            const extras = section.details || section.strategicRanges || section.tacticalRanges || null;
+
+            const extrasHtml = extras ? this.renderSectionExtrasV3(section) : '';
+            const fundHtml = section.id === 'allocation' ? this.renderFundRecommendationsV3(section) : '';
+            const approvalHtml = section.id === 'approval' ? this.renderApprovalSectionV3(section) : '';
+
+            return `
+                <div class="ips-section uk-card uk-card-default uk-card-body uk-margin-bottom" id="ips-section-${this.escapeHtml(section.id || String(idx))}">
+                    <h3 class="uk-card-title">${this.escapeHtml(section.title || 'Bölüm')}</h3>
+                    <p class="uk-text-muted">${this.escapeHtml(section.description || '')}</p>
+                    <p>${this.escapeHtml(content.summary || '')}</p>
+                    ${keyParams.length ? `<h5>Temel Parametreler</h5><ul class="uk-list uk-list-bullet">${keyParams.map(item => `<li>${this.escapeHtml(item)}</li>`).join('')}</ul>` : ''}
+                    ${benefits.length ? `<h5>Fayda ve Amaç</h5><ul class="uk-list uk-list-bullet">${benefits.map(item => `<li>${this.escapeHtml(item)}</li>`).join('')}</ul>` : ''}
+                    ${stakeholders.length ? `<p><strong>İlgili Paydaşlar:</strong> ${this.escapeHtml(stakeholders.join(', '))}</p>` : ''}
+                    ${content.reviewFrequency ? `<p><strong>Gözden Geçirme:</strong> ${this.escapeHtml(content.reviewFrequency)}</p>` : ''}
+                    ${linked.length ? `<p><strong>Kaynak:</strong> ${this.escapeHtml(linked.map(q => String(q).toUpperCase()).join(', '))}</p>` : ''}
+                    ${extrasHtml}
+                    ${fundHtml}
+                    ${approvalHtml}
+                </div>
+            `;
+        }).join('');
+
+        return `
+            <div class="ips-section uk-margin-bottom" id="ips-v3-details">
+                ${cards}
+            </div>
+        `;
+    },
+
+    renderApprovalSectionV3: function (section) {
+        const declarationText = 'Bu Yatırım Politikası Beyanı\'nı okudum, anladım ve kabul ediyorum.';
+        const today = this.formatDate(new Date());
+
+        return `
+            <div class="ips-subsection">
+                <h4 class="ips-subsection-title">Beyan</h4>
+                <div class="ips-info-panel">
+                    <p>${this.escapeHtml(declarationText)}</p>
+                </div>
+            </div>
+
+            <div class="ips-signature-area">
+                <div class="ips-signature-box" id="investorSignatureBox">
+                    <div class="ips-signature-placeholder" id="investorSignaturePlaceholder" style="min-height: 120px; display: flex; align-items: flex-end; justify-content: center; position: relative;">
+                         <div id="investorSignatureContainer" style="display: none; width: 100%; height: 100%;">
+                            <img id="investorSignatureImage" src="" alt="İmza" style="max-height: 80px; max-width: 100%;">
+                            <button class="ips-btn ips-btn--icon ips-btn--xs no-print" onclick="IPSReportRenderer.removeSignature('investor')" style="position: absolute; top: 0; right: 0; background: #fff; border: 1px solid #ccc;">
+                                <span uk-icon="icon: trash; ratio: 0.7"></span>
+                            </button>
+                         </div>
+                         <div class="ips-signature-line" id="investorSignatureLine"></div>
+
+                         <button class="ips-btn ips-btn--outline ips-btn--sm no-print" id="addInvestorSignatureBtn" onclick="IPSReportRenderer.openSignatureModal('investor')" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                            <span uk-icon="icon: pencil; ratio: 0.8"></span>
+                            İmza Ekle
+                         </button>
+                    </div>
+
+                    <div class="ips-signature-label">Yatırımcı İmzası</div>
+                    <div class="ips-editable ips-input uk-margin-small-top" data-field="approval.investorName" style="text-align: center;">
+                        İsim Soyisim
+                    </div>
+                    <div style="margin-top: 8px; color: var(--ips-text-muted);">
+                        Tarih: ${today}
+                    </div>
+                </div>
+
+                <div class="ips-signature-box" id="employeeSignatureBox">
+                    <div class="ips-signature-placeholder" id="employeeSignaturePlaceholder" style="min-height: 120px; display: flex; align-items: flex-end; justify-content: center; position: relative;">
+                        <div id="employeeSignatureContainer" style="display: none; width: 100%; height: 100%;">
+                            <img id="employeeSignatureImage" src="" alt="İmza" style="max-height: 80px; max-width: 100%;">
+                            <button class="ips-btn ips-btn--icon ips-btn--xs no-print" onclick="IPSReportRenderer.removeSignature('employee')" style="position: absolute; top: 0; right: 0; background: #fff; border: 1px solid #ccc;">
+                                <span uk-icon="icon: trash; ratio: 0.7"></span>
+                            </button>
+                        </div>
+                        <div class="ips-signature-line" id="employeeSignatureLine"></div>
+                        <button class="ips-btn ips-btn--outline ips-btn--sm no-print" id="addEmployeeSignatureBtn" onclick="IPSReportRenderer.openSignatureModal('employee')" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                            <span uk-icon="icon: pencil; ratio: 0.8"></span>
+                            İmza Ekle
+                        </button>
+                    </div>
+                    <div class="ips-signature-label">Kuveyt Türk Portföy Yetkilisi</div>
+                    <div class="ips-editable ips-input uk-margin-small-top" data-field="approval.employeeName" style="text-align: center;">
+                        Ad Soyad
+                    </div>
+                    <div class="ips-editable ips-input uk-margin-small-top" data-field="approval.employeeTitle" style="text-align: center;">
+                        Ünvan / Görev
+                    </div>
+                    <div style="margin-top: 8px; color: var(--ips-text-muted);">
+                        Tarih: ${today}
+                    </div>
+                </div>
+            </div>
+
+            <div id="signatureModal" class="uk-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10000; background: rgba(0,0,0,0.5);">
+                <div class="uk-modal-dialog uk-modal-body" style="background: white; width: 500px; max-width: 90%; margin: 50px auto; padding: 24px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+                    <h2 class="uk-modal-title" style="font-size: 1.25rem; font-weight: 600; margin-bottom: 16px;">İmza Ekle</h2>
+                    
+                    <div style="margin-bottom: 16px;">
+                        <ul uk-tab style="display: flex; gap: 16px; border-bottom: 1px solid #eee; padding-bottom: 8px; margin-bottom: 16px;">
+                            <li class="uk-active"><a href="#" onclick="IPSReportRenderer.switchSignatureTab('draw')">Çiz</a></li>
+                            <li><a href="#" onclick="IPSReportRenderer.switchSignatureTab('upload')">Yükle</a></li>
+                        </ul>
+
+                        <div id="tab-draw" style="display: block;">
+                            <div style="border: 1px dashed #ccc; background: #f8f9fa; border-radius: 4px;">
+                                <canvas id="signaturePad" width="450" height="200" style="width: 100%; height: 200px; touch-action: none;"></canvas>
+                            </div>
+                            <div style="text-align: right; margin-top: 8px;">
+                                <button class="ips-btn ips-btn--xs ips-btn--outline" onclick="IPSReportRenderer.clearSignaturePad()">Temizle</button>
+                            </div>
+                        </div>
+
+                        <div id="tab-upload" style="display: none;">
+                            <div class="js-upload uk-placeholder uk-text-center" style="border: 1px dashed #ccc; padding: 32px; background: #f8f9fa; border-radius: 4px;">
+                                <span uk-icon="icon: cloud-upload"></span>
+                                <span class="uk-text-middle">Bir imza görseli sürükleyin veya</span>
+                                <div uk-form-custom>
+                                    <input type="file" id="signatureFileInput" accept="image/*" onchange="IPSReportRenderer.handleSignatureUpload(this)">
+                                    <span class="uk-link">seçin</span>
+                                </div>
+                            </div>
+                            <div id="uploadPreview" style="display: none; margin-top: 16px; text-align: center;">
+                                <img id="uploadPreviewImg" src="" style="max-height: 150px; border: 1px solid #eee;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uk-text-right" style="margin-top: 24px;">
+                        <button class="ips-btn ips-btn--outline uk-modal-close" onclick="IPSReportRenderer.closeSignatureModal()">İptal</button>
+                        <button class="ips-btn ips-btn--primary" onclick="IPSReportRenderer.saveSignature()">Kaydet</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="uk-margin-large-top uk-text-center no-print">
+                <p style="font-size: 0.85rem; color: var(--ips-text-muted);">
+                    Bu belge elektronik ortamda oluşturulmuştur.
+                    <br>Belge Referans No: IPS-${Date.now().toString(36).toUpperCase()}
+                </p>
+            </div>
+        `;
+    },
+
+    renderFundRecommendationsV3: function (section) {
+        const details = section.details || {};
+        const singleFund = details.singleFundRecommendation;
+        const fundAllocation = Array.isArray(details.fundAllocation) ? details.fundAllocation : [];
+        const monthlyReport = details.monthlyReportLink;
+        const recommendationNote = details.fundRecommendationNote;
+        const recommendationInsight = details.recommendationInsight;
+        const recommendationFactors = Array.isArray(details.recommendationFactors) ? details.recommendationFactors : [];
+
+        if (!singleFund && fundAllocation.length === 0 && !monthlyReport) return '';
+
+        const formatPercent = (value) => {
+            const num = typeof value === 'number'
+                ? value
+                : parseFloat(String(value).replace(',', '.'));
+            if (!Number.isFinite(num)) return '';
+            const fixed = num.toFixed(2);
+            return fixed.replace(/\.00$/, '');
+        };
+
+        const clampPercent = (value) => {
+            const num = typeof value === 'number'
+                ? value
+                : parseFloat(String(value).replace(',', '.'));
+            if (!Number.isFinite(num)) return 0;
+            return Math.min(100, Math.max(0, num));
+        };
+
+        const headingHtml = `
+            <div class="ips-fund-recommendations__heading">Sizin İçin Önerilerimiz</div>
+        `;
+        const noteHtml = recommendationNote ? `
+            <div class="ips-fund-recommendations__note">${this.escapeHtml(recommendationNote)}</div>
+        ` : '';
+        const insightHtml = recommendationInsight ? `
+            <div class="ips-fund-insight">
+                <div class="ips-fund-insight__title">Öneri Mantığı (AI)</div>
+                <p class="ips-fund-insight__summary">${this.escapeHtml(recommendationInsight)}</p>
+                ${recommendationFactors.length ? `
+                    <ul class="ips-fund-insight__list">
+                        ${recommendationFactors.map(item => `<li>${this.escapeHtml(item)}</li>`).join('')}
+                    </ul>
+                ` : ''}
+            </div>
+        ` : '';
+
+        const singleFundHtml = singleFund ? `
+            <div class="ips-fund-card">
+                <div class="ips-fund-card__header">
+                    <div>
+                        <div class="ips-fund-card__label">Tek Fonla Pratik Yatırım</div>
+                        <div class="ips-fund-card__code">${this.escapeHtml(singleFund.code || '')}</div>
+                        <div class="ips-fund-card__name">${this.escapeHtml(singleFund.name || '')}</div>
+                    </div>
+                    <div class="ips-fund-card__risk">
+                        <div class="ips-fund-card__risk-score">${this.escapeHtml(singleFund.riskLevel || '')}</div>
+                        <div class="ips-fund-card__risk-label">${this.escapeHtml(singleFund.riskLabel || '')}</div>
+                    </div>
+                </div>
+                <div class="ips-fund-card__metrics">
+                    <div>
+                        <div class="ips-fund-card__metric-label">Aylık Getiri</div>
+                        <div class="ips-fund-card__metric-value">${this.escapeHtml(singleFund.monthlyReturn || '-')}</div>
+                    </div>
+                    <div>
+                        <div class="ips-fund-card__metric-label">Yıllık Getiri</div>
+                        <div class="ips-fund-card__metric-value">${this.escapeHtml(singleFund.yearlyReturn || '-')}</div>
+                    </div>
+                </div>
+                ${singleFund.url ? `<a class="ips-fund-card__link" href="${this.escapeHtml(singleFund.url)}" target="_blank" rel="noopener">Fona Git</a>` : ''}
+            </div>
+        ` : '';
+
+        const allocationHtml = fundAllocation.length ? `
+            <div class="ips-fund-allocation">
+                <div class="ips-fund-allocation__title">Fon Dağılım Önerileri</div>
+                <div class="ips-fund-allocation__list">
+                    ${fundAllocation.map((item) => `
+                        <div class="ips-fund-allocation__row">
+                            <span class="ips-fund-allocation__dot" style="background:${this.escapeHtml(item.color || '#186149')}"></span>
+                            <div class="ips-fund-allocation__meta">
+                                <span class="ips-fund-allocation__code">${this.escapeHtml(item.code || '')}</span>
+                                ${item.name && item.name !== item.code ? `<span class="ips-fund-allocation__name">${this.escapeHtml(item.name)}</span>` : ''}
+                                <div class="ips-fund-allocation__bar" aria-hidden="true">
+                                    <span class="ips-fund-allocation__bar-fill" style="width:${this.escapeHtml(String(clampPercent(item.weight)))}%"></span>
+                                </div>
+                            </div>
+                            <span class="ips-fund-allocation__value">%${this.escapeHtml(formatPercent(item.weight) || String(item.weight || ''))}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        ` : '';
+
+        const monthlyHtml = monthlyReport ? `
+            <div class="ips-fund-monthly">
+                <div class="ips-fund-monthly__title">${this.escapeHtml(monthlyReport.label || 'Aylık Fon Dağılım Önerileri')}</div>
+                <div class="ips-fund-monthly__desc">${this.escapeHtml(monthlyReport.description || '')}</div>
+                ${monthlyReport.url ? `<a class="ips-fund-monthly__link" href="${this.escapeHtml(monthlyReport.url)}" target="_blank" rel="noopener">Keşfet</a>` : ''}
+            </div>
+        ` : '';
+
+        return `
+            <div class="ips-fund-recommendations">
+                ${headingHtml}
+                ${noteHtml}
+                ${insightHtml}
+                ${singleFundHtml}
+                ${allocationHtml}
+                ${monthlyHtml}
+            </div>
+        `;
+    },
+
+    renderSectionExtrasV3: function (section) {
+        const blocks = [];
+
+        const formatValue = (value) => {
+            if (Array.isArray(value)) return value.join(', ');
+            if (value && typeof value === 'object') return JSON.stringify(value);
+            return String(value);
+        };
+
+        if (section.strategicRanges && typeof section.strategicRanges === 'object') {
+            const rows = Object.entries(section.strategicRanges).map(([key, value]) => `
+                <li><strong>${this.escapeHtml(key)}:</strong> ${this.escapeHtml(formatValue(value))}</li>
+            `).join('');
+            if (rows) blocks.push(`<h5>Stratejik Dağılım</h5><ul class="uk-list uk-list-bullet">${rows}</ul>`);
+        }
+
+        if (section.tacticalRanges && typeof section.tacticalRanges === 'object') {
+            const rows = Object.entries(section.tacticalRanges).map(([key, value]) => `
+                <li><strong>${this.escapeHtml(key)}:</strong> ${this.escapeHtml(formatValue(value))}</li>
+            `).join('');
+            if (rows) blocks.push(`<h5>Taktik Dağılım</h5><ul class="uk-list uk-list-bullet">${rows}</ul>`);
+        }
+
+        if (section.details && typeof section.details === 'object') {
+            let detailsSource = section.details;
+            if (section.id === 'allocation') {
+                const filtered = { ...detailsSource };
+                delete filtered.singleFundRecommendation;
+                delete filtered.fundAllocation;
+                delete filtered.monthlyReportLink;
+                delete filtered.fundRecommendationNote;
+                delete filtered.recommendationInsight;
+                delete filtered.recommendationFactors;
+                delete filtered.portfolioData;
+                detailsSource = filtered;
+            }
+
+            const orderedKeys = [
+                'liquidityNeeds',
+                'ethicalESG',
+                'productRestrictions',
+                'benchmarks',
+                'reportingCadence',
+                'triggerRules',
+                'managerCriteria',
+                'watchlistTriggers'
+            ];
+            const labelMap = {
+                liquidityNeeds: 'Likidite İhtiyacı',
+                ethicalESG: 'Etik/ESG Tercihleri',
+                productRestrictions: 'Ürün Kısıtları',
+                benchmarks: 'Benchmarklar',
+                reportingCadence: 'Raporlama Sıklığı',
+                triggerRules: 'Yeniden Dengeleme Tetikleyicileri',
+                managerCriteria: 'Yönetici Seçim Kriterleri',
+                watchlistTriggers: 'Watchlist Tetikleyicileri'
+            };
+            const rows = [];
+
+            orderedKeys.forEach((key) => {
+                if (detailsSource[key] !== undefined) {
+                    rows.push(`<li><strong>${this.escapeHtml(labelMap[key] || key)}:</strong> ${this.escapeHtml(formatValue(detailsSource[key]))}</li>`);
+                }
+            });
+
+            Object.entries(detailsSource).forEach(([key, value]) => {
+                if (orderedKeys.includes(key)) return;
+                rows.push(`<li><strong>${this.escapeHtml(labelMap[key] || key)}:</strong> ${this.escapeHtml(formatValue(value))}</li>`);
+            });
+
+            if (rows.length) blocks.push(`<h5>Detaylar</h5><ul class="uk-list uk-list-bullet">${rows.join('')}</ul>`);
+        }
+
+        return blocks.join('');
     },
 
     /**
@@ -125,7 +659,7 @@ const IPSReportRenderer = {
                         <span uk-icon="icon: download; ratio: 0.8"></span>
                         PDF
                     </button>
-                    <button class="ips-btn ips-btn--outline ips-btn--sm" onclick="window.print()">
+                    <button class="ips-btn ips-btn--outline ips-btn--sm" onclick="IPSReportRenderer.printReport()">
                         <span uk-icon="icon: print; ratio: 0.8"></span>
                         Yazdır
                     </button>
@@ -139,35 +673,59 @@ const IPSReportRenderer = {
     },
 
     /**
-     * Kapak sayfası
+     * Kapak sayfası - Profesyonel Tasarım
      */
     renderCoverPage: function (ipsData) {
         const meta = ipsData.metadata || {};
         const profile = ipsData.riskAnalysis?.content?.overallProfile || {};
         const riskLevel = profile.classification?.level || 'Risk Profili';
+        const riskScore = meta.riskScore || '-';
+
+        // Logo SVG base64 encoded - TAM LOGO
+        const logoBase64 = IPS_LOGO_BASE64;
 
         return `
             <div class="ips-cover-page" id="ipsCover">
-                <img src="/Content/images/logos/logo.svg" 
-                     alt="Kuveyt Türk Portföy" 
-                     class="ips-cover-logo"
-                     onerror="this.style.display='none'">
+                <!-- Logo -->
+                <div style="margin-bottom: 40px; text-align: center;">
+                    <img src="${logoBase64}" 
+                         alt="Kuveyt Türk Portföy" 
+                         class="ips-cover-logo"
+                         style="height: 80px; width: auto; max-width: 500px;">
+                </div>
                 
+                <!-- Ana Başlık -->
                 <h1 class="ips-cover-title">YATIRIM POLİTİKASI BEYANI</h1>
                 <p class="ips-cover-subtitle">Investment Policy Statement (IPS)</p>
                 
+                <!-- Risk Profil Badge -->
                 <div class="ips-profile-badge">
                     <div class="ips-profile-level">${this.escapeHtml(riskLevel)}</div>
-                    <div class="ips-profile-score">Risk Skoru: ${meta.riskScore || '-'}/100</div>
+                    <div class="ips-profile-score">Risk Skoru: ${riskScore}/100</div>
                 </div>
                 
-                <div style="margin-top: 40px; opacity: 0.9; font-size: 0.95rem;">
-                    <p><strong>Değerlendirme Tarihi:</strong> ${this.formatDate(meta.generatedDate)}</p>
-                    <p><strong>Sonraki Gözden Geçirme:</strong> ${this.formatDate(meta.nextReviewDate)}</p>
+                <!-- Tarih Bilgileri -->
+                <div style="margin-top: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 400px; margin-left: auto; margin-right: auto;">
+                    <div style="text-align: left;">
+                        <div style="font-size: 0.75rem; opacity: 0.7; margin-bottom: 4px;">Değerlendirme Tarihi</div>
+                        <div style="font-size: 1rem; font-weight: 600;">${this.formatDate(meta.generatedDate)}</div>
+                    </div>
+                    <div style="text-align: left;">
+                        <div style="font-size: 0.75rem; opacity: 0.7; margin-bottom: 4px;">Sonraki Gözden Geçirme</div>
+                        <div style="font-size: 1rem; font-weight: 600;">${this.formatDate(meta.nextReviewDate)}</div>
+                    </div>
                 </div>
                 
-                <div style="margin-top: 40px; font-size: 0.85rem; opacity: 0.7;">
-                    CFA Institute IPS standartları ve SPK düzenlemelerine uygun olarak hazırlanmıştır.
+                <!-- Doküman Numarası -->
+                <div style="margin-top: 48px; padding: 16px 24px; background: rgba(255,255,255,0.1); border-radius: 8px; display: inline-block;">
+                    <div style="font-size: 0.75rem; opacity: 0.7;">Doküman No</div>
+                    <div style="font-size: 0.9rem; font-weight: 500; font-family: monospace;">IPS-${new Date().getFullYear()}-${String(Math.floor(Math.random() * 10000)).padStart(5, '0')}</div>
+                </div>
+                
+                <!-- Footer -->
+                <div style="margin-top: 60px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.2); font-size: 0.8rem; opacity: 0.7;">
+                    <p style="margin: 0;">CFA Institute IPS standartları ve SPK düzenlemelerine uygun olarak hazırlanmıştır.</p>
+                    <p style="margin: 8px 0 0 0;">© ${new Date().getFullYear()} Kuveyt Türk Portföy Yönetimi A.Ş. - Tüm hakları saklıdır.</p>
                 </div>
             </div>
         `;
@@ -349,14 +907,33 @@ const IPSReportRenderer = {
         const c = section.content;
 
         let rolesHtml = '';
-        if (c.responsibilities && c.responsibilities.roles) {
-            rolesHtml = c.responsibilities.roles.map(role => `
+        // "parties" veya "roles" dizisini destekle (generator "parties" kullanıyor)
+        const partiesData = c.responsibilities?.parties || c.responsibilities?.roles || [];
+        if (partiesData.length > 0) {
+            rolesHtml = partiesData.map(party => {
+                // "duties" dizisi varsa bullet list olarak göster, yoksa "description" kullan
+                let responsibilityText = '';
+                if (party.duties && Array.isArray(party.duties)) {
+                    responsibilityText = '<ul class="ips-list uk-margin-remove">' +
+                        party.duties.map(d => `<li class="ips-list-item">${this.escapeHtml(d)}</li>`).join('') +
+                        '</ul>';
+                } else {
+                    responsibilityText = this.escapeHtml(party.description || '');
+                }
+                return `
                 <tr>
-                    <td><strong>${this.escapeHtml(role.role)}</strong></td>
-                    <td>${this.escapeHtml(role.description)}</td>
+                    <td><strong>${this.escapeHtml(party.role)}</strong></td>
+                    <td>${responsibilityText}</td>
                 </tr>
-            `).join('');
+            `;
+            }).join('');
         }
+
+        // "reviewProcess" veya "reviewSchedule" destekle (generator "reviewProcess" kullanıyor)
+        const reviewData = c.reviewProcess || c.reviewSchedule || {};
+        const reviewTitle = reviewData.title || 'Gözden Geçirme Takvimi';
+        const periodicText = reviewData.schedule?.regular || reviewData.periodic || 'Yıllık';
+        const triggers = reviewData.triggers || [];
 
         const content = `
             <div class="ips-subsection">
@@ -373,14 +950,14 @@ const IPSReportRenderer = {
                     </tbody>
                 </table>
             </div>
-            
+
             <div class="ips-subsection">
-                <h4 class="ips-subsection-title">${c.reviewSchedule?.title || 'Gözden Geçirme Takvimi'}</h4>
+                <h4 class="ips-subsection-title">${this.escapeHtml(reviewTitle)}</h4>
                 <div class="ips-info-panel">
-                    <p><strong>Periyodik Gözden Geçirme:</strong> ${this.escapeHtml(c.reviewSchedule?.periodic || 'Yıllık')}</p>
+                    <p><strong>Periyodik Gözden Geçirme:</strong> ${this.escapeHtml(periodicText)}</p>
                     <p class="uk-margin-small-top"><strong>Tetikleyici Olaylar:</strong></p>
                     <ul class="ips-list uk-margin-small-top">
-                        ${(c.reviewSchedule?.triggers || []).map(t => `
+                        ${triggers.map(t => `
                             <li class="ips-list-item">${this.escapeHtml(t)}</li>
                         `).join('')}
                     </ul>
@@ -497,55 +1074,123 @@ const IPSReportRenderer = {
         if (!section) return '';
         const c = section.content;
         const profile = c.overallProfile || {};
+        const riskCapacity = c.riskCapacity || {};
+        const riskWillingness = c.riskWillingness || {};
 
-        // Expert AI risk analizi içeriği
-        const aiRisk = this.expertContent?.risk_analysis || null;
+        // Frontend'den hesaplanan skorları öncelikli kullan
+        const capacityScore = riskCapacity.score || profile.score || '-';
+        const willingnessScore = riskWillingness.score || profile.score || '-';
+        const capacitySummary = riskCapacity.summary || '';
+        const willingnessSummary = riskWillingness.summary || '';
 
-        // Risk profil kartları - AI içeriği varsa onu kullan
+        // Risk profil kartları - frontend hesaplaması öncelikli
         const riskComponents = [
             {
                 label: 'Risk Kapasitesi',
-                value: aiRisk?.capacity_score || profile.capacity?.level || '-',
-                desc: aiRisk?.capacity_explanation || profile.capacity?.description || ''
+                value: capacityScore,
+                desc: capacitySummary
             },
             {
                 label: 'Risk İstekliliği',
-                value: aiRisk?.willingness_score || profile.tolerance?.level || '-',
-                desc: aiRisk?.willingness_explanation || profile.tolerance?.description || ''
+                value: willingnessScore,
+                desc: willingnessSummary
             }
         ];
 
-        // AI genel değerlendirmesi
-        const aiOverallAssessment = aiRisk?.overall_assessment || '';
-        const aiInconsistency = aiRisk?.inconsistency_found ? `
+        // Profil bilgisi
+        const profileScore = profile.score || profile.normalizedScore || '-';
+        const profileLevel = profile.classification?.level || 'Risk Profili';
+        const profileScoreNum = parseInt(profileScore) || 0;
+
+        // Kapsamlı AI değerlendirmesi oluştur
+        const profileNames = { 'low': 'Sağlamcı (Muhafazakar)', 'medium': 'Temkinli (Dengeli)', 'high': 'Agresif (Dinamik)' };
+        const profileDisplayName = profileNames[profile.profile] || 'Dengeli';
+        const aiAssessmentText = `Risk kapasitesi (${capacityScore}/100) ve risk istekliliğiniz (${willingnessScore}/100) birlikte değerlendirildiğinde, ${profileDisplayName} bir yatırımcı profili ortaya çıkmaktadır. Bu profil, ${profile.profile === 'low' ? 'sermaye koruma odaklı, düşük volatiliteli bir strateji' :
+                profile.profile === 'high' ? 'büyüme odaklı, yüksek risk toleranslı bir strateji' :
+                    'getiri ve risk arasında denge gözeten bir strateji'
+            } gerektirmektedir. Portföy önerileriniz bu profile uygun olarak hazırlanmıştır.`;
+
+        // Tutarsızlık analizi (IPS content'ten)
+        const inconsistencyAnalysis = c.inconsistencyAnalysis || {};
+        const aiInconsistency = inconsistencyAnalysis.hasInconsistencies ? `
             <div class="ips-alert ips-alert--warning" style="margin-top: 16px;">
                 <span uk-icon="icon: warning; ratio: 1.2;"></span>
                 <div>
-                    <strong>Tutarsızlık Tespit Edildi</strong>
-                    <p style="margin: 4px 0 0 0;">${this.escapeHtml(aiRisk.inconsistency_explanation || '')}</p>
+                    <strong>Tutarsızlık Tespit Edildi (${inconsistencyAnalysis.count} adet)</strong>
+                    <p style="margin: 4px 0 0 0;">${this.escapeHtml(inconsistencyAnalysis.implications || '')}</p>
                 </div>
             </div>
         ` : '';
+
+        // Kapasite faktörleri
+        let capacityFactorsHtml = '';
+        if (riskCapacity.factors && riskCapacity.factors.length > 0) {
+            capacityFactorsHtml = `
+                <div class="ips-subsection">
+                    <h4 class="ips-subsection-title">${riskCapacity.title || 'Risk Kapasitesi Faktörleri'}</h4>
+                    <table class="ips-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 30%;">Faktör</th>
+                                <th>Değerlendirme</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${riskCapacity.factors.map(f => `
+                                <tr>
+                                    <td><strong>${this.escapeHtml(f.factor)}</strong></td>
+                                    <td>${this.escapeHtml(f.assessment)}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        // İsteklilik faktörleri
+        let willingnessFactorsHtml = '';
+        if (riskWillingness.factors && riskWillingness.factors.length > 0) {
+            willingnessFactorsHtml = `
+                <div class="ips-subsection">
+                    <h4 class="ips-subsection-title">${riskWillingness.title || 'Risk İstekliliği Faktörleri'}</h4>
+                    <table class="ips-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 30%;">Faktör</th>
+                                <th>Yorum</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${riskWillingness.factors.map(f => `
+                                <tr>
+                                    <td><strong>${this.escapeHtml(f.factor)}</strong></td>
+                                    <td>${this.escapeHtml(f.interpretation || f.response || '')}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
 
         const content = `
             <div class="ips-subsection">
                 <h4 class="ips-subsection-title">Genel Risk Profili</h4>
                 <div class="ips-risk-gauge">
-                    <div class="ips-risk-gauge-value">${profile.classification?.score || '-'}</div>
-                    <div class="ips-risk-gauge-label">${this.escapeHtml(profile.classification?.level || 'Risk Profili')}</div>
+                    <div class="ips-risk-gauge-value">${profileScore}</div>
+                    <div class="ips-risk-gauge-label">${this.escapeHtml(profileLevel)}</div>
                     <div class="ips-risk-bar">
-                        <div class="ips-risk-bar-fill" style="width: ${profile.classification?.score || 0}%;"></div>
+                        <div class="ips-risk-bar-fill" style="width: ${profileScoreNum}%;"></div>
                     </div>
                 </div>
-                ${aiOverallAssessment ? `
-                    <div class="ips-ai-content" style="margin-top: 16px; padding: 16px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 8px; border-left: 4px solid var(--ips-primary);">
-                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-                            <span uk-icon="icon: bolt; ratio: 0.9;"></span>
-                            <strong style="font-size: 0.85rem; color: var(--ips-primary);">AI Değerlendirmesi</strong>
-                        </div>
-                        <p style="margin: 0; line-height: 1.6;">${this.escapeHtml(aiOverallAssessment)}</p>
+                <div class="ips-ai-content" style="margin-top: 16px; padding: 16px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); border-radius: 8px; border-left: 4px solid var(--ips-primary);">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                        <span uk-icon="icon: bolt; ratio: 0.9;"></span>
+                        <strong style="font-size: 0.85rem; color: var(--ips-primary);">AI Değerlendirmesi</strong>
                     </div>
-                ` : ''}
+                    <p style="margin: 0; line-height: 1.6;">${this.escapeHtml(aiAssessmentText)}</p>
+                </div>
                 ${aiInconsistency}
             </div>
 
@@ -555,13 +1200,15 @@ const IPSReportRenderer = {
                     ${riskComponents.map(comp => `
                         <div class="ips-info-panel">
                             <div style="font-weight: 600; margin-bottom: 8px;">${comp.label}</div>
-                            <div style="font-size: 1.5rem; color: var(--ips-primary); font-weight: 600;">${this.escapeHtml(comp.value)}</div>
+                            <div style="font-size: 1.5rem; color: var(--ips-primary); font-weight: 600;">${this.escapeHtml(String(comp.value))}</div>
                             <div style="font-size: 0.9rem; color: var(--ips-text-muted); margin-top: 8px;">${this.escapeHtml(comp.desc)}</div>
                         </div>
                     `).join('')}
                 </div>
             </div>
 
+            ${capacityFactorsHtml}
+            ${willingnessFactorsHtml}
             ${c.surveyAnalysis ? this.renderSurveyAnalysis(c.surveyAnalysis) : ''}
         `;
 
@@ -1077,9 +1724,59 @@ const IPSReportRenderer = {
                 </ul>
             </div>
             ` : ''}
+
+            ${c.riskyInterests ? this.renderRiskyInterests(c.riskyInterests) : ''}
         `;
 
         return this.renderSection('ips-universe', 'Yatırım Evreni', 'grid', content, '7');
+    },
+
+    /**
+     * Q14: Riskli Yatırım İlgi Alanları render
+     */
+    renderRiskyInterests: function (data) {
+        if (!data) return '';
+
+        let itemsHtml = '';
+        if (data.hasInterest && data.items && data.items.length > 0) {
+            itemsHtml = `
+                <table class="ips-table uk-margin-top">
+                    <thead>
+                        <tr>
+                            <th>Yatırım Aracı</th>
+                            <th>Risk Düzeyi</th>
+                            <th>Not</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${data.items.map(item => `
+                            <tr>
+                                <td><strong>${this.escapeHtml(item.name)}</strong></td>
+                                <td>
+                                    <span class="ips-badge ${item.risk === 'Çok Yüksek' ? 'ips-badge--danger' : item.risk === 'Yüksek' ? 'ips-badge--warning' : 'ips-badge--secondary'}">
+                                        ${this.escapeHtml(item.risk)}
+                                    </span>
+                                </td>
+                                <td class="uk-text-small">${this.escapeHtml(item.note)}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        return `
+            <div class="ips-subsection">
+                <h4 class="ips-subsection-title">${this.escapeHtml(data.title || 'Riskli Yatırım İlgi Alanları')}</h4>
+                <p>${this.escapeHtml(data.description)}</p>
+                ${itemsHtml}
+                ${data.recommendation ? `
+                    <div class="ips-info-panel ${data.hasInterest ? 'ips-info-panel--warning' : ''}" style="margin-top: 12px;">
+                        <strong>Öneri:</strong> ${this.escapeHtml(data.recommendation)}
+                    </div>
+                ` : ''}
+            </div>
+        `;
     },
 
     /**
@@ -1536,8 +2233,25 @@ const IPSReportRenderer = {
             </div>
             
             <div class="ips-signature-area">
-                <div class="ips-signature-box">
-                    <div class="ips-signature-line"></div>
+                <div class="ips-signature-box" id="investorSignatureBox">
+                    <div class="ips-signature-placeholder" id="investorSignaturePlaceholder" style="min-height: 120px; display: flex; align-items: flex-end; justify-content: center; position: relative;">
+                         <!-- İmza resmi buraya gelecek -->
+                         <div id="investorSignatureContainer" style="display: none; width: 100%; height: 100%;">
+                            <img id="investorSignatureImage" src="" alt="İmza" style="max-height: 80px; max-width: 100%;">
+                            <button class="ips-btn ips-btn--icon ips-btn--xs no-print" onclick="IPSReportRenderer.removeSignature()" style="position: absolute; top: 0; right: 0; background: #fff; border: 1px solid #ccc;">
+                                <span uk-icon="icon: trash; ratio: 0.7"></span>
+                            </button>
+                         </div>
+                         <!-- İmza Çizgisi -->
+                         <div class="ips-signature-line" id="investorSignatureLine"></div>
+                         
+                         <!-- İmza Ekle Butonu -->
+                         <button class="ips-btn ips-btn--outline ips-btn--sm no-print" id="addSignatureBtn" onclick="IPSReportRenderer.openSignatureModal()" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+                            <span uk-icon="icon: pencil; ratio: 0.8"></span>
+                            İmza Ekle
+                         </button>
+                    </div>
+                    
                     <div class="ips-signature-label">Yatırımcı İmzası</div>
                     <div class="ips-editable ips-input uk-margin-small-top" 
                          data-field="approval.investorName" 
@@ -1550,10 +2264,56 @@ const IPSReportRenderer = {
                 </div>
                 
                 <div class="ips-signature-box">
-                    <div class="ips-signature-line"></div>
+                    <div class="ips-signature-placeholder" style="min-height: 120px; display: flex; align-items: flex-end; justify-content: center;">
+                        <div class="ips-signature-line"></div>
+                    </div>
                     <div class="ips-signature-label">Kuveyt Türk Portföy Yetkilisi</div>
                     <div style="margin-top: 12px; color: var(--ips-text-muted);">
                         Kuveyt Türk Portföy Yönetimi A.Ş.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Signature Modal -->
+            <div id="signatureModal" class="uk-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10000; background: rgba(0,0,0,0.5);">
+                <div class="uk-modal-dialog uk-modal-body" style="background: white; width: 500px; max-width: 90%; margin: 50px auto; padding: 24px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+                    <h2 class="uk-modal-title" style="font-size: 1.25rem; font-weight: 600; margin-bottom: 16px;">İmza Ekle</h2>
+                    
+                    <div style="margin-bottom: 16px;">
+                        <ul uk-tab style="display: flex; gap: 16px; border-bottom: 1px solid #eee; padding-bottom: 8px; margin-bottom: 16px;">
+                            <li class="uk-active"><a href="#" onclick="IPSReportRenderer.switchSignatureTab('draw')">Çiz</a></li>
+                            <li><a href="#" onclick="IPSReportRenderer.switchSignatureTab('upload')">Yükle</a></li>
+                        </ul>
+
+                        <!-- Draw Tab -->
+                        <div id="tab-draw" style="display: block;">
+                            <div style="border: 1px dashed #ccc; background: #f8f9fa; border-radius: 4px;">
+                                <canvas id="signaturePad" width="450" height="200" style="width: 100%; height: 200px; touch-action: none;"></canvas>
+                            </div>
+                            <div style="text-align: right; margin-top: 8px;">
+                                <button class="ips-btn ips-btn--xs ips-btn--outline" onclick="IPSReportRenderer.clearSignaturePad()">Temizle</button>
+                            </div>
+                        </div>
+
+                        <!-- Upload Tab -->
+                        <div id="tab-upload" style="display: none;">
+                            <div class="js-upload uk-placeholder uk-text-center" style="border: 1px dashed #ccc; padding: 32px; background: #f8f9fa; border-radius: 4px;">
+                                <span uk-icon="icon: cloud-upload"></span>
+                                <span class="uk-text-middle">Bir imza görseli sürükleyin veya</span>
+                                <div uk-form-custom>
+                                    <input type="file" id="signatureFileInput" accept="image/*" onchange="IPSReportRenderer.handleSignatureUpload(this)">
+                                    <span class="uk-link">seçin</span>
+                                </div>
+                            </div>
+                            <div id="uploadPreview" style="display: none; margin-top: 16px; text-align: center;">
+                                <img id="uploadPreviewImg" src="" style="max-height: 150px; border: 1px solid #eee;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uk-text-right" style="margin-top: 24px;">
+                        <button class="ips-btn ips-btn--outline uk-modal-close" onclick="IPSReportRenderer.closeSignatureModal()">İptal</button>
+                        <button class="ips-btn ips-btn--primary" onclick="IPSReportRenderer.saveSignature()">Kaydet</button>
                     </div>
                 </div>
             </div>
@@ -1570,6 +2330,282 @@ const IPSReportRenderer = {
     },
 
     // ========== UTILITY FUNCTIONS ==========
+
+    /**
+     * Profil bazlı tutarlı expert content oluştur
+     * Backend'den gelen tutarsız verileri override eder
+     */
+    generateConsistentExpertContent: function (profileType, profileScore, ipsData) {
+        const profiles = {
+            low: {
+                name: 'Sağlamcı (Muhafazakar)',
+                summary: 'Anket sonuçlarınıza göre sağlamcı (muhafazakar) bir yatırımcı profili sergiliyorsunuz. Düşük risk toleransınız ve sermaye koruma önceliğiniz doğrultusunda, anapara güvenliği ve istikrarlı gelir sağlayan bir strateji sizin için en uygun seçenektir.',
+                demographics: 'Demografik verileriniz ve finansal durumunuz analiz edildiğinde, likidite ihtiyaçlarınızı karşılayacak ve sermaye korumasını ön planda tutacak bir portföy yapısı önerilmektedir. Mevcut varlık durumunuz göz önüne alındığında, düşük volatiliteli ve sabit getirili araçlar ağırlıklı bir dağılım uygundur.',
+                personality: 'Yatırım kararlarınızda temkinli ve güvenlik odaklı bir yaklaşım sergiliyorsunuz. Piyasa dalgalanmalarından kaçınma eğilimindesiniz ve anapara güvenliğini ön planda tutuyorsunuz.',
+                strengths: [
+                    'Sermaye koruma konusunda disiplinli bir tutumunuz var',
+                    'Finansal hedefler konusunda net bir vizyona sahipsiniz',
+                    'Düzenli gelir beklentileriniz tutarlı',
+                    'Risk yönetimi konusunda bilinçli bir yaklaşımınız var'
+                ],
+                attention: [
+                    'Aşırı muhafazakar yaklaşım enflasyon karşısında reel kayba yol açabilir',
+                    'Uzun vadede büyüme fırsatlarını kaçırma riski değerlendirilmeli',
+                    'Portföyde minimum düzeyde büyüme odaklı varlık bulundurulmalı',
+                    'Enflasyon üstü reel getiri hedeflenmelidir'
+                ],
+                goalSummary: 'Birincil yatırım hedefiniz, sermaye koruması ve enflasyonun üzerinde istikrarlı getiri sağlamaktır. Düşük volatilite ve düzenli gelir akışı öncelikli hedeflerinizdir.',
+                goals: ['Anapara koruması ve sermaye güvenliği', 'Enflasyonun üzerinde düzenli gelir elde etmek', 'Düşük volatiliteli bir portföy yapısı sürdürmek'],
+                timeHorizon: 'Kısa-orta vadeli (1-3 yıl) bir yatırım ufku önerilmektedir. Sermaye koruma odaklı profiliniz gereği, uzun vadeli volatiliteye maruz kalmamak için daha kısa vadeli enstrümanlar tercih edilmelidir. Para piyasası fonları ve kısa vadeli kira sertifikaları ideal araçlardır.',
+                returnExpectations: 'Hedef getiri: Enflasyon + %1-3 reel getiri. Muhafazakar profiliniz için öncelik sermaye koruması olup, düzenli kupon/kar payı geliri beklentisi ön plandadır. Yıllık bazda TÜFE üzerinde pozitif reel getiri hedeflenmelidir.',
+                riskBudget: 'Maksimum portföy düşüşü (drawdown) toleransı: %5-8. Yıllık volatilite hedefi: %5-10 aralığında. Portföyün %80-90\'ı düşük riskli araçlarda (para piyasası, kira sertifikası) tutulmalıdır.',
+                liquidityNeedLevel: 'Yüksek',
+                liquidityExplanation: 'Muhafazakar profiliniz gereği, portföyün büyük çoğunluğu yüksek likiditeye sahip olmalıdır. Ani nakit ihtiyaçlarını karşılayabilecek esneklik korunmalıdır.',
+                liquidityRecommendations: [
+                    'Portföyün en az %30-50\'si T+0 veya T+1 likiditeye sahip fonlarda tutulmalı',
+                    'Acil durum fonu olarak 6 aylık gider tutarı ayrılmalı',
+                    'Uzun vadeli kilitlenen yatırımlar toplam portföyün %10\'unu geçmemeli'
+                ],
+                timeHorizonCategory: 'Kısa Vade (1-3 Yıl)',
+                timeHorizonExplanation: 'Sermaye koruma önceliğiniz ve düşük risk toleransınız göz önüne alındığında, kısa vadeli yatırım araçları ağırlıklı bir strateji uygulanmalıdır.',
+                timeHorizonImplications: [
+                    'Para piyasası fonları ve kısa vadeli kira sertifikaları ağırlıklı olmalı',
+                    'Uzun vadeli hisse senedi fonları sınırlı tutulmalı (%5-10)',
+                    'Vade uyumsuzluğu riskinden kaçınılmalı'
+                ],
+                strategyName: 'Sermaye Koruma Stratejisi',
+                strategyRationale: 'Düşük risk toleransınız ve sermaye güvenliği önceliğiniz doğrultusunda, para piyasası ve sabit getirili araçlar ağırlıklı bir varlık dağılımı uygulanmaktadır. Portföy, düşük volatilite ve düzenli gelir akışı sağlayacak şekilde yapılandırılmıştır.',
+                allocations: {
+                    'Para Piyasası': { range: '%40-55', rationale: 'Yüksek likidite ve sermaye koruması sağlar' },
+                    'Kira Sertifikası': { range: '%25-35', rationale: 'Düzenli kupon geliri ve düşük volatilite sunar' },
+                    'Altın/Kıymetli Madenler': { range: '%10-15', rationale: 'Enflasyon koruması ve portföy çeşitlendirmesi' },
+                    'Hisse/Katılım Endeksi': { range: '%5-10', rationale: 'Minimum düzeyde büyüme potansiyeli' }
+                },
+                rebalancingPolicy: 'Portföy hedef dağılımından %3-5 sapma durumunda yeniden dengeleme yapılmalıdır. Çeyreklik periyodik kontroller önerilir.',
+                reviewFrequency: 'Aylık',
+                rebalancingCriteria: 'Hedef dağılımdan %3-5 sapma veya piyasa koşullarında önemli değişiklik',
+                reviewTriggers: [
+                    'Portföy volatilitesi hedef bandın üzerine çıktığında',
+                    'Faiz oranlarında önemli değişiklik olduğunda',
+                    'Yatırımcının finansal durumunda değişiklik olduğunda',
+                    'Piyasalarda %10\'dan fazla düşüş yaşandığında'
+                ],
+                performanceBenchmarks: [
+                    'BIST-KYD Repo Endeksi (para piyasası kıyaslama)',
+                    'BIST-KYD TLREF Endeksi',
+                    'TÜFE + %2 (reel getiri hedefi)'
+                ],
+                communicationPlan: 'Aylık performans raporu, çeyreklik strateji değerlendirmesi ve yıllık kapsamlı IPS gözden geçirmesi yapılacaktır.'
+            },
+            medium: {
+                name: 'Dengeli (Temkinli)',
+                summary: 'Anket sonuçlarınıza göre dengeli bir yatırımcı profili sergiliyorsunuz. Orta risk toleransınız ve finansal hedefleriniz doğrultusunda, sermaye koruma ile büyüme arasında denge kuran bir strateji sizin için en uygun seçenektir.',
+                demographics: 'Demografik verileriniz ve finansal durumunuz analiz edildiğinde, likidite ihtiyaçlarınızı karşılayacak ancak uzun vadeli sermaye birikimini de destekleyecek bir portföy yapısı önerilmektedir. Düzenli gelir akışınız ve mevcut varlık durumunuz risk alma kapasitenizi desteklemektedir.',
+                personality: 'Yatırım kararlarınızda dengeli ve pragmatik bir yaklaşım sergiliyorsunuz. Piyasa dalgalanmalarına karşı bekleme ve gözlemleme eğilimindesiniz.',
+                strengths: [
+                    'Risk-getiri dengesini iyi kurabiliyorsunuz',
+                    'Finansal hedefler konusunda net bir vizyona sahipsiniz',
+                    'Uzun vadeli düşünme kapasitesine sahipsiniz',
+                    'Yatırım araçları hakkında temel bilgiye sahipsiniz'
+                ],
+                attention: [
+                    'Enflasyon riski ve reel getiri takibi önemlidir',
+                    'Likidite yönetimi ve acil durum fonu ayrımı yapılmalıdır',
+                    'Duygusal kararlardan kaçınmak için IPS\'e sadık kalınmalıdır',
+                    'Periyodik portföy değerlendirmesi ihmal edilmemelidir'
+                ],
+                goalSummary: 'Birincil yatırım hedefiniz, risk ve getiri arasında denge kurarak uzun vadede varlık artışı sağlamaktır.',
+                goals: ['Uzun vadeli sermaye büyümesi', 'Enflasyonun üzerinde reel getiri sağlamak', 'Portföy çeşitlendirmesi ile riskleri minimize etmek'],
+                timeHorizon: 'Orta vadeli (3-5 yıl) bir yatırım ufku önerilmektedir. Dengeli profiliniz, hem kısa vadeli likidite hem de uzun vadeli büyüme ihtiyaçlarını karşılayacak bir vade yapısına uygundur. Karma fonlar ve orta vadeli kira sertifikaları ideal araçlardır.',
+                returnExpectations: 'Hedef getiri: Enflasyon + %3-5 reel getiri. Dengeli profiliniz için sermaye büyümesi ve düzenli gelir kombinasyonu hedeflenmektedir. Orta vadede benchmark endeksler ile uyumlu performans beklenmektedir.',
+                riskBudget: 'Maksimum portföy düşüşü (drawdown) toleransı: %10-15. Yıllık volatilite hedefi: %10-18 aralığında. Portföyün %50-60\'ı orta riskli araçlarda, %20-30\'u düşük riskli araçlarda tutulmalıdır.',
+                liquidityNeedLevel: 'Orta',
+                liquidityExplanation: 'Dengeli profiliniz gereği, portföyün bir kısmı likit tutulurken, bir kısmı daha uzun vadeli yatırımlara yönlendirilebilir.',
+                liquidityRecommendations: [
+                    'Portföyün %15-25\'i yüksek likiditeye sahip fonlarda tutulmalı',
+                    'Acil durum fonu olarak 3-6 aylık gider tutarı ayrılmalı',
+                    'Orta vadeli kilitli yatırımlar toplam portföyün %30\'una kadar çıkabilir'
+                ],
+                timeHorizonCategory: 'Orta Vade (3-5 Yıl)',
+                timeHorizonExplanation: 'Dengeli risk toleransınız ve büyüme-koruma dengeniz göz önüne alındığında, orta vadeli yatırım araçları ağırlıklı bir strateji uygulanmalıdır.',
+                timeHorizonImplications: [
+                    'Karma fonlar ve dengeli portföyler uygun araçlardır',
+                    'Hisse senedi fonlarına %25-40 arası tahsis yapılabilir',
+                    'Kira sertifikaları ve sukuk orta vadeli gelir sağlar'
+                ],
+                strategyName: 'Dengeli Büyüme Stratejisi',
+                strategyRationale: 'Orta düzey risk toleransınız ve büyüme-koruma dengeniz doğrultusunda, karma bir varlık dağılımı uygulanmaktadır. Portföy, hem sermaye koruması hem de uzun vadeli büyüme sağlayacak şekilde yapılandırılmıştır.',
+                allocations: {
+                    'Para Piyasası': { range: '%15-25', rationale: 'Likidite tamponu ve fırsat fonu olarak' },
+                    'Kira Sertifikası': { range: '%25-35', rationale: 'Düzenli gelir ve orta düzey risk' },
+                    'Hisse/Katılım Endeksi': { range: '%25-40', rationale: 'Uzun vadeli büyüme potansiyeli' },
+                    'Altın/Kıymetli Madenler': { range: '%10-15', rationale: 'Portföy çeşitlendirmesi ve enflasyon koruması' }
+                },
+                rebalancingPolicy: 'Portföy hedef dağılımından %5-7 sapma durumunda yeniden dengeleme yapılmalıdır. Çeyreklik periyodik kontroller ve yarıyıllık stratejik değerlendirme önerilir.',
+                reviewFrequency: 'Çeyreklik',
+                rebalancingCriteria: 'Hedef dağılımdan %5-7 sapma veya çeyreklik periyodik kontrol',
+                reviewTriggers: [
+                    'Varlık sınıfı ağırlığı hedef bantta %7\'den fazla saptığında',
+                    'Piyasa koşullarında yapısal değişiklik olduğunda',
+                    'Yatırımcının risk profilinde değişiklik tespit edildiğinde',
+                    'Benchmark performansının altında kalındığında'
+                ],
+                performanceBenchmarks: [
+                    'BIST-KYD Karma Fon Endeksi',
+                    'BIST 100 Getiri Endeksi (hisse kıyaslama)',
+                    'TÜFE + %4 (reel getiri hedefi)'
+                ],
+                communicationPlan: 'Çeyreklik performans raporu, yarıyıllık strateji değerlendirmesi ve yıllık kapsamlı IPS gözden geçirmesi yapılacaktır.'
+            },
+            high: {
+                name: 'Agresif (Dinamik)',
+                summary: 'Anket sonuçlarınıza göre agresif (dinamik) bir yatırımcı profili sergiliyorsunuz. Yüksek risk toleransınız ve büyüme odaklı hedefleriniz doğrultusunda, uzun vadeli sermaye kazancını maksimize eden bir strateji sizin için en uygun seçenektir.',
+                demographics: 'Demografik verileriniz ve finansal durumunuz analiz edildiğinde, yüksek risk kapasitesi ile uzun vadeli büyüme odaklı bir portföy yapısı önerilmektedir. Güçlü gelir akışınız ve yüksek varlık tabanınız, piyasa dalgalanmalarını tolere etmenize olanak tanımaktadır.',
+                personality: 'Yatırım kararlarınızda cesur ve fırsatçı bir yaklaşım sergiliyorsunuz. Piyasa düşüşlerini alım fırsatı olarak değerlendirme eğilimindesiniz ve yüksek getiri için yüksek risk almaya hazırsınız.',
+                strengths: [
+                    'Yüksek risk toleransı ile büyüme fırsatlarını değerlendirebiliyorsunuz',
+                    'Piyasa dalgalanmalarına karşı psikolojik dayanıklılığınız yüksek',
+                    'Uzun vadeli perspektifle yatırım yapabiliyorsunuz',
+                    'Fırsat maliyetini iyi değerlendiriyorsunuz'
+                ],
+                attention: [
+                    'Aşırı özgüven ve aşırı işlem yapma riskine dikkat edilmeli',
+                    'Portföy konsantrasyonu riskini yönetmek için çeşitlendirme önemli',
+                    'Büyük kayıplar sonrası duygusal karar vermekten kaçınılmalı',
+                    'Kaldıraç kullanımı sınırlı tutulmalıdır'
+                ],
+                goalSummary: 'Birincil yatırım hedefiniz, uzun vadeli sermaye kazancını maksimize etmektir. Yüksek büyüme potansiyeli olan yatırım araçlarına ağırlık verilmesi hedeflenmektedir.',
+                goals: ['Uzun vadeli yüksek sermaye büyümesi', 'Piyasa ortalamasının üzerinde getiri elde etmek', 'Büyüme potansiyeli yüksek sektörlere yatırım yapmak'],
+                timeHorizon: 'Uzun vadeli (5+ yıl) bir yatırım ufku önerilmektedir. Agresif profiliniz, kısa vadeli dalgalanmaları tolere ederek uzun vadeli büyüme fırsatlarından yararlanmanıza olanak tanır. Hisse senedi fonları ve katılım endeks fonları temel araçlarınızdır.',
+                returnExpectations: 'Hedef getiri: Enflasyon + %7-12 reel getiri. Agresif profiliniz için yüksek büyüme potansiyeli hedeflenmektedir. BIST 100 ve katılım endekslerinin üzerinde performans beklentisi mevcuttur.',
+                riskBudget: 'Maksimum portföy düşüşü (drawdown) toleransı: %25-35. Yıllık volatilite hedefi: %20-30 aralığında kabul edilebilir. Portföyün %60-80\'i yüksek riskli büyüme odaklı araçlarda tutulabilir.',
+                liquidityNeedLevel: 'Düşük',
+                liquidityExplanation: 'Agresif profiliniz ve uzun vadeli yatırım ufkunuz gereği, portföyün büyük çoğunluğu uzun vadeli büyüme araçlarına yönlendirilebilir. Minimum likidite tamponu yeterlidir.',
+                liquidityRecommendations: [
+                    'Portföyün %5-10\'u acil likidite için ayrılmalı',
+                    'Uzun vadeli yatırımlar toplam portföyün %70-80\'ini oluşturabilir',
+                    'Piyasa fırsatları için %10-15 taktik nakit pozisyonu tutulabilir'
+                ],
+                timeHorizonCategory: 'Uzun Vade (5+ Yıl)',
+                timeHorizonExplanation: 'Yüksek risk toleransınız ve büyüme odaklı hedefleriniz göz önüne alındığında, uzun vadeli yatırım araçları ağırlıklı bir strateji uygulanmalıdır.',
+                timeHorizonImplications: [
+                    'Hisse senedi ve katılım endeks fonları portföyün %50-70\'ini oluşturabilir',
+                    'Kısa vadeli dalgalanmalar tolere edilebilir',
+                    'Bileşik getiri etkisinden maksimum fayda sağlanır',
+                    'Sektörel ve tematik fonlarla büyüme fırsatları değerlendirilebilir'
+                ],
+                strategyName: 'Agresif Büyüme Stratejisi',
+                strategyRationale: 'Yüksek risk toleransınız ve uzun vadeli büyüme hedefleriniz doğrultusunda, hisse senedi ve katılım endeks fonları ağırlıklı bir varlık dağılımı uygulanmaktadır. Portföy, maksimum sermaye kazancı ve bileşik getiri sağlayacak şekilde yapılandırılmıştır.',
+                allocations: {
+                    'Hisse/Katılım Endeksi': { range: '%50-70', rationale: 'Uzun vadeli yüksek büyüme potansiyeli' },
+                    'Altın/Kıymetli Madenler': { range: '%10-20', rationale: 'Portföy çeşitlendirmesi ve enflasyon koruması' },
+                    'Kira Sertifikası': { range: '%10-20', rationale: 'Gelir akışı ve volatilite dengeleme' },
+                    'Para Piyasası': { range: '%5-10', rationale: 'Minimum likidite tamponu ve fırsat fonu' }
+                },
+                rebalancingPolicy: 'Portföy hedef dağılımından %7-10 sapma durumunda yeniden dengeleme yapılmalıdır. Piyasa fırsatlarına göre taktik ayarlamalar yapılabilir.',
+                reviewFrequency: 'Aylık',
+                rebalancingCriteria: 'Hedef dağılımdan %7-10 sapma veya önemli piyasa fırsatı',
+                reviewTriggers: [
+                    'Hisse ağırlığı hedef bandın dışına çıktığında',
+                    'Portföy drawdown %25\'i aştığında',
+                    'Sektörel rotasyon fırsatı tespit edildiğinde',
+                    'Makroekonomik göstergelerde önemli değişiklik olduğunda'
+                ],
+                performanceBenchmarks: [
+                    'BIST Katılım 50 Getiri Endeksi',
+                    'BIST 100 Getiri Endeksi',
+                    'TÜFE + %8 (reel getiri hedefi)',
+                    'MSCI Türkiye Endeksi (uluslararası kıyaslama)'
+                ],
+                communicationPlan: 'Aylık performans raporu, çeyreklik taktik değerlendirme ve yıllık kapsamlı strateji gözden geçirmesi yapılacaktır. Piyasa fırsatlarında anlık bilgilendirme yapılacaktır.'
+            }
+        };
+
+        const p = profiles[profileType] || profiles.medium;
+        const capacityScore = ipsData.riskAnalysis?.content?.riskCapacity?.score || profileScore;
+        const willingnessScore = ipsData.riskAnalysis?.content?.riskWillingness?.score || profileScore;
+
+        return {
+            investor_profile: {
+                summary: p.summary,
+                demographics_analysis: p.demographics,
+                investment_personality: p.personality,
+                strengths: p.strengths,
+                attention_points: p.attention
+            },
+            investment_goals: {
+                primary_goal: p.goalSummary,
+                secondary_goals: p.goals,
+                time_horizon_analysis: p.timeHorizon,
+                return_expectations: p.returnExpectations,
+                risk_budget: p.riskBudget,
+                ai_recommendation: `Risk profiliniz (${p.name}) ve skorunuz (${profileScore}/100) dikkate alındığında, ${profileType === 'high' ? 'büyüme odaklı ve dinamik' : profileType === 'low' ? 'sermaye koruma ağırlıklı' : 'dengeli'} bir yatırım stratejisi önerilmektedir.`
+            },
+            risk_analysis: {
+                capacity_score: capacityScore,
+                capacity_explanation: `Finansal durumunuz ve varlık tabanınız göz önüne alındığında, risk alma kapasiteniz ${capacityScore > 65 ? 'yüksek' : capacityScore > 35 ? 'orta' : 'düşük'} düzeyde olarak değerlendirilmiştir.`,
+                willingness_score: willingnessScore,
+                willingness_explanation: `Anket cevaplarınız, piyasa dalgalanmalarına karşı ${willingnessScore > 65 ? 'yüksek' : willingnessScore > 35 ? 'orta' : 'düşük'} düzey tolerans gösterdiğinizi ortaya koymaktadır.`,
+                overall_assessment: `Risk kapasitesi (${capacityScore}/100) ve risk istekliliğiniz (${willingnessScore}/100) birlikte değerlendirildiğinde, ${p.name} bir yatırımcı profili ortaya çıkmaktadır.`,
+                inconsistency_found: false
+            },
+            constraints: {
+                ai_summary: `${p.name} risk profilinize uygun olarak, portföyünüzün ${profileType === 'low' ? '%30-50\'si' : profileType === 'high' ? '%5-10\'u' : '%15-25\'i'} likit varlıklardan oluşması önerilmektedir.`,
+                liquidity: {
+                    need_level: p.liquidityNeedLevel,
+                    explanation: p.liquidityExplanation,
+                    recommendations: p.liquidityRecommendations
+                },
+                time_horizon: {
+                    category: p.timeHorizonCategory,
+                    explanation: p.timeHorizonExplanation,
+                    implications: p.timeHorizonImplications
+                },
+                tax_considerations: {
+                    summary: 'Katılım finans uyumlu yatırım fonları, stopaj avantajı ve vergi optimizasyonu açısından değerlendirilmiştir.',
+                    key_points: [
+                        'Yatırım fonlarından elde edilen gelirler %10 stopaja tabidir',
+                        'Bir yıldan uzun süre tutulan fonlarda %0 stopaj uygulanmaktadır',
+                        'Katılım bankacılığı fonlarında faiz geliri bulunmadığından vergi avantajı sağlanır',
+                        'Fon alım-satımlarında BSMV muafiyeti mevcuttur'
+                    ]
+                },
+                legal_regulatory: {
+                    summary: 'SPK düzenlemeleri ve katılım finans ilkeleri çerçevesinde yatırım yapılmaktadır.',
+                    key_points: [
+                        'Tüm fonlar SPK onaylı ve TEFAS üzerinden işlem görmektedir',
+                        'Katılım finans ilkelerine uygunluk danışma kurulu tarafından denetlenmektedir',
+                        'Yatırımcı tazmin fonu kapsamında koruma mevcuttur',
+                        'MiFID II uyumlu yatırımcı profili değerlendirmesi yapılmıştır'
+                    ]
+                }
+            },
+            asset_strategy: {
+                strategy_name: p.strategyName,
+                strategy_rationale: p.strategyRationale,
+                allocations: p.allocations,
+                rebalancing_policy: p.rebalancingPolicy
+            },
+            esg_policy: {
+                is_participatory: true,
+                rationale: 'Kuveyt Türk Portföy fonları, katılım finans ilkelerine uygun olarak yönetilmektedir. Tüm yatırımlar danışma kurulu onayından geçmekte ve faizsiz finans prensiplerine uygunluk sürekli denetlenmektedir.',
+                restrictions: [
+                    'Faiz geliri içeren enstrümanlara yatırım yapılmaz',
+                    'Alkol, tütün, silah ve kumar sektörlerine yatırım yapılmaz',
+                    'Konvansiyonel bankacılık ve sigorta hisselerine yatırım yapılmaz',
+                    'Haram gelir oranı %5\'i aşan şirketlere yatırım yapılmaz'
+                ]
+            },
+            monitoring: {
+                ai_note: p.monitoringNote || '',
+                review_frequency: p.reviewFrequency,
+                rebalancing_criteria: p.rebalancingCriteria,
+                review_triggers: p.reviewTriggers,
+                performance_benchmarks: p.performanceBenchmarks,
+                communication_plan: p.communicationPlan
+            }
+        };
+    },
 
     /**
      * HTML escape
@@ -1623,8 +2659,39 @@ const IPSReportRenderer = {
         // Gerçek fon dağılım verilerini localStorage'dan al
         const riskProfiliSonuc = JSON.parse(localStorage.getItem('riskProfiliSonuc') || '{}');
         const fonDagilimData = riskProfiliSonuc?.data?.fonDagilimData || [];
-        const expertContent = riskProfiliSonuc?.expert_content || null;
-        const allocationRationale = expertContent?.allocation_rationale || null;
+
+        // allocationRationale'i frontend profil bilgisiyle oluştur (backend tutarsızlığını önle)
+        const riskData = riskProfiliSonuc?.data || {};
+
+        // Risk skorunu doğru hesapla - her zaman survey cevaplarından
+        let riskScoreForDisplay = riskData.riskScore;
+        if (!riskScoreForDisplay && typeof IPS !== 'undefined' && IPS.calculateLocalRiskScore) {
+            const surveyAnswers = JSON.parse(localStorage.getItem('surveyAnswers') || '{}');
+            const localScores = IPS.calculateLocalRiskScore(surveyAnswers);
+            riskScoreForDisplay = Math.round(localScores.total);
+        }
+        if (!riskScoreForDisplay) {
+            riskScoreForDisplay = 50;
+        }
+
+        // profileName'i skor bazlı hesapla (backend bağımlılığını kaldır)
+        let profileName;
+        if (riskScoreForDisplay <= 35) profileName = 'low';
+        else if (riskScoreForDisplay >= 65) profileName = 'high';
+        else profileName = 'medium';
+        const profileNames = { 'low': 'Sağlamcı', 'medium': 'Dengeli', 'high': 'Agresif' };
+        const profileDisplayName = profileNames[profileName] || 'Dengeli';
+
+        const allocationRationale = {
+            algorithm_summary: `Portföy optimizasyonu, Modern Portföy Teorisi (Markowitz) ve katılım finans ilkeleri birleştirilerek gerçekleştirilmiştir. Risk skorunuz (${riskScoreForDisplay}/100) ve yatırımcı profiliniz (${profileDisplayName}) temel alınarak, ${profileName === 'low' ? 'sermaye koruma ağırlıklı' : profileName === 'high' ? 'büyüme odaklı' : 'dengeli risk-getiri'} bir dağılım oluşturulmuştur.`,
+            risk_score_impact: `Risk skorunuz ${riskScoreForDisplay} olarak hesaplanmıştır. Bu skor, ${profileName === 'low' ? 'düşük' : profileName === 'high' ? 'yüksek' : 'orta'} düzey risk toleransına karşılık gelmektedir. Portföy dağılımı bu tolerans seviyesine göre optimize edilmiştir.`,
+            ai_analysis: `Yapay zeka destekli analizimiz, anket cevaplarınızı değerlendirmiştir. Önerilen portföy dağılımının finansal hedefleriniz ve risk toleransınız ile uyumlu olduğu görülmektedir.`,
+            key_factors: [
+                `Risk Profili: ${profileDisplayName}`,
+                `Risk Skoru: ${riskScoreForDisplay}/100`,
+                `Optimizasyon: Maksimum Sharpe Oranı`
+            ]
+        };
 
         console.log('[IPS Renderer] Fon dağılım verisi:', fonDagilimData);
 
@@ -1787,15 +2854,7 @@ const IPSReportRenderer = {
     attachEventListeners: function () {
         // Editable alanlar için
         document.querySelectorAll('.ips-editable').forEach(el => {
-            el.addEventListener('click', () => {
-                if (this.editMode) {
-                    el.setAttribute('contenteditable', 'true');
-                    el.focus();
-                }
-            });
-
             el.addEventListener('blur', () => {
-                el.setAttribute('contenteditable', 'false');
                 const field = el.dataset.field;
                 if (field) {
                     this.changedFields[field] = el.textContent;
@@ -1816,6 +2875,22 @@ const IPSReportRenderer = {
         });
     },
 
+    applySavedCustomizations: function () {
+        let saved = {};
+        try {
+            saved = JSON.parse(localStorage.getItem('ipsCustomizations') || '{}');
+        } catch (e) {
+            console.warn('[IPS] Customization parse error', e);
+            return;
+        }
+        Object.entries(saved).forEach(([field, value]) => {
+            const el = document.querySelector(`[data-field="${field}"]`);
+            if (el && typeof value === 'string') {
+                el.textContent = value;
+            }
+        });
+    },
+
     /**
      * Düzenleme modunu aç/kapat
      */
@@ -1825,17 +2900,24 @@ const IPSReportRenderer = {
         const editBtn = document.getElementById('editModeBtn');
         const saveBtn = document.getElementById('saveBtn');
 
+        const editableElements = document.querySelectorAll('.ips-editable');
+
         if (this.editMode) {
             report.classList.add('ips-edit-mode');
-            editBtn.querySelector('.edit-btn-text').textContent = 'Düzenlemeyi Bitir';
-            saveBtn.style.display = 'inline-flex';
+            if (editBtn) editBtn.querySelector('.edit-btn-text').textContent = 'Düzenlemeyi Bitir';
+            if (saveBtn) saveBtn.style.display = 'inline-flex';
+
+            // Tüm editable alanları aç
+            editableElements.forEach(el => {
+                el.setAttribute('contenteditable', 'true');
+            });
         } else {
             report.classList.remove('ips-edit-mode');
-            editBtn.querySelector('.edit-btn-text').textContent = 'Düzenle';
-            saveBtn.style.display = 'none';
+            if (editBtn) editBtn.querySelector('.edit-btn-text').textContent = 'Düzenle';
+            if (saveBtn) saveBtn.style.display = 'none';
 
             // Tüm contenteditable'ları kapat
-            document.querySelectorAll('[contenteditable="true"]').forEach(el => {
+            editableElements.forEach(el => {
                 el.setAttribute('contenteditable', 'false');
             });
         }
@@ -1893,11 +2975,625 @@ const IPSReportRenderer = {
     },
 
     /**
-     * PDF export
+     * PDF export - Gotenberg üzerinden profesyonel PDF oluşturur
      */
-    exportPDF: function () {
-        // Print dialog açılır, kullanıcı PDF olarak kaydedebilir
+    exportPDF: async function () {
+        if (this.pdfInProgress) {
+            this.notifyUser('PDF hazırlanıyor. Lütfen bekleyin...', 'warning');
+            return;
+        }
+        this.pdfInProgress = true;
+        this.setToolbarDisabled(true);
+        this.showPdfOverlay('PDF servisi kontrol ediliyor...', 'Bağlantı doğrulanıyor', 'info');
+
+        const reportElement = document.getElementById('ipsFullReport');
+
+        if (!reportElement) {
+            console.error('[IPS PDF] IPS rapor elementi bulunamadı');
+            this.hidePdfOverlay();
+            this.resetPdfState();
+            this.printReport(); // Fallback
+            return;
+        }
+
+        if (!this.confirmApprovalBeforeExport()) {
+            this.hidePdfOverlay();
+            this.resetPdfState();
+            return;
+        }
+
+        const availability = await this.checkPdfServiceAvailability();
+        if (!availability.ok || !availability.gotenberg) {
+            const reason = availability.message || 'PDF servisi şu anda kullanılamıyor.';
+            this.notifyUser(reason, 'warning');
+            this.updatePdfOverlay('PDF servisi kullanılamıyor', reason, 'error');
+            const proceedPrint = window.confirm(`${reason}\n\nYazdırma moduna geçmek ister misiniz?`);
+            this.hidePdfOverlay();
+            this.resetPdfState();
+            if (proceedPrint) {
+                this.printReport();
+            }
+            return;
+        }
+
+        const responseTimeText = availability.responseTimeMs ? `Gotenberg: ${availability.responseTimeMs} ms` : '';
+        const waitText = responseTimeText ? `Lütfen bekleyin • ${responseTimeText}` : 'Lütfen bekleyin';
+        this.updatePdfOverlay('PDF oluşturuluyor...', waitText, 'success');
+
+        try {
+            // Sadece rapor içeriğini al (toolbar ve no-print elementleri hariç)
+            const clone = reportElement.cloneNode(true);
+
+            // no-print elementlerini kaldır
+            clone.querySelectorAll('.no-print').forEach(el => el.remove());
+            clone.querySelectorAll('#ipsToolbar').forEach(el => el.remove());
+            clone.querySelectorAll('.ips-toolbar').forEach(el => el.remove());
+            clone.querySelectorAll('button').forEach(el => el.remove());
+
+            // Canvas'ları (chart) base64 image'a çevir
+            const originalCanvases = reportElement.querySelectorAll('canvas');
+            const clonedCanvases = clone.querySelectorAll('canvas');
+            clonedCanvases.forEach((canvas, i) => {
+                const origCanvas = originalCanvases[i];
+                if (origCanvas) {
+                    const img = document.createElement('img');
+                    img.src = origCanvas.toDataURL('image/png');
+                    img.style.cssText = 'max-width: 100%; height: auto;';
+                    canvas.parentNode.replaceChild(img, canvas);
+                }
+            });
+
+            const htmlContent = clone.innerHTML;
+
+            // Backend'e gönder - use config URL
+            const pdfUrl = window.IPS_CONFIG?.pdfUrl || 'http://localhost:8001/api/ips/generate-pdf';
+            const response = await fetch(pdfUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    html: htmlContent,
+                    filename: `IPS-Raporu-${new Date().toISOString().slice(0, 10)}.pdf`
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(`PDF oluşturulamadı: ${response.status}`);
+            }
+
+            // PDF'i al ve işle
+            const pdfBlob = await response.blob();
+            const filename = `IPS-Raporu-${new Date().toISOString().slice(0, 10)}.pdf`;
+
+            // Data URL oluştur (Mac Chrome için en güvenilir yöntem)
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                // Yeni sekmede PDF aç
+                const pdfWindow = window.open('', '_blank');
+                if (pdfWindow) {
+                    pdfWindow.document.write(`
+                        <!DOCTYPE html>
+                        <html>
+                        <head>
+                            <title>${filename}</title>
+                            <style>
+                                * { margin: 0; padding: 0; }
+                                body { 
+                                    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+                                    background: #1a1a1a;
+                                }
+                                .toolbar {
+                                    position: fixed;
+                                    top: 0;
+                                    left: 0;
+                                    right: 0;
+                                    background: #2d2d2d;
+                                    padding: 12px 20px;
+                                    display: flex;
+                                    justify-content: space-between;
+                                    align-items: center;
+                                    z-index: 1000;
+                                    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+                                }
+                                .toolbar h3 {
+                                    color: #fff;
+                                    font-size: 14px;
+                                    font-weight: 500;
+                                }
+                                .download-btn {
+                                    background: #186149;
+                                    color: white;
+                                    border: none;
+                                    padding: 10px 20px;
+                                    border-radius: 4px;
+                                    cursor: pointer;
+                                    font-size: 14px;
+                                    text-decoration: none;
+                                    display: inline-flex;
+                                    align-items: center;
+                                    gap: 8px;
+                                }
+                                .download-btn:hover { background: #134e3b; }
+                                iframe {
+                                    width: 100%;
+                                    height: calc(100vh - 60px);
+                                    margin-top: 60px;
+                                    border: none;
+                                }
+                            </style>
+                        </head>
+                        <body>
+                            <div class="toolbar">
+                                <h3>${filename}</h3>
+                                <a href="${reader.result}" download="${filename}" class="download-btn">
+                                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                                    İndir
+                                </a>
+                            </div>
+                            <iframe src="${reader.result}"></iframe>
+                        </body>
+                        </html>
+                    `);
+                    pdfWindow.document.close();
+                    console.log('[IPS PDF] PDF yeni sekmede açıldı:', filename);
+                } else {
+                    // Popup engellendiyse doğrudan indirmeyi dene
+                    console.warn('[IPS PDF] Popup engellendi, doğrudan indirme deneniyor');
+                    const link = document.createElement('a');
+                    link.href = reader.result;
+                    link.download = filename;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                }
+            };
+            reader.readAsDataURL(pdfBlob);
+
+            console.log('[IPS PDF] PDF işleniyor...', filename);
+
+        } catch (error) {
+            console.error('[IPS PDF] Hata:', error);
+
+            // Fallback: Tarayıcının yazdırma dialog'unu aç
+            if (typeof UIkit !== 'undefined') {
+                UIkit.notification({
+                    message: 'PDF servisi kullanılamıyor. Tarayıcı yazdırma açılıyor...',
+                    status: 'warning',
+                    pos: 'top-right',
+                    timeout: 3000
+                });
+            }
+
+            setTimeout(() => this.printReport(), 500);
+
+        } finally {
+            this.hidePdfOverlay();
+            this.resetPdfState();
+        }
+    },
+
+    printReport: function () {
+        if (!this.confirmApprovalBeforeExport()) {
+            return;
+        }
         window.print();
+    },
+
+    confirmApprovalBeforeExport: function () {
+        const missing = this.getMissingApprovalFields();
+        if (!missing.length) return true;
+
+        const message = `Aşağıdaki alanlar eksik görünüyor:\\n- ${missing.join('\\n- ')}\\n\\nYine de devam etmek istiyor musunuz?`;
+        return window.confirm(message);
+    },
+
+    getMissingApprovalFields: function () {
+        const missing = [];
+        const investorName = this.getApprovalFieldValue('approval.investorName');
+        const employeeName = this.getApprovalFieldValue('approval.employeeName');
+        const employeeTitle = this.getApprovalFieldValue('approval.employeeTitle');
+        const signatures = this.getSignatureStore();
+
+        if (!investorName) missing.push('Yatırımcı adı');
+        if (!signatures?.investor?.dataUrl) missing.push('Yatırımcı imzası');
+        if (!employeeName) missing.push('Yetkili adı');
+        if (!employeeTitle) missing.push('Yetkili ünvanı');
+        if (!signatures?.employee?.dataUrl) missing.push('Yetkili imzası');
+
+        return missing;
+    },
+
+    getApprovalFieldValue: function (field) {
+        const el = document.querySelector(`[data-field="${field}"]`);
+        if (!el) return '';
+        return String(el.textContent || '').trim();
+    },
+
+    setToolbarDisabled: function (disabled) {
+        const buttons = document.querySelectorAll('.ips-toolbar-actions .ips-btn');
+        buttons.forEach((btn) => {
+            if (disabled) {
+                btn.setAttribute('disabled', 'disabled');
+                btn.classList.add('is-disabled');
+            } else {
+                btn.removeAttribute('disabled');
+                btn.classList.remove('is-disabled');
+            }
+        });
+    },
+
+    notifyUser: function (message, status) {
+        if (typeof UIkit !== 'undefined') {
+            UIkit.notification({
+                message: message,
+                status: status || 'primary',
+                pos: 'top-right',
+                timeout: 3000
+            });
+        } else {
+            alert(message);
+        }
+    },
+
+    resetPdfState: function () {
+        this.pdfInProgress = false;
+        this.setToolbarDisabled(false);
+    },
+
+    showPdfOverlay: function (title, subtitle, status) {
+        this.hidePdfOverlay();
+        const loadingOverlay = document.createElement('div');
+        loadingOverlay.id = 'pdfLoadingOverlay';
+        loadingOverlay.innerHTML = `
+            <div style="position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 9999;">
+                <div style="background: white; padding: 32px 48px; border-radius: 12px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.2);">
+                    <div id="pdfLoadingIcon" style="margin: 0 auto 12px; width: 44px; height: 44px;">${this.getPdfOverlayIcon(status || 'info')}</div>
+                    <div style="width: 40px; height: 40px; border: 3px solid #186149; border-top-color: transparent; border-radius: 50%; margin: 0 auto 16px; animation: spin 1s linear infinite;"></div>
+                    <p id="pdfLoadingTitle" style="margin: 0; font-size: 16px; color: #333;">${this.escapeHtml(title || 'PDF oluşturuluyor...')}</p>
+                    <p id="pdfLoadingSubtitle" style="margin: 8px 0 0; font-size: 12px; color: #666;">${this.escapeHtml(subtitle || 'Lütfen bekleyin')}</p>
+                </div>
+            </div>
+            <style>@keyframes spin { to { transform: rotate(360deg); } }</style>
+        `;
+        document.body.appendChild(loadingOverlay);
+    },
+
+    updatePdfOverlay: function (title, subtitle, status) {
+        const overlay = document.getElementById('pdfLoadingOverlay');
+        if (!overlay) return;
+        const titleEl = overlay.querySelector('#pdfLoadingTitle');
+        const subtitleEl = overlay.querySelector('#pdfLoadingSubtitle');
+        const iconEl = overlay.querySelector('#pdfLoadingIcon');
+        if (titleEl && title !== undefined) titleEl.textContent = title;
+        if (subtitleEl && subtitle !== undefined) subtitleEl.textContent = subtitle;
+        if (iconEl && status) iconEl.innerHTML = this.getPdfOverlayIcon(status);
+    },
+
+    hidePdfOverlay: function () {
+        const overlay = document.getElementById('pdfLoadingOverlay');
+        if (overlay) overlay.remove();
+    },
+
+    getPdfOverlayIcon: function (status) {
+        const colorMap = {
+            info: '#186149',
+            success: '#1B7F5A',
+            warning: '#F5A623',
+            error: '#D64545'
+        };
+        const color = colorMap[status] || colorMap.info;
+        return `
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="9"></circle>
+                ${status === 'success'
+                ? '<path d="M8 12l2.5 2.5L16 9"></path>'
+                : status === 'warning'
+                    ? '<path d="M12 7v6"></path><path d="M12 17h.01"></path>'
+                    : status === 'error'
+                        ? '<path d="M9 9l6 6"></path><path d="M15 9l-6 6"></path>'
+                        : '<path d="M12 8h.01"></path><path d="M12 12v4"></path>'}
+            </svg>
+        `;
+    },
+
+    checkPdfServiceAvailability: async function () {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 3000);
+        try {
+            const pdfHealthUrl = window.IPS_CONFIG?.pdfHealthUrl || 'http://localhost:8001/api/ips/pdf-health';
+            const response = await fetch(pdfHealthUrl, {
+                method: 'GET',
+                signal: controller.signal
+            });
+            clearTimeout(timeoutId);
+            if (!response.ok) {
+                return { ok: false, gotenberg: false, message: 'PDF servisine ulaşılamıyor (backend hatası).' };
+            }
+            const data = await response.json();
+            if (!data.gotenberg) {
+                const url = data.gotenbergUrl ? ` (${data.gotenbergUrl})` : '';
+                return { ok: true, gotenberg: false, message: `PDF servisi çalışmıyor, Gotenberg erişilemedi${url}.` };
+            }
+            return { ok: true, gotenberg: true, responseTimeMs: data.responseTimeMs };
+        } catch (e) {
+            clearTimeout(timeoutId);
+            return { ok: false, gotenberg: false, message: 'PDF servisine bağlantı kurulamadı.' };
+        }
+    },
+
+    // --- Signature Handling ---
+
+    signaturePad: null,
+    activeSignatureTarget: 'investor',
+
+    getSignatureStore: function () {
+        try {
+            return JSON.parse(localStorage.getItem('ipsSignatureData') || '{}');
+        } catch (e) {
+            console.warn('[IPS] Signature store parse error', e);
+            return {};
+        }
+    },
+
+    setSignatureStore: function (store) {
+        try {
+            localStorage.setItem('ipsSignatureData', JSON.stringify(store || {}));
+        } catch (e) {
+            console.warn('[IPS] Signature store save error', e);
+        }
+    },
+
+    applySavedSignatures: function () {
+        const store = this.getSignatureStore();
+        ['investor', 'employee'].forEach((target) => {
+            const payload = store[target];
+            if (!payload || !payload.dataUrl) return;
+            const elements = this.getSignatureElements(target);
+            const container = document.getElementById(elements.containerId);
+            const img = document.getElementById(elements.imageId);
+            const btn = document.getElementById(elements.buttonId) || (elements.fallbackButtonId ? document.getElementById(elements.fallbackButtonId) : null);
+            const line = document.getElementById(elements.lineId);
+
+            if (img) img.src = payload.dataUrl;
+            if (container) container.style.display = 'block';
+            if (btn) btn.style.display = 'none';
+            if (line) line.style.display = 'none';
+        });
+    },
+
+    getSignatureElements: function (target) {
+        const map = {
+            investor: {
+                containerId: 'investorSignatureContainer',
+                imageId: 'investorSignatureImage',
+                buttonId: 'addInvestorSignatureBtn',
+                fallbackButtonId: 'addSignatureBtn',
+                lineId: 'investorSignatureLine'
+            },
+            employee: {
+                containerId: 'employeeSignatureContainer',
+                imageId: 'employeeSignatureImage',
+                buttonId: 'addEmployeeSignatureBtn',
+                lineId: 'employeeSignatureLine'
+            }
+        };
+        return map[target] || map.investor;
+    },
+
+    openSignatureModal: function (target) {
+        this.activeSignatureTarget = target || 'investor';
+        const modal = document.getElementById('signatureModal');
+        if (!modal) {
+            console.error('[IPS] Signature modal not found');
+            return;
+        }
+
+        // Move modal to body to avoid transform context issues
+        if (modal.parentElement !== document.body) {
+            document.body.appendChild(modal);
+        }
+
+        // Add UIkit's open class and set visibility
+        modal.classList.add('uk-open');
+        modal.style.display = 'block';
+        modal.style.opacity = '1';
+
+        // Also set dialog visibility explicitly
+        const dialog = modal.querySelector('.uk-modal-dialog');
+        if (dialog) {
+            dialog.style.opacity = '1';
+            dialog.style.visibility = 'visible';
+        }
+
+        if (!this.signaturePad) {
+            this.initSignaturePad();
+        } else {
+            // Re-adjust canvas size specifically when opening modal
+            const canvas = document.getElementById('signaturePad');
+            if (canvas) {
+                canvas.width = canvas.parentElement.offsetWidth;
+                canvas.height = 200;
+                this.signaturePad.clear(); // Clear on reopen for new start
+            }
+        }
+    },
+
+    closeSignatureModal: function () {
+        const modal = document.getElementById('signatureModal');
+        if (modal) {
+            modal.classList.remove('uk-open');
+            modal.style.display = 'none';
+            modal.style.opacity = '0';
+
+            // Reset dialog opacity
+            const dialog = modal.querySelector('.uk-modal-dialog');
+            if (dialog) {
+                dialog.style.opacity = '';
+                dialog.style.visibility = '';
+            }
+        }
+        // Reset state
+        this.switchSignatureTab('draw');
+        if (this.signaturePad) {
+            this.signaturePad.clear();
+        }
+        const uploadPreview = document.getElementById('uploadPreview');
+        if (uploadPreview) uploadPreview.style.display = 'none';
+        const fileInput = document.getElementById('signatureFileInput');
+        if (fileInput) fileInput.value = '';
+    },
+
+    switchSignatureTab: function (tab) {
+        // UIkit tabs handle the class switching usually, but we need to manage content visibility manually if not using full UIkit JS
+        const drawTab = document.getElementById('tab-draw');
+        const uploadTab = document.getElementById('tab-upload');
+        const tabs = document.querySelectorAll('#signatureModal ul[uk-tab] li');
+
+        if (tab === 'draw') {
+            drawTab.style.display = 'block';
+            uploadTab.style.display = 'none';
+            tabs[0].classList.add('uk-active');
+            tabs[1].classList.remove('uk-active');
+            // Resize canvas when tab becomes visible
+            if (this.signaturePad) {
+                const canvas = document.getElementById('signaturePad');
+                canvas.width = canvas.parentElement.offsetWidth;
+                this.signaturePad.clear(); // Clear on resize to avoid scaling artifacts
+            }
+        } else {
+            drawTab.style.display = 'none';
+            uploadTab.style.display = 'block';
+            tabs[0].classList.remove('uk-active');
+            tabs[1].classList.add('uk-active');
+        }
+    },
+
+    initSignaturePad: function () {
+        // Load signature_pad library if not present
+        if (typeof SignaturePad === 'undefined') {
+            const script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js';
+            script.onload = () => {
+                this._initPad();
+            };
+            document.head.appendChild(script);
+        } else {
+            this._initPad();
+        }
+    },
+
+    _initPad: function () {
+        const canvas = document.getElementById('signaturePad');
+        if (canvas) {
+            // Fix canvas resolution for high DPI screens
+            const ratio = Math.max(window.devicePixelRatio || 1, 1);
+            canvas.width = canvas.parentElement.offsetWidth * ratio;
+            canvas.height = 200 * ratio;
+            canvas.getContext("2d").scale(ratio, ratio);
+
+            // Adjust CSS size
+            canvas.style.width = "100%";
+            canvas.style.height = "200px";
+
+            this.signaturePad = new SignaturePad(canvas, {
+                backgroundColor: 'rgba(255, 255, 255, 0)',
+                penColor: 'rgb(0, 0, 0)'
+            });
+
+            // Handle window resize
+            window.addEventListener("resize", () => {
+                // Simple reset on resize
+                // In a pro app we would save data, resize, load data
+            });
+        }
+    },
+
+    clearSignaturePad: function () {
+        if (this.signaturePad) {
+            this.signaturePad.clear();
+        }
+    },
+
+    handleSignatureUpload: function (input) {
+        if (input.files && input.files[0]) {
+            const file = input.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                const preview = document.getElementById('uploadPreview');
+                const img = document.getElementById('uploadPreviewImg');
+                img.src = e.target.result;
+                preview.style.display = 'block';
+            };
+
+            reader.readAsDataURL(file);
+        }
+    },
+
+    saveSignature: function () {
+        let signatureData = null;
+        const activeTab = document.querySelector('#signatureModal ul[uk-tab] li.uk-active').innerText.trim();
+
+        if (activeTab === 'Çiz') {
+            if (this.signaturePad && !this.signaturePad.isEmpty()) {
+                signatureData = this.signaturePad.toDataURL();
+            } else {
+                alert('Lütfen bir imza çizin.');
+                return;
+            }
+        } else {
+            // Upload
+            const img = document.getElementById('uploadPreviewImg');
+            if (img.src && img.src.startsWith('data:')) {
+                signatureData = img.src;
+            } else {
+                alert('Lütfen bir imza dosyası yükleyin.');
+                return;
+            }
+        }
+
+        if (signatureData) {
+            const target = this.activeSignatureTarget || 'investor';
+            const elements = this.getSignatureElements(target);
+            const container = document.getElementById(elements.containerId);
+            const img = document.getElementById(elements.imageId);
+            const btn = document.getElementById(elements.buttonId) || (elements.fallbackButtonId ? document.getElementById(elements.fallbackButtonId) : null);
+            const line = document.getElementById(elements.lineId);
+
+            if (img) img.src = signatureData;
+            if (container) container.style.display = 'block';
+            if (btn) btn.style.display = 'none';
+            if (line) line.style.display = 'none';
+
+            const store = this.getSignatureStore();
+            store[target] = {
+                dataUrl: signatureData,
+                updatedAt: new Date().toISOString()
+            };
+            this.setSignatureStore(store);
+
+            this.closeSignatureModal();
+        }
+    },
+
+    removeSignature: function (target) {
+        const elements = this.getSignatureElements(target || 'investor');
+        const container = document.getElementById(elements.containerId);
+        const img = document.getElementById(elements.imageId);
+        const btn = document.getElementById(elements.buttonId) || (elements.fallbackButtonId ? document.getElementById(elements.fallbackButtonId) : null);
+        const line = document.getElementById(elements.lineId);
+
+        if (img) img.src = '';
+        if (container) container.style.display = 'none';
+        if (btn) btn.style.display = 'inline-flex';
+        if (line) line.style.display = 'block';
+
+        const store = this.getSignatureStore();
+        if (store[target || 'investor']) {
+            delete store[target || 'investor'];
+            this.setSignatureStore(store);
+        }
     }
 };
 

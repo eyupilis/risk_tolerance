@@ -2228,14 +2228,10 @@
         });
     </script>
 
-    <!-- IPS entegrasyonu (backend /api'ye göre relative) -->
-    <script>
-        window.IPS_CONFIG = {
-            baseUrl: window.location.origin.includes('localhost') ? 'http://localhost:8001/api' : '/api',
-            timeoutMs: 15000,
-        };
-    </script>
-    <script src="/Content/js/ips-integration.js"></script>
+    <!-- IPS Configuration - Production/Development URL -->
+    <script src="/Content/js/config.js?v=1.0"></script>
+    <script src="/Content/js/ips-integration.js?v=4.5"></script>
+
 
     <!-- Portfolio Optimizer - Risk Hesaplama -->
     <script src="/Content/js/portfolio-optimizer.js"></script>

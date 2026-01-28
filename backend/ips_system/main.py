@@ -1,17 +1,29 @@
 from fastapi import FastAPI, HTTPException
+import os
+import time
+import httpx
+from fastapi.responses import Response
 from pydantic import BaseModel
 from typing import List, Optional, Dict, Any
 import random
 import uuid
 import math
 from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 app = FastAPI()
 
-# CORS mock configuration
+# CORS configuration - supports production and development
+ALLOWED_ORIGINS = os.getenv("ALLOWED_ORIGINS", "*").split(",")
+if "*" in ALLOWED_ORIGINS:
+    ALLOWED_ORIGINS = ["*"]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -213,14 +225,54 @@ def analyze_ips(request: AnalyzeRequest):
     
     capacity_scores = []
     willingness_scores = []
-    
+
+    # Q1-Q5 için answer_value'dan skor hesaplama mapping'i
+    # Frontend CAPACITY_SCORES ile senkronize (0-100 değerler 100'e bölünüyor)
+    capacity_value_mapping = {
+        'question1': {'a': 0.90, 'b': 0.70, 'c': 0.40, 'd': 0.20},  # Yaş (genç=yüksek kapasite)
+        'question2': {'a': 0.20, 'b': 0.50, 'c': 0.70, 'd': 0.90},  # Yatırım vadesi (uzun=yüksek)
+        'question3': {'a': 0.20, 'b': 0.50, 'c': 0.70, 'd': 0.90},  # Varlık (yüksek=yüksek)
+        'question4': {'a': 0.20, 'b': 0.50, 'c': 0.70, 'd': 0.90},  # Gelir (yüksek=yüksek)
+        'question5': {'a': 0.20, 'b': 0.50, 'c': 0.90},             # Acil durum fonu (var=yüksek)
+    }
+
+    # Q6-Q12 için answer_value'dan skor hesaplama mapping'i
+    # Frontend ANSWER_SCORES ile senkronize (0-100 değerler 100'e bölünüyor)
+    willingness_value_mapping = {
+        'question6': {'a': 0.00, 'b': 0.60, 'c': 1.00},   # %20 kayıp senaryosu
+        'question7': {'a': 0.10, 'b': 0.60, 'c': 1.00},   # Genel risk-getiri tercihi
+        'question8': {'a': 0.00, 'b': 0.60, 'c': 1.00},   # Garantili vs riskli getiri
+        'question9': {'a': 0.20, 'b': 0.60, 'c': 1.00},   # Yatırım deneyimi
+        'question10': {'a': 0.00, 'b': 0.50, 'c': 1.00},  # Kazanç vs kayıp psikolojisi
+        'question11': {'a': 0.00, 'b': 0.60, 'c': 1.00},  # Volatilite toleransı
+        'question12': {'a': 0.20, 'b': 0.60, 'c': 0.90},  # Büyük kazanç senaryosu
+    }
+
     for ans in request.answers:
         q_id = ans.question_id
+
+        # answer_scale varsa kullan, yoksa answer_value'dan hesapla
         if ans.answer_scale is not None:
+            score = ans.answer_scale
+        elif ans.answer_value:
+            # answer_value'dan skor hesapla
+            value = ans.answer_value.lower().strip()
+            if q_id in capacity_value_mapping:
+                score = capacity_value_mapping[q_id].get(value, 0.5)
+            elif q_id in willingness_value_mapping:
+                score = willingness_value_mapping[q_id].get(value, 0.5)
+            else:
+                score = None
+        else:
+            score = None
+
+        if score is not None:
             if q_id in capacity_questions:
-                capacity_scores.append(ans.answer_scale)
+                capacity_scores.append(score)
+                print(f"   📊 {q_id}: capacity score = {score:.2f}")
             elif q_id in willingness_questions:
-                willingness_scores.append(ans.answer_scale)
+                willingness_scores.append(score)
+                print(f"   📊 {q_id}: willingness score = {score:.2f}")
     
     # Ortalama skorları hesapla
     capacity_avg = sum(capacity_scores) / len(capacity_scores) if capacity_scores else 0.5
@@ -316,7 +368,79 @@ def confirm_ips(request: ConfirmRequest):
 def get_i_ps_result(trace_id: str):
     return generate_mock_ips_response(0.5)
 
+
+# PDF Generator için Request Model
+class PDFGenerateRequest(BaseModel):
+    html: str
+    filename: Optional[str] = "ips-raporu.pdf"
+
+
+@app.post("/api/ips/generate-pdf")
+async def generate_pdf(request: PDFGenerateRequest):
+    """
+    IPS HTML içeriğini PDF'e dönüştürür.
+    Gotenberg servisi gerektirir (docker-compose up gotenberg).
+    """
+    try:
+        from pdf_generator import generate_pdf_from_html
+        
+        # PDF oluştur
+        pdf_bytes = await generate_pdf_from_html(
+            html_content=request.html,
+            margin_top="0.75in",
+            margin_bottom="0.75in",
+            margin_left="0.5in",
+            margin_right="0.5in"
+        )
+        
+        # PDF response döndür
+        return Response(
+            content=pdf_bytes,
+            media_type="application/pdf",
+            headers={
+                "Content-Disposition": f"attachment; filename={request.filename}"
+            }
+        )
+    except ImportError:
+        raise HTTPException(
+            status_code=500,
+            detail="PDF generator modülü bulunamadı. pdf_generator.py dosyasının mevcut olduğundan emin olun."
+        )
+    except Exception as e:
+        print(f"PDF oluşturma hatası: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail=f"PDF oluşturulamadı: {str(e)}"
+        )
+
+
+@app.get("/api/ips/health")
+async def ips_health():
+    return {"ok": True}
+
+
+@app.get("/api/ips/pdf-health")
+async def pdf_health():
+    gotenberg_url = os.getenv("GOTENBERG_URL", "http://localhost:3002")
+    response_time_ms = None
+    try:
+        start = time.perf_counter()
+        async with httpx.AsyncClient(timeout=2.0) as client:
+            response = await client.get(f"{gotenberg_url}/health")
+            gotenberg_ok = response.status_code == 200
+        response_time_ms = int((time.perf_counter() - start) * 1000)
+    except Exception:
+        gotenberg_ok = False
+
+    return {
+        "ok": True,
+        "gotenberg": gotenberg_ok,
+        "gotenbergUrl": gotenberg_url,
+        "responseTimeMs": response_time_ms
+    }
+
+
 if __name__ == "__main__":
     import uvicorn
-    # process.env.PORT or 8001
-    uvicorn.run(app, host="0.0.0.0", port=8001)
+    port = int(os.getenv("PORT", 8001))
+    uvicorn.run(app, host="0.0.0.0", port=port)

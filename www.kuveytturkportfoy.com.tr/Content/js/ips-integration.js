@@ -7,7 +7,7 @@
 
 // Konfigürasyon (window.IPS_CONFIG üzerinden override edilebilir)
 const DEFAULT_IPS_CONFIG = {
-    baseUrl: 'http://localhost:8001/api',
+    baseUrl: 'http://127.0.0.1:8001/api',
     timeoutMs: 60000,  // 60 saniye - Gemini API çağrıları için yeterli süre
 };
 
@@ -23,7 +23,16 @@ function fetchWithTimeout(url, options = {}) {
     return fetch(url, options);
 }
 
-// Risk skoruna dahil olan sorular ve ağırlıkları (Q6-Q12)
+// Risk skoruna dahil olan sorular ve ağırlıkları
+// Kapasite soruları (Q1-Q5) %40, İsteklilik soruları (Q6-Q12) %60
+const CAPACITY_WEIGHTS = {
+    q1: 0.20,  // Yaş
+    q2: 0.25,  // Yatırım vadesi
+    q3: 0.25,  // Finansal varlık
+    q4: 0.20,  // Gelir düzeyi
+    q5: 0.10,  // Acil durum fonu
+};
+
 const RISK_SCORE_WEIGHTS = {
     q6: 0.20,  // %20 kayıp senaryosu
     q7: 0.20,  // Genel risk-getiri tercihi
@@ -35,6 +44,16 @@ const RISK_SCORE_WEIGHTS = {
 };
 
 // Her soru için şık puanları (0-100 arası)
+// Q1-Q5: Kapasite soruları
+const CAPACITY_SCORES = {
+    q1: { a: 90, b: 70, c: 40, d: 20 },  // Yaş (genç=yüksek kapasite)
+    q2: { a: 20, b: 50, c: 70, d: 90 },   // Vade (uzun=yüksek)
+    q3: { a: 20, b: 50, c: 70, d: 90 },   // Varlık (yüksek=yüksek)
+    q4: { a: 20, b: 50, c: 70, d: 90 },   // Gelir (yüksek=yüksek)
+    q5: { a: 20, b: 50, c: 90 },           // Acil durum fonu (var=yüksek)
+};
+
+// Q6-Q12: İsteklilik soruları
 const ANSWER_SCORES = {
     q6: { a: 0, b: 60, c: 100 },
     q7: { a: 10, b: 60, c: 100 },
@@ -109,22 +128,50 @@ const QUESTION_OPTIONS = {
 function formatAnswersForAPI(surveyAnswers) {
     const answers = [];
 
-    for (const [questionId, answer] of Object.entries(surveyAnswers)) {
+    for (const [questionId, rawAnswer] of Object.entries(surveyAnswers)) {
         const qNum = questionId.toLowerCase();
+
+        // Sadece soru ID'lerini işle (q1, q2, ... q15)
+        // q1_text, investorType, personType, timestamp gibi alanları atla
+        if (!qNum.match(/^q\d+$/)) continue;
+
+        // surveyAnswers formatı: q1='a' (string) veya q14=[{value,text}] (array)
+        let answerValue;
+        let answerText = '';
+
+        if (typeof rawAnswer === 'string') {
+            answerValue = rawAnswer; // Harf kodu (a, b, c, d)
+            answerText = surveyAnswers[`${qNum}_text`] || '';
+        } else if (Array.isArray(rawAnswer)) {
+            // Q13, Q14 gibi çoklu seçim soruları
+            answerValue = rawAnswer.map(item => item.value).join(',');
+            answerText = rawAnswer.map(item => item.text).join(', ');
+        } else if (rawAnswer && typeof rawAnswer === 'object') {
+            answerValue = rawAnswer.value || '';
+            answerText = rawAnswer.text || '';
+        } else {
+            continue; // Geçersiz değer, atla
+        }
 
         // answer_scale hesapla (0-1 arası)
         let answerScale = null;
         if (RISK_SCORE_WEIGHTS[qNum] && ANSWER_SCORES[qNum]) {
-            const rawScore = ANSWER_SCORES[qNum][answer.value] || 50;
+            // İsteklilik soruları (Q6-Q12)
+            const rawScore = ANSWER_SCORES[qNum][answerValue] || 50;
+            answerScale = rawScore / 100; // 0-100 -> 0-1
+        } else if (CAPACITY_WEIGHTS[qNum] && CAPACITY_SCORES[qNum]) {
+            // Kapasite soruları (Q1-Q5)
+            const rawScore = CAPACITY_SCORES[qNum][answerValue] || 50;
             answerScale = rawScore / 100; // 0-100 -> 0-1
         }
 
+        // Backend 'question1' formatını bekliyor, 'q1' -> 'question1' dönüşümü
+        const backendQuestionId = qNum.replace(/^q(\d+)$/, 'question$1');
+
         answers.push({
-            question_id: qNum,
-            question_text: QUESTION_TEXTS[qNum] || questionId,
-            answer_raw: answer.text || answer.value,
+            question_id: backendQuestionId,
+            answer_value: answerValue, // Harf kodu (a, b, c, d)
             answer_scale: answerScale,
-            timestamp: new Date().toISOString(),
         });
     }
 
@@ -133,22 +180,45 @@ function formatAnswersForAPI(surveyAnswers) {
 
 /**
  * Risk skorunu manuel hesapla (backend ile karşılaştırma için)
+ * Kapasite %40, İsteklilik %60 ağırlıkla hesaplanır
  */
 function calculateLocalRiskScore(surveyAnswers) {
-    let weightedSum = 0;
-    let totalWeight = 0;
-
-    for (const [qNum, weight] of Object.entries(RISK_SCORE_WEIGHTS)) {
-        const answer = surveyAnswers[qNum];
-        if (answer && ANSWER_SCORES[qNum]) {
-            const score = ANSWER_SCORES[qNum][answer.value] || 50;
-            weightedSum += weight * score;
-            totalWeight += weight;
+    // Kapasite skoru (Q1-Q5)
+    let capacitySum = 0;
+    let capacityWeight = 0;
+    for (const [qNum, weight] of Object.entries(CAPACITY_WEIGHTS)) {
+        const answer = surveyAnswers[qNum]; // Direkt string ('a', 'b', 'c', 'd')
+        if (answer && typeof answer === 'string' && CAPACITY_SCORES[qNum]) {
+            const score = CAPACITY_SCORES[qNum][answer] || 50;
+            capacitySum += weight * score;
+            capacityWeight += weight;
         }
     }
+    const capacityScore = capacityWeight > 0 ? capacitySum / capacityWeight : 50;
 
-    if (totalWeight === 0) return 50;
-    return weightedSum / totalWeight;
+    // İsteklilik skoru (Q6-Q12)
+    let willingnessSum = 0;
+    let willingnessWeight = 0;
+    for (const [qNum, weight] of Object.entries(RISK_SCORE_WEIGHTS)) {
+        const answer = surveyAnswers[qNum]; // Direkt string ('a', 'b', 'c')
+        if (answer && typeof answer === 'string' && ANSWER_SCORES[qNum]) {
+            const score = ANSWER_SCORES[qNum][answer] || 50;
+            willingnessSum += weight * score;
+            willingnessWeight += weight;
+        }
+    }
+    const willingnessScore = willingnessWeight > 0 ? willingnessSum / willingnessWeight : 50;
+
+    // Final skor: Kapasite %40 + İsteklilik %60
+    const finalScore = (capacityScore * 0.4) + (willingnessScore * 0.6);
+
+    console.log(`Local Risk Score: Capacity=${capacityScore.toFixed(1)}, Willingness=${willingnessScore.toFixed(1)}, Final=${finalScore.toFixed(1)}`);
+
+    return {
+        total: finalScore,
+        capacity: capacityScore,
+        willingness: willingnessScore
+    };
 }
 
 /**
@@ -487,6 +557,61 @@ function showError(message) {
 }
 
 /**
+ * Lokal olarak risk sonucunu hesapla (API başarısız olduğunda fallback)
+ */
+function generateLocalResult(surveyAnswers) {
+    console.log('[IPS] Lokal hesaplama başlatılıyor...');
+
+    // Risk skorunu hesapla
+    const localScore = calculateLocalRiskScore(surveyAnswers);
+    const score = localScore.total;
+
+    // Profil belirleme
+    let profile = 'medium';
+    let profileName = 'Dengeli';
+    if (score <= 35) {
+        profile = 'low';
+        profileName = 'Temkinli (Muhafazakar)';
+    } else if (score >= 65) {
+        profile = 'high';
+        profileName = 'Agresif (Dinamik)';
+    }
+
+    console.log(`[IPS] Lokal skor: ${score.toFixed(1)}, Profil: ${profile}`);
+
+    const riskResult = {
+        score: score,
+        normalizedScore: score,
+        profile: profile,
+        profileName: profileName,
+        level: profile === 'low' ? 'Düşük' : profile === 'high' ? 'Yüksek' : 'Orta',
+        capacityScore: localScore.capacity,
+        willingnessScore: localScore.willingness
+    };
+
+    // IPS içeriğini lokal olarak oluştur
+    let fullIPS = null;
+    if (typeof IPSContentGenerator !== 'undefined') {
+        try {
+            fullIPS = IPSContentGenerator.generateFullIPS(surveyAnswers, riskResult, null);
+            console.log('[IPS] Lokal IPS içeriği oluşturuldu:', Object.keys(fullIPS));
+        } catch (e) {
+            console.error('[IPS] Lokal IPS içeriği oluşturulamadı:', e);
+        }
+    }
+
+    return {
+        risk: {
+            score: score / 100, // Backend formatı 0-1 arası
+            bucket: profile === 'low' ? 'temkinli' : profile === 'high' ? 'agresif' : 'dengeli'
+        },
+        riskResult: riskResult,
+        fullIPS: fullIPS,
+        isLocalFallback: true
+    };
+}
+
+/**
  * Ana IPS oluşturma fonksiyonu
  * Anket tamamlandığında bu fonksiyon çağrılır
  */
@@ -557,9 +682,35 @@ async function generateIPS(surveyAnswers) {
         return analyzeResult;
 
     } catch (error) {
-        hideLoading();
-        showError(error.message);
-        return null;
+        console.warn('[IPS] API hatası, lokal hesaplamaya geçiliyor:', error.message);
+
+        // FALLBACK: API başarısız olursa lokal hesaplama yap
+        try {
+            const localResult = generateLocalResult(surveyAnswers);
+
+            // localStorage'a kaydet
+            const existingResult = JSON.parse(localStorage.getItem('riskProfiliSonuc') || '{}');
+            existingResult.risk = localResult.risk;
+            existingResult.riskResult = localResult.riskResult;
+            existingResult.fullIPS = localResult.fullIPS;
+            existingResult.isLocalFallback = true;
+            existingResult.surveyAnswers = surveyAnswers; // Cevapları da kaydet
+            localStorage.setItem('riskProfiliSonuc', JSON.stringify(existingResult));
+
+            hideLoading();
+
+            console.log('[IPS] Lokal fallback başarılı, sonuç sayfasına yönlendiriliyor...');
+
+            // Sonuç sayfasına yönlendir
+            window.location.href = 'risk-profili-anketi-sonuc/';
+            return localResult;
+
+        } catch (fallbackError) {
+            console.error('[IPS] Lokal fallback da başarısız:', fallbackError);
+            hideLoading();
+            showError('İşlem tamamlanamadı. Lütfen sayfayı yenileyip tekrar deneyin.');
+            return null;
+        }
     }
 }
 

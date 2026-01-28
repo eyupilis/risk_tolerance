@@ -659,7 +659,7 @@
             <div class="uk-container">
                 <div class="uk-grid uk-grid-medium uk-flex-center uk-text-center uk-margin-bottom" uk-grid>
                     <div class="uk-width-3-5@m">
-                        <h2>📋 Detaylı Yatırım Politikası Beyanı (IPS)</h2>
+                        <h2>Detaylı Yatırım Politikası Beyanı (IPS)</h2>
                         <p class="uk-text-muted">Anket cevaplarınızın finansal değerlendirmesi ve risk analizi</p>
                     </div>
                 </div>
@@ -720,7 +720,7 @@
 
                                 <div>
                                     <h5 class="uk-margin-remove">Risk Seviyesi</h5>
-                                    <span class="uk-text-muted-200">Az Riskli</span>
+                                    <span class="uk-text-muted-200 js-risk-level-text">Az Riskli</span>
                                 </div>
                             </div>
                             <div class="uk-margin-medium uk-flex uk-gap-12 uk-text-small uk-text-emphasis uk-width-1-1">
@@ -1357,19 +1357,27 @@
     </script>
 
 
+    <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../../Content/js/fund-data.js"></script>
     <script src="../../Content/js/portfolio-optimizer.js"></script>
     <script src="../../Content/js/portfolio-api-client.js"></script>
 
-    <!-- IPS Rapor Modülleri v3.1 - Kurumsal Tasarım + Veri Düzeltmesi -->
-    <script src="../../Content/js/ips-evaluations.js?v=3.1"></script>
-    <script src="../../Content/js/ips-charts.js?v=3.1"></script>
-    <script src="../../Content/js/ips-content-generator.js?v=3.1"></script>
-    <script src="../../Content/js/ips-report-renderer.js?v=3.1"></script>
-    <script src="../../Content/js/ips-report.js?v=3.1"></script>
-    <link rel="stylesheet" href="../../Content/css/ips-print.css?v=3.1">
-    <link rel="stylesheet" href="../../Content/css/ips-corporate.css?v=3.1">
+    <!-- IPS Configuration - Production/Development URL -->
+    <script src="../../Content/js/config.js?v=1.0"></script>
+    <!-- IPS Rapor Modülleri v4.5 - Production Ready -->
+    <script src="../../Content/js/ips-evaluations.js?v=4.5"></script>
+    <script src="../../Content/js/ips-charts.js?v=4.5"></script>
+    <script src="../../Content/js/ips-content-generator.js?v=4.5"></script>
+    <script src="../../Content/js/ips-report-renderer.js?v=4.5"></script>
+    <script src="../../Content/js/ips-report.js?v=4.4"></script>
+    <link rel="stylesheet" href="../../Content/css/ips-print.css?v=4.4">
+    <link rel="stylesheet" href="../../Content/css/ips-corporate.css?v=4.4">
+
+    <script>
+        // IPS rapor v3 semasi aktif
+        window.IPS_REPORT_VERSION = 'v3';
+    </script>
 
     <script>
         document.addEventListener('DOMContentLoaded', async function () {
@@ -1485,13 +1493,19 @@
                     const riskProfiliValue = backendResult.riskProfile === 'low' ? 1 :
                         backendResult.riskProfile === 'high' ? 3 : 2;
 
+                    // Backend fonlarını ağırlığa göre sırala (yüksekten düşüğe)
+                    const sortedFunds = [...backendResult.funds].sort((a, b) =>
+                        parseFloat(b.allocation) - parseFloat(a.allocation)
+                    );
+                    console.log('   📊 Fonlar ağırlığa göre sıralandı. En yüksek:', sortedFunds[0]?.code, '(%' + sortedFunds[0]?.allocation + ')');
+
                     // Backend fonlarını CSV verileriyle zenginleştir
-                    const backendFonDagilim = backendResult.funds.map(f => ({
+                    const backendFonDagilim = sortedFunds.map(f => ({
                         name: f.code,
                         value: parseFloat(f.allocation)
                     }));
 
-                    const backendRecommendations = backendResult.funds.map(f => {
+                    const backendRecommendations = sortedFunds.map(f => {
                         const csvFund = optimizer.funds.find(fund => fund.code === f.code);
                         if (csvFund) {
                             console.log(`   ✅ ${f.code}: CSV'den gerçek veriler kullanılıyor`);
@@ -1523,19 +1537,31 @@
                         }
                     });
 
-                    // İlk fonun bilgilerini al
-                    const firstFund = optimizer.funds.find(fund => fund.code === backendResult.funds[0]?.code);
+                    // En yüksek ağırlıklı fonun bilgilerini al (sıralanmış diziden)
+                    const topFund = sortedFunds[0];
+                    const firstFund = optimizer.funds.find(fund => fund.code === topFund?.code);
+                    console.log('   🎯 Tek fon önerisi:', topFund?.code, '- Risk:', firstFund?.category?.riskLevel || 'N/A');
 
                     // Önceki expert_content, risk, ips_sections verilerini koru
                     const oldExpertContent = riskProfiliSonuc?.expert_content || riskProfiliSonuc?.expertContent || null;
                     const oldRisk = riskProfiliSonuc?.risk || null;
                     const oldIpsSections = riskProfiliSonuc?.ips_sections || null;
 
+                    // Risk skorunu hesapla (IPS integration mevcutsa)
+                    let backendRiskScore = null;
+                    if (typeof IPS !== 'undefined' && IPS.calculateLocalRiskScore) {
+                        const storedSurveyAnswers = JSON.parse(localStorage.getItem('surveyAnswers') || '{}');
+                        const localScores = IPS.calculateLocalRiskScore(storedSurveyAnswers);
+                        backendRiskScore = Math.round(localScores.total);
+                        console.log('   📊 Risk Skoru hesaplandı:', backendRiskScore, '(Capacity:', Math.round(localScores.capacity), ', Willingness:', Math.round(localScores.willingness), ')');
+                    }
+
                     riskProfiliSonuc = {
                         data: {
                             riskProfili: riskProfiliValue,
-                            fundCode: backendResult.funds[0]?.code || '',
-                            fundTitle: firstFund?.name || backendResult.funds[0]?.name || '',
+                            riskScore: backendRiskScore || (riskProfiliValue === 1 ? 25 : riskProfiliValue === 3 ? 80 : 50),
+                            fundCode: topFund?.code || '',
+                            fundTitle: firstFund?.name || topFund?.name || '',
                             fundRiskSeviyesi: firstFund?.category?.riskLevel || (riskProfiliValue + 2),
                             aylikGetiri: firstFund ? firstFund.monthlyReturn * 100 : 0,
                             yillikGetiri: firstFund ? firstFund.yearlyReturn * 100 : 0,
@@ -1930,6 +1956,13 @@
                     $('.js-risk-profile-circle').css('--number', fundRiskSeviyesi);
                     $('.js-risk-profile-result').text(fundRiskSeviyesi);
 
+                    // Update risk level text based on fund risk level (1-7 scale)
+                    const riskLevelText = fundRiskSeviyesi <= 2 ? 'Az Riskli' :
+                        fundRiskSeviyesi <= 4 ? 'Orta Riskli' :
+                            fundRiskSeviyesi <= 5 ? 'Riskli' : 'Yüksek Riskli';
+                    $('.js-risk-level-text').text(riskLevelText);
+                    console.log(`   Risk Seviyesi Etiketi: ${fundRiskSeviyesi}/7 = ${riskLevelText}`);
+
                     // Update the yield values
                     $('.js-fund-monthly-yield').text(`%${aylikGetiri.toFixed(2)}`);
                     $('.js-fund-yearly-yield').text(`%${yillikGetiri.toFixed(2)}`);
@@ -2062,6 +2095,13 @@
                         $('.js-fund-name').text(fundTitle);
                         $('.js-risk-profile-circle').css('--number', fundRiskSeviyesi);
                         $('.js-risk-profile-result').text(fundRiskSeviyesi);
+
+                        // Update risk level text based on fund risk level (1-7 scale)
+                        const riskLevelTextFallback = fundRiskSeviyesi <= 2 ? 'Az Riskli' :
+                            fundRiskSeviyesi <= 4 ? 'Orta Riskli' :
+                                fundRiskSeviyesi <= 5 ? 'Riskli' : 'Yüksek Riskli';
+                        $('.js-risk-level-text').text(riskLevelTextFallback);
+
                         $('.js-fund-monthly-yield').text(`%${aylikGetiri.toFixed(2)}`);
                         $('.js-fund-yearly-yield').text(`%${yillikGetiri.toFixed(2)}`);
 
@@ -2179,16 +2219,45 @@
 
                     // Prepare risk result object for IPS report
                     const riskData = riskProfiliSonuc.data || {};
-                    const profileName = riskData.riskProfili === 1 ? 'low' : riskData.riskProfili === 3 ? 'high' : 'medium';
+
+                    // Risk skorunu HER ZAMAN anket cevaplarından hesapla (backend'e güvenme)
+                    let computedRiskScore = 50;
+                    let computedCapacity = 50;
+                    let computedWillingness = 50;
+
+                    if (typeof IPS !== 'undefined' && IPS.calculateLocalRiskScore) {
+                        const localScores = IPS.calculateLocalRiskScore(surveyAnswers);
+                        computedRiskScore = Math.round(localScores.total);
+                        computedCapacity = Math.round(localScores.capacity);
+                        computedWillingness = Math.round(localScores.willingness);
+                        console.log('IPS Risk Skoru (lokal): Total=' + computedRiskScore + ', Capacity=' + computedCapacity + ', Willingness=' + computedWillingness);
+                    } else if (riskData.riskScore) {
+                        computedRiskScore = riskData.riskScore;
+                    } else {
+                        // Son fallback: profil seviyesinden
+                        computedRiskScore = riskData.riskProfili === 1 ? 25 : riskData.riskProfili === 3 ? 80 : 50;
+                    }
+
+                    // Profil adını SKOR BAZLI hesapla (backend'e bağımlı olma!)
+                    let profileName;
+                    if (computedRiskScore <= 35) {
+                        profileName = 'low';
+                    } else if (computedRiskScore >= 65) {
+                        profileName = 'high';
+                    } else {
+                        profileName = 'medium';
+                    }
+                    const riskLevel = profileName === 'low' ? 1 : profileName === 'high' ? 3 : 2;
+                    console.log('IPS Profil: ' + profileName + ' (skor: ' + computedRiskScore + ')');
 
                     const riskResult = {
                         profile: profileName,
                         profileName: profileName,
-                        score: riskData.riskScore || 50,
-                        normalizedScore: riskData.riskScore || 50,
-                        level: riskData.riskProfili,
-                        capacityScore: riskData.riskBreakdown ?
-                            Object.values(riskData.riskBreakdown).reduce((sum, q) => sum + q.value, 0) : 50,
+                        score: computedRiskScore,
+                        normalizedScore: computedRiskScore,
+                        level: riskLevel,
+                        capacityScore: computedCapacity,
+                        willingnessScore: computedWillingness,
                         optimalPortfolio: (riskData.allRecommendations || []).map(r => ({
                             code: r.code,
                             name: r.name,
